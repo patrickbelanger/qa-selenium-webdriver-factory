@@ -17,13 +17,13 @@
 
 package qa.patrick.belanger.selenium.webdriver.factory;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import qa.patrick.belanger.selenium.webdriver.base.Driver;
 
 /**
@@ -33,7 +33,7 @@ public class WebDriverFactoryTest {
 
 	private WebDriver webDriver;
 	
-	@Before
+	@BeforeEach
 	public void setUp() {
 		//
 	}
@@ -52,7 +52,7 @@ public class WebDriverFactoryTest {
 		assertTrue(webDriver instanceof ChromeDriver);
 	}
 	
-	@After
+	@AfterEach
 	public void tearDown() {
 		if (webDriver != null) {
 			webDriver.quit();
