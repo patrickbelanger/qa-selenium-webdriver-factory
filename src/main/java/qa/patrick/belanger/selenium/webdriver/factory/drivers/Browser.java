@@ -69,7 +69,7 @@ public abstract class Browser {
 	}
 	
 	/**
-	 * Creates a new WebDriver instance with the specified options.
+	 * Creates a new WebDriver instance with specified options.
 	 * @param remote Returns a RemoteDriver instance with the specified options
 	 * @return {@link WebDriver}
 	 * @throws MalformedURLException
