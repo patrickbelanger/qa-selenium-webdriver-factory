@@ -25,6 +25,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import qa.patrick.belanger.selenium.webdriver.base.Driver;
 
@@ -48,10 +49,30 @@ public class WebDriverFactoryTest {
 	}
 	
 	@Test
+	public void braveBrowser_shouldBeAbleToInstantiateChromeDriverRemotely() {
+		webDriver = WebDriverFactory.getDriver(Driver.BRAVE, true);
+		assertNotNull(webDriver);
+		assertTrue(webDriver instanceof RemoteWebDriver);
+		assertTrue(
+				((RemoteWebDriver)webDriver).getCapabilities().getBrowserName().equalsIgnoreCase("chrome")
+		);		
+	}
+	
+	@Test
 	public void chromeBrowser_shouldBeAbleToInstantiateChromeDriverLocally() {
 		webDriver = WebDriverFactory.getDriver(Driver.CHROME, false);
 		assertNotNull(webDriver);
 		assertTrue(webDriver instanceof ChromeDriver);
+	}
+	
+	@Test
+	public void chromeBrowser_shouldBeAbleToInstantiateChromeDriverRemotely() {
+		webDriver = WebDriverFactory.getDriver(Driver.CHROME, true);
+		assertNotNull(webDriver);
+		assertTrue(webDriver instanceof RemoteWebDriver);
+		assertTrue(
+				((RemoteWebDriver)webDriver).getCapabilities().getBrowserName().equalsIgnoreCase("chrome")
+		);		
 	}
 	
 	@AfterEach
