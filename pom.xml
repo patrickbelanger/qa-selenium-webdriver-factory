@@ -35,6 +35,7 @@
 
 	<properties>
 		<junit.version>5.8.2</junit.version>
+		<logback.core.version>1.2.11</logback.core.version>
 		<lombok.version>1.18.22</lombok.version>
 		<owner.version>1.0.12</owner.version>
 		<selenium.version>4.1.2</selenium.version>
@@ -62,6 +63,11 @@
 			<artifactId>junit-jupiter-api</artifactId>
 			<version>${junit.version}</version>
 			<scope>test</scope>
+		</dependency>
+			<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+			<version>${logback.core.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
