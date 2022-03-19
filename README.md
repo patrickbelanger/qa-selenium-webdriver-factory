@@ -23,7 +23,7 @@ and [Visual Studio Code](https://projectlombok.org/setup/vscode).
 
 # Knowledge Base
 
-* If you get Java error(s) on getters/setters, this means you haven't install Lombok plugin on your IDE. This library is required to use qa-selenium-webdriver-factory.
+* If you get Java error(s) on getters/setters, this means you haven't install Lombok plugin on your IDE. This library is required to use qa-selenium-webdriver-factory. After installing the plugin, make sure to perform a Maven update.
 
 # Contribute
 
