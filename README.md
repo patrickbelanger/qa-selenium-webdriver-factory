@@ -1,5 +1,5 @@
 # qa-selenium-webdriver-factory
-A library to ease development of Selenium's powered automation framework by instantiating a web driver and reducing boilerplate code.
+A library to ease the development of Selenium's powered automation framework by instantiating a web driver and reducing boilerplate code.
 
 ## Features
 ### Supported Browsers
@@ -19,17 +19,17 @@ and [Visual Studio Code](https://projectlombok.org/setup/vscode).
 
 # Developer(s)
 
-* [Patrick BÃ©langer](https://github.com/patrickbelanger)
+* [Patrick Bélanger](https://github.com/patrickbelanger)
 
 # Knowledge Base
 
 * If you get Java error(s) on getters/setters, this means you haven't install Lombok plugin on your IDE. This library is required to use qa-selenium-webdriver-factory. After installing the plugin, make sure to perform a Maven update.
-* Brave Browser on Linux (local): Feature flagged as experimental. There's an issue when webDriver.quit() is called.
-I would recommend to execute Brave driver on a Windows host or executing remotely (through Selenium Grid (* not tested, yet)). 
+* Brave Browser on Linux (local): Feature flagged as experimental. There's an issue when webDriver.quit() is called. I recommend executing Brave driver on a Windows host or remotely (through Selenium Grid hosted on Windows 
+(* tested and works fine)).
 
 # Contribute
 
 * This is an active open-source project. We are always open to people who want to use the system or contribute to it. 
 Contact us if you are looking for implementation tasks that fit your skills. An article will be available how to 
 contribute to qa-selenium-webdriver-factory.
-* For developers using Eclipse, use the provided code-formatter in src/main/resources.
+* For developers using Eclipse IDE, use the provided code-formatter in src/main/resources.
