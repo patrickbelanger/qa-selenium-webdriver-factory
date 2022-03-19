@@ -24,7 +24,12 @@ public class OperatingSystem {
 
 	private OperatingSystem() { }
 
+	public static boolean isExecutionHostLinux() {
+		return System.getProperty("os.name").equalsIgnoreCase("linux");
+	}
+	
 	public static boolean isExecutionHostWindows() {
 		return System.getProperty("os.name").toLowerCase().contains("win");
 	}
+
 }

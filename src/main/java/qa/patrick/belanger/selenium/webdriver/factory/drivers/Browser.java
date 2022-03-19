@@ -26,6 +26,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.AbstractDriverOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -49,6 +51,8 @@ public abstract class Browser {
 	
 	@Getter(AccessLevel.PROTECTED)
 	WebDriverProperties webDriverProperties = ConfigFactory.create(WebDriverProperties.class);
+	
+	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	public Browser(Driver driver) {
 		setDriver(driver);
