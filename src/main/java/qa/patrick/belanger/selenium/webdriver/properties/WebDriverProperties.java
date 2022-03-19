@@ -26,7 +26,7 @@ import qa.patrick.belanger.selenium.webdriver.base.Driver;
 public interface WebDriverProperties extends Config {
 
 	static final String GRID_HUB_ENDPOINT = "/wd/hub";
-	static final String UNIX_WEBDRIVER_PATH = "usr/local/bin/";
+	static final String UNIX_WEBDRIVER_PATH = "/usr/local/bin/";
 	
 	/* Brave Browser related properties */
 	
