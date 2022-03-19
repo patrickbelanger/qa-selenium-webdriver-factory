@@ -25,6 +25,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import qa.patrick.belanger.selenium.webdriver.base.Driver;
@@ -72,6 +73,23 @@ public class WebDriverFactoryTest {
 		assertTrue(webDriver instanceof RemoteWebDriver);
 		assertTrue(
 				((RemoteWebDriver)webDriver).getCapabilities().getBrowserName().equalsIgnoreCase("chrome")
+		);		
+	}
+	
+	@Test
+	public void edgeBrowser_shouldBeAbleToInstantiateEdgeDriverLocally() {
+		webDriver = WebDriverFactory.getDriver(Driver.EDGE, false);
+		assertNotNull(webDriver);
+		assertTrue(webDriver instanceof EdgeDriver);
+	}
+	
+	@Test
+	public void edgeBrowser_shouldBeAbleToInstantiateEdgeDriverRemotely() {
+		webDriver = WebDriverFactory.getDriver(Driver.EDGE, true);
+		assertNotNull(webDriver);
+		assertTrue(webDriver instanceof RemoteWebDriver);
+		assertTrue(
+				((RemoteWebDriver)webDriver).getCapabilities().getBrowserName().equalsIgnoreCase("edge")
 		);		
 	}
 	

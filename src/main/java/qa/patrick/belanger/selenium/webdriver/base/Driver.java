@@ -36,9 +36,12 @@ public enum Driver {
 	/**
 	 * Chrome Browser
 	 */
-	CHROME("Chrome", ".drivers.desktop.Chrome", "webdriver.chrome.driver", "chromedriver.exe","chromedriver")
+	CHROME("Chrome", ".drivers.desktop.Chrome", "webdriver.chrome.driver", "chromedriver.exe","chromedriver"),
+	/**
+	 * Edge Browser
+	 */
+	EDGE("Edge", ".drivers.desktop.Edge", "webdriver.edge.driver", "msedgedriver.exe", "msedgedriver"),
 	;
-	
 	/**
 	 * Get/set browser name
 	 */
