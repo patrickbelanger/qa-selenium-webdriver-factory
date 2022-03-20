@@ -41,10 +41,7 @@ public class Chrome extends ChromiumBasedBrowser {
 	public Chrome(Driver driver) {
 		super(driver);
 	}
-	
-  /**
-   * Get ChromeOptions
-   */
+
 	@Override
 	public AbstractDriverOptions<?> getOptions() {
 		ChromeOptions chromeOptions = new ChromeOptions();

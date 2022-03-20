@@ -47,6 +47,8 @@ public class WebDriverFactoryTest {
 		webDriver = WebDriverFactory.getDriver(Driver.BRAVE, false);
 		assertNotNull(webDriver);
 		assertTrue(webDriver instanceof ChromeDriver);
+		webDriver.navigate().to("https://www.google.com");
+		assertTrue(webDriver.getCurrentUrl().contains("google"));
 	}
 	
 	@Test
@@ -56,7 +58,9 @@ public class WebDriverFactoryTest {
 		assertTrue(webDriver instanceof RemoteWebDriver);
 		assertTrue(
 				((RemoteWebDriver)webDriver).getCapabilities().getBrowserName().equalsIgnoreCase("chrome")
-		);		
+		);
+		webDriver.navigate().to("https://www.google.com");
+		assertTrue(webDriver.getCurrentUrl().contains("google"));
 	}
 	
 	@Test
@@ -64,6 +68,8 @@ public class WebDriverFactoryTest {
 		webDriver = WebDriverFactory.getDriver(Driver.CHROME, false);
 		assertNotNull(webDriver);
 		assertTrue(webDriver instanceof ChromeDriver);
+		webDriver.navigate().to("https://www.google.com");
+		assertTrue(webDriver.getCurrentUrl().contains("google"));
 	}
 	
 	@Test
@@ -73,7 +79,9 @@ public class WebDriverFactoryTest {
 		assertTrue(webDriver instanceof RemoteWebDriver);
 		assertTrue(
 				((RemoteWebDriver)webDriver).getCapabilities().getBrowserName().equalsIgnoreCase("chrome")
-		);		
+		);
+		webDriver.navigate().to("https://www.google.com");
+		assertTrue(webDriver.getCurrentUrl().contains("google"));
 	}
 	
 	@Test
@@ -81,6 +89,8 @@ public class WebDriverFactoryTest {
 		webDriver = WebDriverFactory.getDriver(Driver.EDGE, false);
 		assertNotNull(webDriver);
 		assertTrue(webDriver instanceof EdgeDriver);
+		webDriver.navigate().to("https://www.google.com");
+		assertTrue(webDriver.getCurrentUrl().contains("google"));
 	}
 	
 	@Test
@@ -89,8 +99,10 @@ public class WebDriverFactoryTest {
 		assertNotNull(webDriver);
 		assertTrue(webDriver instanceof RemoteWebDriver);
 		assertTrue(
-				((RemoteWebDriver)webDriver).getCapabilities().getBrowserName().equalsIgnoreCase("edge")
-		);		
+				((RemoteWebDriver)webDriver).getCapabilities().getBrowserName().equalsIgnoreCase("msedge")
+		);
+		webDriver.navigate().to("https://www.google.com");
+		assertTrue(webDriver.getCurrentUrl().contains("google"));
 	}
 	
 	@AfterEach

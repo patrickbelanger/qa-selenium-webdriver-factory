@@ -63,13 +63,32 @@ public abstract class Browser {
 	
 	public abstract WebDriver getWebDriver();
 	
-	private String getHostUrl() {
+	protected String getHostUrl() {
 		return String.format("%s:%s%s", getWebDriverProperties().getGridUrl(), 
 				getWebDriverProperties().getGridPort(), WebDriverProperties.GRID_HUB_ENDPOINT);
 	}
 	
-	private WebDriver getRemoteDriver() throws MalformedURLException {
-		return new RemoteWebDriver(new URL(getHostUrl()), toCapabilities());
+	/**
+	 * Creates a new RemoteWebDriver instance with specified options.
+	 * @return
+	 * @throws MalformedURLException
+	 */
+	private WebDriver getRemoteWebDriver() throws MalformedURLException {
+		return getRemoteWebDriver(false); // We should use (Browser)Options classes used nowadays over Capabilities.
+	}
+	
+	/**
+	 * Creates a new RemoteWebDriver instance with specified options (or capabilities).
+	 * @param useCapabilities Use values set in Capabilities (object that describes a series of key/value pairs that 
+	 * encapsulate aspects of a browser).
+	 * 
+	 * Third-party providers still use Capabilities object to set a specific browser (browser_name, browser_version, etc).
+	 * 
+	 * @return
+	 * @throws MalformedURLException
+	 */
+	private WebDriver getRemoteWebDriver(boolean useCapabilities) throws MalformedURLException {
+		return new RemoteWebDriver(new URL(getHostUrl()), useCapabilities ? toCapabilities() : getOptions());
 	}
 	
 	/**
@@ -79,7 +98,7 @@ public abstract class Browser {
 	 * @throws MalformedURLException
 	 */
 	public WebDriver getWebDriver(boolean remote) throws MalformedURLException {
-		return remote ? getRemoteDriver() : getWebDriver();
+		return remote ? getRemoteWebDriver() : getWebDriver();
 	}
 	
 	private String getWebDriverPath() {

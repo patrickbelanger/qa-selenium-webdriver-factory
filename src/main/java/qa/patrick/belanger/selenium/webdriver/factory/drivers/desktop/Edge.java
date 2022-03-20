@@ -57,9 +57,7 @@ public class Edge extends ChromiumBasedBrowser {
 	 */
 	@Override
 	public Capabilities toCapabilities() {
-		super.toCapabilities();
-		getCapabilities().setCapability(EdgeOptions.CAPABILITY, getOptions());
-		return getCapabilities(); 
+		return null;
 	}
 	
 	/**
