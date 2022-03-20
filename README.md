@@ -6,7 +6,7 @@ A library to ease the development of Selenium's powered automation framework by 
 * Brave Browser (uses ChromeDriver) (* see knowledge base section) - (tested on version 99.0.4844.74 (Windows))
 * Chrome Browser (tested on version 99.0.4844.74 (Linux/Windows))
 * Microsoft Edge (tested on version 99.0.1150.46 (Linux/Windows))
-* Opera Browser (tested on version 84.0.4316.42 (WebKit - 98.0.4758.109) (Windows))
+* Opera Browser (tested on version 84.0.4316.42 (WebKit - 98.0.4758.109) (Windows/Linux (*see knowledge base section)))
 
 ### Supported Platform
 * Linux (tested on Ubuntu 21.10)
@@ -28,6 +28,8 @@ and [Visual Studio Code](https://projectlombok.org/setup/vscode).
 * If you get Java error(s) on getters/setters, you haven't installed the Lombok plugin on your IDE. This library is required to use qa-selenium-webdriver-factory. After installing the plugin, make sure to perform a Maven update.
 * Brave Browser on Linux (local): Not supported. I recommend executing Brave Browser on a Windows host or remotely (through Selenium Grid hosted on Windows 
 (* tested and works fine)).
+* Opera Browser on Linux (local): Not supported. I recommend executing Opera Browser on a Windows host or remotely (through Selenium Grid hosted on Windows 
+(* tested and works fine)).
 
 # Contribute
 
@@ -35,3 +37,4 @@ and [Visual Studio Code](https://projectlombok.org/setup/vscode).
 Contact us if you are looking for implementation tasks that fit your skills. An article will be available how to 
 contribute to qa-selenium-webdriver-factory.
 * For developers using Eclipse IDE, use the provided code-formatter in src/main/resources.
+* For Mac developers, I need your help to test this library to make it available on MacOS.
