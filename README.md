@@ -6,6 +6,7 @@ A library to ease the development of Selenium's powered automation framework by 
 * Brave Browser (uses ChromeDriver) (* see knowledge base section) - (tested on version 99.0.4844.74 (Windows))
 * Chrome Browser (tested on version 99.0.4844.74 (Linux/Windows))
 * Microsoft Edge (tested on version 99.0.1150.46 (Linux/Windows))
+* Mozilla Firefox (tested on version 98.0.1 (Windows))
 * Opera Browser (tested on version 84.0.4316.42 (WebKit - 98.0.4758.109) (Windows/Linux (*see knowledge base section)))
 
 ### Supported Platform
@@ -37,4 +38,4 @@ and [Visual Studio Code](https://projectlombok.org/setup/vscode).
 Contact us if you are looking for implementation tasks that fit your skills. An article will be available how to 
 contribute to qa-selenium-webdriver-factory.
 * For developers using Eclipse IDE, use the provided code-formatter in src/main/resources.
-* For Mac developers, I need your help to test this library to make it available on MacOS.
+* For Mac developers, I need help to test this library to make it available on MacOS.

@@ -23,22 +23,14 @@ import qa.patrick.belanger.selenium.webdriver.factory.drivers.Browser;
 /**
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
-public abstract class ChromiumBasedBrowser extends Browser {
+public abstract class GeckoBasedBrowser extends Browser {
 
 	/**
-	 * Maximize Chromium-based browser window at launch
+	 * Enabling private browsing on Firefox
 	 */
-	protected final String ARGUMENT_START_MAXIMIZED = "--start-maximized";
-	/**
-	 * Enabling private browsing on Brave/Chrome
-	 */
-	protected final String ARGUMENT_INCOGNITO_MODE = "--incognito";
-	/**
-	 * Enabling private browsing on Edge
-	 */
-	protected final String ARGUMENT_INPRIVATE_MODE = "--inprivate";
-
-	public ChromiumBasedBrowser(Driver driver) {
+	protected final String ARGUMENT_PRIVATE_MODE = "--private";
+	
+	public GeckoBasedBrowser(Driver driver) {
 		super(driver);
 	}
 

@@ -27,6 +27,7 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -102,9 +103,29 @@ public class WebDriverFactoryTest {
 		webDriver.navigate().to("https://www.google.com");
 		assertTrue(webDriver.getCurrentUrl().contains("google"));
 	}
+	
+	@Test
+	public void firefoxBrowser_shouldBeAbleToInstantiateFirefoxDriverLocally() {
+		webDriver = WebDriverFactory.getDriver(Driver.FIREFOX, false);
+		assertNotNull(webDriver);
+		assertTrue(webDriver instanceof FirefoxDriver);
+		webDriver.navigate().to("https://www.google.com");
+		assertTrue(webDriver.getCurrentUrl().contains("google"));
+	}
+
+	@Test
+	public void firefoxBrowser_shouldBeAbleToInstantiateFirefoxDriverRemotely() {
+		webDriver = WebDriverFactory.getDriver(Driver.FIREFOX, true);
+		assertNotNull(webDriver);
+		assertTrue(webDriver instanceof RemoteWebDriver);
+		assertTrue(((RemoteWebDriver) webDriver).getCapabilities().getBrowserName().equalsIgnoreCase("firefox"));
+		webDriver.navigate().to("https://www.google.com");
+		assertTrue(webDriver.getCurrentUrl().contains("google"));
+	}
 
 	@Test
 	public void operaBrowser_shouldBeAbleToInstantiateOperaDriverLocally() {
+		Assumptions.assumeTrue(OperatingSystem.isExecutionHostWindows()); // Only works on Windows host
 		webDriver = WebDriverFactory.getDriver(Driver.OPERA, false);
 		assertNotNull(webDriver);
 		assertTrue(webDriver instanceof OperaDriver);
