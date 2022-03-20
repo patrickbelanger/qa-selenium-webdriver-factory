@@ -17,37 +17,51 @@
 
 package qa.patrick.belanger.selenium.webdriver.factory.drivers.desktop;
 
+import java.net.MalformedURLException;
+
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.remote.AbstractDriverOptions;
 
 import qa.patrick.belanger.selenium.webdriver.base.Driver;
-import qa.patrick.belanger.selenium.webdriver.exceptions.WebDriverNotSupportedException;
-import qa.patrick.belanger.selenium.webdriver.utils.OperatingSystem;
 
 /**
- * Brave Browser class 
- * Returns a ChromeDriver/RemoteWebDriver (using the binary location of Brave Browser)
+ * Edge Browser class 
+ * Returns a EdgeDriver/RemoteWebDriver
  * 
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
-public class Brave extends Chrome {
+public class Edge extends ChromiumBasedBrowser {
 
-	public Brave() {
-		super(Driver.BRAVE);
+	public Edge() {
+		super(Driver.EDGE);
+	}
+
+	public Edge(Driver driver) {
+		super(driver);
+	}
+
+	@Override
+	public AbstractDriverOptions<?> getOptions() {
+		EdgeOptions edgeOptions = new EdgeOptions();
+		edgeOptions.addArguments(ARGUMENT_START_MAXIMIZED);
+		if (getWebDriverProperties().isBrowserPrivateMode()) {
+			edgeOptions.addArguments(ARGUMENT_INPRIVATE_MODE);
+		}
+		if (getWebDriverProperties().useEdgeBrowserBinaryPath()) {
+			edgeOptions.setBinary(getWebDriverProperties().getEdgeBrowserBinaryPath());
+		}
+		return edgeOptions;
 	}
 
 	/**
-	 * Get ChromeOptions (with the binary location of Brave Browser)
+	 * Store a set of EdgeOptions in a {@link Capabilities} class
 	 */
 	@Override
-	public AbstractDriverOptions<?> getOptions() {
-		ChromeOptions chromeOptions = (ChromeOptions) super.getOptions(); // Same as Chrome, basically
-		if (getWebDriverProperties().useBraveBrowserBinaryPath()) {
-			chromeOptions.setBinary(getWebDriverProperties().getBraveBrowserBinaryPath());
-		}
-		return chromeOptions;
+	public Capabilities toCapabilities() {
+		return null;
 	}
 
 	/**
@@ -55,15 +69,12 @@ public class Brave extends Chrome {
 	 */
 	@Override
 	public WebDriver getWebDriver() {
-		if (OperatingSystem.isExecutionHostLinux()) {
-			StringBuilder sb = new StringBuilder()
-			    .append("WebDriverFactory: Using ChromeDriver against Brave Browser locally on Linux is unstable. ")
-			    .append("For better stability, consider executing Brave Browser remotely through Selenium Grid on ")
-			    .append("a Windows host.");
-			logger.warn(sb.toString());
-			throw new WebDriverNotSupportedException(sb.toString());
-		}
-		return new ChromeDriver((ChromeOptions) getOptions());
+		return new EdgeDriver((EdgeOptions) getOptions());
+	}
+
+	@Override
+	public WebDriver getWebDriver(boolean remote) throws MalformedURLException {
+		return super.getWebDriver(remote);
 	}
 
 }

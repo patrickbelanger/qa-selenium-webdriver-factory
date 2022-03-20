@@ -48,53 +48,80 @@ public abstract class Browser {
 	@Getter(AccessLevel.PROTECTED)
 	@Setter(AccessLevel.PRIVATE)
 	Driver driver;
-	
+
 	@Getter(AccessLevel.PROTECTED)
 	WebDriverProperties webDriverProperties = ConfigFactory.create(WebDriverProperties.class);
-	
+
 	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
-	
+
 	public Browser(Driver driver) {
 		setDriver(driver);
 		System.setProperty(driver.getProperty(), getWebDriverPath());
 	}
-	
+
 	public abstract AbstractDriverOptions<?> getOptions();
-	
+
 	public abstract WebDriver getWebDriver();
-	
-	private String getHostUrl() {
-		return String.format("%s:%s%s", getWebDriverProperties().getGridUrl(), 
-				getWebDriverProperties().getGridPort(), WebDriverProperties.GRID_HUB_ENDPOINT);
+
+	protected String getHostUrl() {
+		return String.format("%s:%s%s", getWebDriverProperties().getGridUrl(), getWebDriverProperties().getGridPort(),
+		    WebDriverProperties.GRID_HUB_ENDPOINT);
 	}
-	
-	private WebDriver getRemoteDriver() throws MalformedURLException {
-		return new RemoteWebDriver(new URL(getHostUrl()), toCapabilities());
+
+	/**
+	 * Creates a new RemoteWebDriver instance with specified options.
+	 * 
+	 * @return
+	 * @throws MalformedURLException
+	 */
+	private WebDriver getRemoteWebDriver() throws MalformedURLException {
+		return getRemoteWebDriver(false); // We should use (Browser)Options classes used nowadays over Capabilities.
 	}
-	
+
+	/**
+	 * Creates a new RemoteWebDriver instance with specified options (or
+	 * capabilities).
+	 * 
+	 * @param useCapabilities Use values set in Capabilities (object that describes
+	 *                        a series of key/value pairs that encapsulate aspects
+	 *                        of a browser).
+	 * 
+	 *                        Third-party providers still use Capabilities object to
+	 *                        set a specific browser (browser_name, browser_version,
+	 *                        etc).
+	 * 
+	 * @return
+	 * @throws MalformedURLException
+	 */
+	private WebDriver getRemoteWebDriver(boolean useCapabilities) throws MalformedURLException {
+		return new RemoteWebDriver(new URL(getHostUrl()), useCapabilities ? toCapabilities() : getOptions());
+	}
+
 	/**
 	 * Creates a new WebDriver instance with specified options.
+	 * 
 	 * @param remote Returns a RemoteDriver instance with the specified options
 	 * @return {@link WebDriver}
 	 * @throws MalformedURLException
 	 */
 	public WebDriver getWebDriver(boolean remote) throws MalformedURLException {
-		return remote ? getRemoteDriver() : getWebDriver();
+		return remote ? getRemoteWebDriver() : getWebDriver();
 	}
-	
+
 	private String getWebDriverPath() {
-		if ((OperatingSystem.isExecutionHostWindows()) && 
-				(webDriverProperties.getWebDriverDefaultPath().contains("classpath"))) {
-				return Browser.class.getClassLoader().getResource(getDriver().getExecutable()).getPath();
-			} // Use defined path in .properties
-			return String.format("%s%s", OperatingSystem.isExecutionHostWindows() ?
-					webDriverProperties.getWebDriverDefaultPath() : WebDriverProperties.UNIX_WEBDRIVER_PATH, 
-					getDriver().getExecutable());
+		if ((OperatingSystem.isExecutionHostWindows())
+		    && (webDriverProperties.getWebDriverDefaultPath().contains("classpath"))) {
+			return Browser.class.getClassLoader().getResource(getDriver().getExecutable()).getPath();
+		} // Use defined path in .properties
+		return String.format("%s%s",
+		    OperatingSystem.isExecutionHostWindows() ? webDriverProperties.getWebDriverDefaultPath()
+		        : WebDriverProperties.UNIX_WEBDRIVER_PATH,
+		    getDriver().getExecutable());
 	}
-	
+
 	protected Capabilities toCapabilities() {
 		setCapabilities(new DesiredCapabilities());
 		return getCapabilities();
 	}
-	 
+
 }

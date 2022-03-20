@@ -34,9 +34,9 @@ public abstract class ChromiumBasedBrowser extends Browser {
 	 * Enabling private browsing on Edge
 	 */
 	protected final String ARGUMENT_INPRIVATE_MODE = "--inprivate";
-	
+
 	public ChromiumBasedBrowser(Driver driver) {
 		super(driver);
 	}
-	
+
 }

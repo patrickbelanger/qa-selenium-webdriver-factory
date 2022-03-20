@@ -27,37 +27,41 @@ import qa.patrick.belanger.selenium.webdriver.factory.drivers.Browser;
 
 /**
  * WebDriverFactory
+ * 
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
 public class WebDriverFactory {
 
 	private final static Logger logger = LoggerFactory.getLogger(WebDriverFactory.class);
-	
-	private WebDriverFactory() { }
-	
+
+	private WebDriverFactory() {
+	}
+
 	/**
 	 * Instantiate a WebDriver or RemoteWebDriver
+	 * 
 	 * @param driver {@link Driver} Launch the specified Browser/Platform
 	 * @param remote Return a RemoteWebDriver instance over a WebDriver
 	 * @return {@WebDriver}
 	 */
 	public static WebDriver getDriver(Driver driver, boolean remote) {
 		try {
-			return ((Browser) Class.forName(getDriverPackageName(driver)).getDeclaredConstructor()
-					.newInstance()).getWebDriver(remote);
-		} catch(Exception e) {
+			return ((Browser) Class.forName(getDriverPackageName(driver)).getDeclaredConstructor().newInstance())
+			    .getWebDriver(remote);
+		} catch (Exception e) {
 			logger.error(e.getLocalizedMessage());
 			throw new WebDriverException(e.getLocalizedMessage());
 		}
 	}
-	
+
 	/**
 	 * Returns the fully qualified package name of the Driver
+	 * 
 	 * @param driver {@link Driver}
 	 * @return
 	 */
 	private static String getDriverPackageName(Driver driver) {
 		return String.format("%s%s", WebDriverFactory.class.getPackageName(), driver.getClassName());
 	}
-	
+
 }

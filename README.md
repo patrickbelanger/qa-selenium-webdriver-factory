@@ -19,12 +19,12 @@ and [Visual Studio Code](https://projectlombok.org/setup/vscode).
 
 # Developer(s)
 
-* [Patrick BÃ©langer](https://github.com/patrickbelanger)
+* [Patrick Bélanger](https://github.com/patrickbelanger)
 
 # Knowledge Base
 
 * If you get Java error(s) on getters/setters, you haven't installed the Lombok plugin on your IDE. This library is required to use qa-selenium-webdriver-factory. After installing the plugin, make sure to perform a Maven update.
-* Brave Browser on Linux (local): Feature flagged as experimental. There's an issue when webDriver.quit() is called. I recommend executing Brave driver on a Windows host or remotely (through Selenium Grid hosted on Windows 
+* Brave Browser on Linux (local): Not supported. I recommend executing Brave driver on a Windows host or remotely (through Selenium Grid hosted on Windows 
 (* tested and works fine)).
 
 # Contribute
