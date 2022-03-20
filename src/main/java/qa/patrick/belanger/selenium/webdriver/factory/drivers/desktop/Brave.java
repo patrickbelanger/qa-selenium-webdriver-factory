@@ -1,3 +1,20 @@
+// Licensed to the Software Freedom Conservancy (SFC) under one
+// or more contributor license agreements.  See the NOTICE file
+// distributed with this work for additional information
+// regarding copyright ownership.  The SFC licenses this file
+// to you under the Apache License, Version 2.0 (the
+// "License"); you may not use this file except in compliance
+// with the License.  You may obtain a copy of the License at
+//
+//   http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+
 package qa.patrick.belanger.selenium.webdriver.factory.drivers.desktop;
 
 import org.openqa.selenium.WebDriver;
@@ -6,8 +23,8 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.AbstractDriverOptions;
 
 import qa.patrick.belanger.selenium.webdriver.base.Driver;
+import qa.patrick.belanger.selenium.webdriver.exceptions.WebDriverNotSupportedException;
 import qa.patrick.belanger.selenium.webdriver.utils.OperatingSystem;
-
 
 /**
  * Brave Browser class
@@ -25,8 +42,10 @@ public class Brave extends Chrome {
    */
 	@Override
 	public AbstractDriverOptions<?> getOptions() {
-		ChromeOptions chromeOptions = (ChromeOptions) super.getOptions();
-		chromeOptions.setBinary(getWebDriverProperties().getBraveBrowserBinaryPath());
+		ChromeOptions chromeOptions = (ChromeOptions) super.getOptions(); // Same as Chrome, basically
+		if (getWebDriverProperties().useBraveBrowserBinaryPath()) {
+			chromeOptions.setBinary(getWebDriverProperties().getBraveBrowserBinaryPath());
+		}
 		return chromeOptions;
 	}
 	
@@ -37,11 +56,11 @@ public class Brave extends Chrome {
 	public WebDriver getWebDriver() {
 		if (OperatingSystem.isExecutionHostLinux()) {
 			StringBuilder sb = new StringBuilder()
-					.append("Brave Browser support on Linux is experimental.\n")
-					.append("In local, you may get a 'org.openqa.selenium.concurrent.ExecutorServices shutdownGracefully ' ")
-					.append("[pid=xxxxx, exitValue=0] SEVERE status when calling webDriver.quit();\n")
-					.append("If you get this SEVERE status, you need to kill Brave Browser process by your own.\n");
+					.append("WebDriverFactory: Using ChromeDriver against Brave Browser locally on Linux is unstable. ")
+					.append("For better stability, consider executing Brave Browser remotely through Selenium Grid on ")
+					.append("a Windows host.");
 			logger.warn(sb.toString());
+			throw new WebDriverNotSupportedException(sb.toString());
 		}
 		return new ChromeDriver((ChromeOptions) getOptions());
 	}

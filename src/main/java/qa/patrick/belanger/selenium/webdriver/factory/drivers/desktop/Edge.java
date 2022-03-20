@@ -49,11 +49,14 @@ public class Edge extends ChromiumBasedBrowser {
 		if (getWebDriverProperties().isBrowserPrivateMode()) {
 			edgeOptions.addArguments(ARGUMENT_INPRIVATE_MODE);
 		}
+		if (getWebDriverProperties().useEdgeBrowserBinaryPath()) {
+			edgeOptions.setBinary(getWebDriverProperties().getEdgeBrowserBinaryPath());
+		}
 		return edgeOptions;
 	}
 
 	/**
-	 * Store a set of EdgeOptions in a {@link Capabilities}
+	 * Store a set of EdgeOptions in a {@link Capabilities} class
 	 */
 	@Override
 	public Capabilities toCapabilities() {

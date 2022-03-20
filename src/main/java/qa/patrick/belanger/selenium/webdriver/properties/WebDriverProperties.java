@@ -34,6 +34,21 @@ public interface WebDriverProperties extends Config {
 	@DefaultValue("C:/Program Files/BraveSoftware/Brave-Browser/Application/brave.exe")
 	String getBraveBrowserBinaryPath();
 	
+	@Key("brave.browser.use.binary.path")
+	@DefaultValue("true") // Browser binary path for Brave Browser must be mentioned
+	boolean useBraveBrowserBinaryPath();
+	
+	/* Edge Browser related properties */
+	
+	@Key("edge.browser.binary.path")
+	@DefaultValue("C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe")
+	String getEdgeBrowserBinaryPath();
+	
+	@Key("edge.browser.use.binary.path")
+	@DefaultValue("false") // Not required, but could be required if Edge is executed on a Selenium Grid running 
+												 // from a Linux-based execution host 
+	boolean useEdgeBrowserBinaryPath();
+	
 	/* General browser options */
 	
 	@Key("browser.private.mode")

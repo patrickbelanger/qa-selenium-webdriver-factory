@@ -53,7 +53,7 @@ public class Chrome extends ChromiumBasedBrowser {
 	}
 
 	/**
-	 * Store a set of ChromeOptions in a {@link Capabilities}
+	 * Store a set of ChromeOptions in a {@link Capabilities} class
 	 */
 	@Override
 	public Capabilities toCapabilities() {

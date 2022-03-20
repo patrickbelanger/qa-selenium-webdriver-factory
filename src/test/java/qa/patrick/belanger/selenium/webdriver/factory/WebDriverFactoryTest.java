@@ -21,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
@@ -29,6 +30,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import qa.patrick.belanger.selenium.webdriver.base.Driver;
+import qa.patrick.belanger.selenium.webdriver.utils.OperatingSystem;
 
 /**
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
@@ -44,6 +46,7 @@ public class WebDriverFactoryTest {
 	
 	@Test
 	public void braveBrowser_shouldBeAbleToInstantiateChromeDriverLocally() {
+		Assumptions.assumeTrue(OperatingSystem.isExecutionHostWindows()); // Only works on Windows host
 		webDriver = WebDriverFactory.getDriver(Driver.BRAVE, false);
 		assertNotNull(webDriver);
 		assertTrue(webDriver instanceof ChromeDriver);
