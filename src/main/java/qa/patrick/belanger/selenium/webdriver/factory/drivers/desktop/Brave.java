@@ -55,7 +55,7 @@ public class Brave extends Chrome {
 	 */
 	@Override
 	public WebDriver getWebDriver() {
-		if (OperatingSystem.isExecutionHostLinux()) {
+		if (OperatingSystem.isExecutionHostLinux()) { // TODO: To investigate with another browser/driver release
 			StringBuilder sb = new StringBuilder()
 			    .append("WebDriverFactory: Using ChromeDriver against Brave Browser locally on Linux is unstable. ")
 			    .append("For better stability, consider executing Brave Browser remotely through Selenium Grid on ")

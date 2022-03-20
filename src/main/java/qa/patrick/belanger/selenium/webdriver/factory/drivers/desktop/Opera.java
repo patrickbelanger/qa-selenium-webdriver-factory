@@ -26,6 +26,8 @@ import org.openqa.selenium.opera.OperaOptions;
 import org.openqa.selenium.remote.AbstractDriverOptions;
 
 import qa.patrick.belanger.selenium.webdriver.base.Driver;
+import qa.patrick.belanger.selenium.webdriver.exceptions.WebDriverNotSupportedException;
+import qa.patrick.belanger.selenium.webdriver.utils.OperatingSystem;
 
 /**
  * Opera Browser class 
@@ -71,6 +73,14 @@ public class Opera extends ChromiumBasedBrowser {
 
 	@Override
 	public WebDriver getWebDriver(boolean remote) throws MalformedURLException {
+		if (OperatingSystem.isExecutionHostLinux()) { // TODO: To investigate with another browser/driver release
+			StringBuilder sb = new StringBuilder()
+			    .append("WebDriverFactory: Using OperaDriver locally on Linux is unstable. ")
+			    .append("For better stability, consider executing Opera Browser remotely through Selenium Grid on ")
+			    .append("a Windows host.");
+			logger.warn(sb.toString());
+			throw new WebDriverNotSupportedException(sb.toString());
+		}
 		return super.getWebDriver(remote);
 	}
 
