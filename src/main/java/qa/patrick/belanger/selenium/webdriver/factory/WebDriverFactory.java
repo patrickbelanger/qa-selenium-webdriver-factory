@@ -41,7 +41,7 @@ public class WebDriverFactory {
 	 * Instantiate a WebDriver or RemoteWebDriver
 	 * 
 	 * @param driver {@link Driver} Launch the specified Browser/Platform
-	 * @param remote Return a RemoteWebDriver instance over a WebDriver
+	 * @param remote Return a RemoteWebDriver instance instead of a WebDriver object
 	 * @return {@WebDriver}
 	 */
 	public static WebDriver getDriver(Driver driver, boolean remote) {

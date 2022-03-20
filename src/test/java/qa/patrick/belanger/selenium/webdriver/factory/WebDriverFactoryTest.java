@@ -27,6 +27,7 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import qa.patrick.belanger.selenium.webdriver.base.Driver;
@@ -102,6 +103,25 @@ public class WebDriverFactoryTest {
 		assertTrue(webDriver.getCurrentUrl().contains("google"));
 	}
 
+	@Test
+	public void operaBrowser_shouldBeAbleToInstantiateOperaDriverLocally() {
+		webDriver = WebDriverFactory.getDriver(Driver.OPERA, false);
+		assertNotNull(webDriver);
+		assertTrue(webDriver instanceof OperaDriver);
+		webDriver.navigate().to("https://www.google.com");
+		assertTrue(webDriver.getCurrentUrl().contains("google"));
+	}
+	
+	@Test
+	public void operaBrowser_shouldBeAbleToInstantiateOperaDriverRemotely() {
+		webDriver = WebDriverFactory.getDriver(Driver.OPERA, true);
+		assertNotNull(webDriver);
+		assertTrue(webDriver instanceof RemoteWebDriver);
+		assertTrue(((RemoteWebDriver) webDriver).getCapabilities().getBrowserName().equalsIgnoreCase("opera"));
+		webDriver.navigate().to("https://www.google.com");
+		assertTrue(webDriver.getCurrentUrl().contains("google"));
+	}
+	
 	@AfterEach
 	public void tearDown() {
 		if (webDriver != null) {

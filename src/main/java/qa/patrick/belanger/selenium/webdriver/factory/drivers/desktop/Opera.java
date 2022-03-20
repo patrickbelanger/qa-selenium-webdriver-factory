@@ -17,9 +17,12 @@
 
 package qa.patrick.belanger.selenium.webdriver.factory.drivers.desktop;
 
+import java.net.MalformedURLException;
+
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.opera.OperaDriver;
+import org.openqa.selenium.opera.OperaOptions;
 import org.openqa.selenium.remote.AbstractDriverOptions;
 
 import qa.patrick.belanger.selenium.webdriver.base.Driver;
@@ -27,43 +30,58 @@ import qa.patrick.belanger.selenium.webdriver.exceptions.WebDriverNotSupportedEx
 import qa.patrick.belanger.selenium.webdriver.utils.OperatingSystem;
 
 /**
- * Brave Browser class 
- * Returns a ChromeDriver/RemoteWebDriver (using the binary location of Brave Browser)
+ * Opera Browser class 
+ * Returns a OperaDriver/RemoteWebDriver
  * 
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
-public class Brave extends Chrome {
+public class Opera extends ChromiumBasedBrowser {
 
-	public Brave() {
-		super(Driver.BRAVE);
+	public Opera() {
+		super(Driver.OPERA);
 	}
 
-	/**
-	 * Get ChromeOptions (with the binary location of Brave Browser)
-	 */
+	public Opera(Driver driver) {
+		super(driver);
+	}
+
 	@Override
 	public AbstractDriverOptions<?> getOptions() {
-		ChromeOptions chromeOptions = (ChromeOptions) super.getOptions(); // Same as Chrome, basically
-		if (getWebDriverProperties().useBraveBrowserBinaryPath()) {
-			chromeOptions.setBinary(getWebDriverProperties().getBraveBrowserBinaryPath());
+		OperaOptions operaOptions = new OperaOptions();
+		operaOptions.addArguments(ARGUMENT_START_MAXIMIZED);
+		if (getWebDriverProperties().isBrowserPrivateMode()) {
+			operaOptions.addArguments(ARGUMENT_INCOGNITO_MODE);
 		}
-		return chromeOptions;
+		return operaOptions;
 	}
 
 	/**
-	 * Creates a new ChromeDriver instance with the specified options.
+	 * Store a set of OperaOptions in a {@link Capabilities} class
+	 */
+	@Override
+	public Capabilities toCapabilities() {
+		return null;
+	}
+
+	/**
+	 * Creates a new OperaDriver instance with the specified options.
 	 */
 	@Override
 	public WebDriver getWebDriver() {
+		return new OperaDriver((OperaOptions) getOptions());
+	}
+
+	@Override
+	public WebDriver getWebDriver(boolean remote) throws MalformedURLException {
 		if (OperatingSystem.isExecutionHostLinux()) { // TODO: To investigate with another browser/driver release
 			StringBuilder sb = new StringBuilder()
-			    .append("WebDriverFactory: Using ChromeDriver against Brave Browser locally on Linux is unstable. ")
-			    .append("For better stability, consider executing Brave Browser remotely through Selenium Grid on ")
+			    .append("WebDriverFactory: Using OperaDriver locally on Linux is unstable. ")
+			    .append("For better stability, consider executing Opera Browser remotely through Selenium Grid on ")
 			    .append("a Windows host.");
 			logger.warn(sb.toString());
 			throw new WebDriverNotSupportedException(sb.toString());
 		}
-		return new ChromeDriver((ChromeOptions) getOptions());
+		return super.getWebDriver(remote);
 	}
 
 }

@@ -65,7 +65,7 @@ public class Edge extends ChromiumBasedBrowser {
 	}
 
 	/**
-	 * Creates a new ChromeDriver instance with the specified options.
+	 * Creates a new EdgeDriver instance with the specified options.
 	 */
 	@Override
 	public WebDriver getWebDriver() {
