@@ -41,7 +41,12 @@ public enum Driver {
 	/**
 	 * Edge Browser
 	 */
-	EDGE("msedgedriver", ".drivers.desktop.Edge", "webdriver.edge.driver", "msedgedriver.exe", "msedgedriver"),;
+	EDGE("Edge", ".drivers.desktop.Edge", "webdriver.edge.driver", "msedgedriver.exe", "msedgedriver"),
+	/**
+	 * Edge Browser
+	 */
+	OPERA("Opera", ".drivers.desktop.Opera", "webdriver.opera.driver", "operadriver.exe", "operadriver"),
+	;
 
 	/**
 	 * Get/set browser name

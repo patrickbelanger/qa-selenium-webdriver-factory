@@ -21,43 +21,40 @@ import java.net.MalformedURLException;
 
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.opera.OperaDriver;
+import org.openqa.selenium.opera.OperaOptions;
 import org.openqa.selenium.remote.AbstractDriverOptions;
 
 import qa.patrick.belanger.selenium.webdriver.base.Driver;
 
 /**
- * Edge Browser class 
- * Returns a EdgeDriver/RemoteWebDriver
+ * Opera Browser class 
+ * Returns a OperaDriver/RemoteWebDriver
  * 
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
-public class Edge extends ChromiumBasedBrowser {
+public class Opera extends ChromiumBasedBrowser {
 
-	public Edge() {
-		super(Driver.EDGE);
+	public Opera() {
+		super(Driver.OPERA);
 	}
 
-	public Edge(Driver driver) {
+	public Opera(Driver driver) {
 		super(driver);
 	}
 
 	@Override
 	public AbstractDriverOptions<?> getOptions() {
-		EdgeOptions edgeOptions = new EdgeOptions();
-		edgeOptions.addArguments(ARGUMENT_START_MAXIMIZED);
+		OperaOptions operaOptions = new OperaOptions();
+		operaOptions.addArguments(ARGUMENT_START_MAXIMIZED);
 		if (getWebDriverProperties().isBrowserPrivateMode()) {
-			edgeOptions.addArguments(ARGUMENT_INPRIVATE_MODE);
+			operaOptions.addArguments(ARGUMENT_INCOGNITO_MODE);
 		}
-		if (getWebDriverProperties().useEdgeBrowserBinaryPath()) {
-			edgeOptions.setBinary(getWebDriverProperties().getEdgeBrowserBinaryPath());
-		}
-		return edgeOptions;
+		return operaOptions;
 	}
 
 	/**
-	 * Store a set of EdgeOptions in a {@link Capabilities} class
+	 * Store a set of OperaOptions in a {@link Capabilities} class
 	 */
 	@Override
 	public Capabilities toCapabilities() {
@@ -65,11 +62,11 @@ public class Edge extends ChromiumBasedBrowser {
 	}
 
 	/**
-	 * Creates a new EdgeDriver instance with the specified options.
+	 * Creates a new OperaDriver instance with the specified options.
 	 */
 	@Override
 	public WebDriver getWebDriver() {
-		return new EdgeDriver((EdgeOptions) getOptions());
+		return new OperaDriver((OperaOptions) getOptions());
 	}
 
 	@Override

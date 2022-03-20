@@ -6,6 +6,7 @@ A library to ease the development of Selenium's powered automation framework by 
 * Brave Browser (uses ChromeDriver) (* see knowledge base section) - (tested on version 99.0.4844.74 (Windows))
 * Chrome Browser (tested on version 99.0.4844.74 (Linux/Windows))
 * Microsoft Edge (tested on version 99.0.1150.46 (Linux/Windows))
+* Opera Browser (tested on version 84.0.4316.42 (WebKit - 98.0.4758.109) (Windows))
 
 ### Supported Platform
 * Linux (tested on Ubuntu 21.10)
