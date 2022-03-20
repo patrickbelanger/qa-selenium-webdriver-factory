@@ -28,8 +28,9 @@ import org.openqa.selenium.remote.AbstractDriverOptions;
 import qa.patrick.belanger.selenium.webdriver.base.Driver;
 
 /**
- * Edge Browser class
+ * Edge Browser class 
  * Returns a EdgeDriver/RemoteWebDriver
+ * 
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
 public class Edge extends ChromiumBasedBrowser {
@@ -37,7 +38,7 @@ public class Edge extends ChromiumBasedBrowser {
 	public Edge() {
 		super(Driver.EDGE);
 	}
-	
+
 	public Edge(Driver driver) {
 		super(driver);
 	}
@@ -62,7 +63,7 @@ public class Edge extends ChromiumBasedBrowser {
 	public Capabilities toCapabilities() {
 		return null;
 	}
-	
+
 	/**
 	 * Creates a new ChromeDriver instance with the specified options.
 	 */

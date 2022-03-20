@@ -27,8 +27,9 @@ import qa.patrick.belanger.selenium.webdriver.exceptions.WebDriverNotSupportedEx
 import qa.patrick.belanger.selenium.webdriver.utils.OperatingSystem;
 
 /**
- * Brave Browser class
+ * Brave Browser class 
  * Returns a ChromeDriver/RemoteWebDriver (using the binary location of Brave Browser)
+ * 
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
 public class Brave extends Chrome {
@@ -36,10 +37,10 @@ public class Brave extends Chrome {
 	public Brave() {
 		super(Driver.BRAVE);
 	}
-	
+
 	/**
-   * Get ChromeOptions (with the binary location of Brave Browser)
-   */
+	 * Get ChromeOptions (with the binary location of Brave Browser)
+	 */
 	@Override
 	public AbstractDriverOptions<?> getOptions() {
 		ChromeOptions chromeOptions = (ChromeOptions) super.getOptions(); // Same as Chrome, basically
@@ -48,7 +49,7 @@ public class Brave extends Chrome {
 		}
 		return chromeOptions;
 	}
-	
+
 	/**
 	 * Creates a new ChromeDriver instance with the specified options.
 	 */
@@ -56,13 +57,13 @@ public class Brave extends Chrome {
 	public WebDriver getWebDriver() {
 		if (OperatingSystem.isExecutionHostLinux()) {
 			StringBuilder sb = new StringBuilder()
-					.append("WebDriverFactory: Using ChromeDriver against Brave Browser locally on Linux is unstable. ")
-					.append("For better stability, consider executing Brave Browser remotely through Selenium Grid on ")
-					.append("a Windows host.");
+			    .append("WebDriverFactory: Using ChromeDriver against Brave Browser locally on Linux is unstable. ")
+			    .append("For better stability, consider executing Brave Browser remotely through Selenium Grid on ")
+			    .append("a Windows host.");
 			logger.warn(sb.toString());
 			throw new WebDriverNotSupportedException(sb.toString());
 		}
 		return new ChromeDriver((ChromeOptions) getOptions());
 	}
-	
+
 }

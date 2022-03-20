@@ -28,8 +28,9 @@ import org.openqa.selenium.remote.AbstractDriverOptions;
 import qa.patrick.belanger.selenium.webdriver.base.Driver;
 
 /**
- * Chrome Browser class
+ * Chrome Browser class 
  * Returns a ChromeDriver/RemoteWebDriver
+ * 
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
 public class Chrome extends ChromiumBasedBrowser {
@@ -37,7 +38,7 @@ public class Chrome extends ChromiumBasedBrowser {
 	public Chrome() {
 		super(Driver.CHROME);
 	}
-	
+
 	public Chrome(Driver driver) {
 		super(driver);
 	}
@@ -59,7 +60,7 @@ public class Chrome extends ChromiumBasedBrowser {
 	public Capabilities toCapabilities() {
 		super.toCapabilities();
 		getCapabilities().setCapability(ChromeOptions.CAPABILITY, getOptions());
-		return getCapabilities(); 
+		return getCapabilities();
 	}
 
 	/**
@@ -74,5 +75,5 @@ public class Chrome extends ChromiumBasedBrowser {
 	public WebDriver getWebDriver(boolean remote) throws MalformedURLException {
 		return super.getWebDriver(remote);
 	}
-	
+
 }

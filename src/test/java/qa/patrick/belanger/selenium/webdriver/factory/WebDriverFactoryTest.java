@@ -38,12 +38,12 @@ import qa.patrick.belanger.selenium.webdriver.utils.OperatingSystem;
 public class WebDriverFactoryTest {
 
 	private WebDriver webDriver;
-	
+
 	@BeforeEach
 	public void setUp() {
 		//
 	}
-	
+
 	@Test
 	public void braveBrowser_shouldBeAbleToInstantiateChromeDriverLocally() {
 		Assumptions.assumeTrue(OperatingSystem.isExecutionHostWindows()); // Only works on Windows host
@@ -53,19 +53,17 @@ public class WebDriverFactoryTest {
 		webDriver.navigate().to("https://www.google.com");
 		assertTrue(webDriver.getCurrentUrl().contains("google"));
 	}
-	
+
 	@Test
 	public void braveBrowser_shouldBeAbleToInstantiateChromeDriverRemotely() {
 		webDriver = WebDriverFactory.getDriver(Driver.BRAVE, true);
 		assertNotNull(webDriver);
 		assertTrue(webDriver instanceof RemoteWebDriver);
-		assertTrue(
-				((RemoteWebDriver)webDriver).getCapabilities().getBrowserName().equalsIgnoreCase("chrome")
-		);
+		assertTrue(((RemoteWebDriver) webDriver).getCapabilities().getBrowserName().equalsIgnoreCase("chrome"));
 		webDriver.navigate().to("https://www.google.com");
 		assertTrue(webDriver.getCurrentUrl().contains("google"));
 	}
-	
+
 	@Test
 	public void chromeBrowser_shouldBeAbleToInstantiateChromeDriverLocally() {
 		webDriver = WebDriverFactory.getDriver(Driver.CHROME, false);
@@ -74,19 +72,17 @@ public class WebDriverFactoryTest {
 		webDriver.navigate().to("https://www.google.com");
 		assertTrue(webDriver.getCurrentUrl().contains("google"));
 	}
-	
+
 	@Test
 	public void chromeBrowser_shouldBeAbleToInstantiateChromeDriverRemotely() {
 		webDriver = WebDriverFactory.getDriver(Driver.CHROME, true);
 		assertNotNull(webDriver);
 		assertTrue(webDriver instanceof RemoteWebDriver);
-		assertTrue(
-				((RemoteWebDriver)webDriver).getCapabilities().getBrowserName().equalsIgnoreCase("chrome")
-		);
+		assertTrue(((RemoteWebDriver) webDriver).getCapabilities().getBrowserName().equalsIgnoreCase("chrome"));
 		webDriver.navigate().to("https://www.google.com");
 		assertTrue(webDriver.getCurrentUrl().contains("google"));
 	}
-	
+
 	@Test
 	public void edgeBrowser_shouldBeAbleToInstantiateEdgeDriverLocally() {
 		webDriver = WebDriverFactory.getDriver(Driver.EDGE, false);
@@ -95,24 +91,22 @@ public class WebDriverFactoryTest {
 		webDriver.navigate().to("https://www.google.com");
 		assertTrue(webDriver.getCurrentUrl().contains("google"));
 	}
-	
+
 	@Test
 	public void edgeBrowser_shouldBeAbleToInstantiateEdgeDriverRemotely() {
 		webDriver = WebDriverFactory.getDriver(Driver.EDGE, true);
 		assertNotNull(webDriver);
 		assertTrue(webDriver instanceof RemoteWebDriver);
-		assertTrue(
-				((RemoteWebDriver)webDriver).getCapabilities().getBrowserName().equalsIgnoreCase("msedge")
-		);
+		assertTrue(((RemoteWebDriver) webDriver).getCapabilities().getBrowserName().equalsIgnoreCase("msedge"));
 		webDriver.navigate().to("https://www.google.com");
 		assertTrue(webDriver.getCurrentUrl().contains("google"));
 	}
-	
+
 	@AfterEach
 	public void tearDown() {
 		if (webDriver != null) {
 			webDriver.quit();
 		}
 	}
-	
+
 }

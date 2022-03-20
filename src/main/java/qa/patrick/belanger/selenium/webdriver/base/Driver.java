@@ -24,68 +24,69 @@ import qa.patrick.belanger.selenium.webdriver.utils.OperatingSystem;
 
 /**
  * List of supported WebDrivers
+ * 
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
 public enum Driver {
-	
+
 	/**
-	 * Brave Browser
-	 * Remark: Binary location needs to be specified in webdriver.properties file. 
+	 * Brave Browser Remark: Binary location needs to be specified in
+	 * webdriver.properties file.
 	 */
-	BRAVE("Brave", ".drivers.desktop.Brave", "webdriver.chrome.driver", "chromedriver.exe","chromedriver"),
+	BRAVE("Brave", ".drivers.desktop.Brave", "webdriver.chrome.driver", "chromedriver.exe", "chromedriver"),
 	/**
 	 * Chrome Browser
 	 */
-	CHROME("Chrome", ".drivers.desktop.Chrome", "webdriver.chrome.driver", "chromedriver.exe","chromedriver"),
+	CHROME("Chrome", ".drivers.desktop.Chrome", "webdriver.chrome.driver", "chromedriver.exe", "chromedriver"),
 	/**
 	 * Edge Browser
 	 */
-	EDGE("msedgedriver", ".drivers.desktop.Edge", "webdriver.edge.driver", "msedgedriver.exe", "msedgedriver"),
-	;
+	EDGE("msedgedriver", ".drivers.desktop.Edge", "webdriver.edge.driver", "msedgedriver.exe", "msedgedriver"),;
+
 	/**
 	 * Get/set browser name
 	 */
 	@Getter
 	@Setter(AccessLevel.PRIVATE)
 	String browserName;
-	
+
 	/**
 	 * Get/set class name (including part of the package as prefix)
 	 */
 	@Getter
 	@Setter(AccessLevel.PRIVATE)
 	private String className;
-	
+
 	/**
 	 * Get/set system property for this webdriver
 	 */
 	@Getter
 	@Setter(AccessLevel.PRIVATE)
 	private String property;
-	
+
 	/**
 	 * Get/set driver executable for Windows-based platform (Arm64, x64, x86)
 	 */
 	@Getter(AccessLevel.PRIVATE)
 	@Setter(AccessLevel.PRIVATE)
 	String executableWindowsArm64;
-	
+
 	/**
 	 * Get/set driver executable for Unix-based platform (including MacOS)
 	 */
 	@Getter(AccessLevel.PRIVATE)
 	@Setter(AccessLevel.PRIVATE)
 	String executableUnix;
-	
+
 	/**
 	 * Get/set driver executable for Windows (Arm64, x64, x86)
 	 */
 	@Getter
 	@Setter(AccessLevel.PRIVATE)
 	String executable;
-	
-	private Driver(String browserName, String className, String property, 
-			String executableWindowsArm64, String executableUnix) {
+
+	private Driver(String browserName, String className, String property, String executableWindowsArm64,
+	    String executableUnix) {
 		setBrowserName(browserName);
 		setClassName(className);
 		setProperty(property);
@@ -93,5 +94,5 @@ public enum Driver {
 		setExecutableUnix(executableUnix);
 		setExecutable(OperatingSystem.isExecutionHostWindows() ? executableWindowsArm64 : executableUnix);
 	}
-	
+
 }
