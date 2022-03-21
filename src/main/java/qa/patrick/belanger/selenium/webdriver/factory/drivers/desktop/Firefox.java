@@ -19,69 +19,53 @@ package qa.patrick.belanger.selenium.webdriver.factory.drivers.desktop;
 
 import java.net.MalformedURLException;
 
-import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.opera.OperaDriver;
-import org.openqa.selenium.opera.OperaOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.AbstractDriverOptions;
 
 import qa.patrick.belanger.selenium.webdriver.base.Driver;
-import qa.patrick.belanger.selenium.webdriver.exceptions.WebDriverNotSupportedException;
-import qa.patrick.belanger.selenium.webdriver.utils.OperatingSystem;
 
 /**
- * Opera Browser class 
- * Returns a OperaDriver/RemoteWebDriver
+ * Firefox Browser class 
+ * Returns a FirefoxDriver/RemoteWebDriver
  * 
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
-public class Opera extends ChromiumBasedBrowser {
+public class Firefox extends GeckoBasedBrowser {
 
-	public Opera() {
-		super(Driver.OPERA);
+	public Firefox() {
+		super(Driver.FIREFOX);
 	}
-
-	public Opera(Driver driver) {
+	
+	public Firefox(Driver driver) {
 		super(driver);
 	}
 
 	@Override
 	public AbstractDriverOptions<?> getOptions() {
-		OperaOptions operaOptions = new OperaOptions();
-		operaOptions.addArguments(ARGUMENT_START_MAXIMIZED);
+		FirefoxOptions firefoxOptions = new FirefoxOptions();
 		if (getWebDriverProperties().isBrowserPrivateMode()) {
-			operaOptions.addArguments(ARGUMENT_INCOGNITO_MODE);
+			firefoxOptions.addArguments(ARGUMENT_PRIVATE_MODE);
 		}
-		return operaOptions;
+		return firefoxOptions;
 	}
-
+	
 	/**
-	 * Store a set of OperaOptions in a {@link Capabilities} class
-	 */
-	@Override
-	public Capabilities toCapabilities() {
-		return null;
-	}
-
-	/**
-	 * Creates a new OperaDriver instance with the specified options.
+	 * Creates a new ChromeDriver instance with the specified options.
 	 */
 	@Override
 	public WebDriver getWebDriver() {
-		return new OperaDriver((OperaOptions) getOptions());
+		WebDriver webDriver = new FirefoxDriver((FirefoxOptions) getOptions());
+		webDriver.manage().window().maximize(); // No argument to start Firefox maximized
+		return webDriver;
 	}
 
 	@Override
 	public WebDriver getWebDriver(boolean remote) throws MalformedURLException {
-		if (OperatingSystem.isExecutionHostLinux() && !remote) { // TODO: To investigate with another browser/driver release
-			StringBuilder sb = new StringBuilder()
-			    .append("WebDriverFactory: Using OperaDriver locally on Linux is unstable. ")
-			    .append("For better stability, consider executing Opera Browser remotely through Selenium Grid on ")
-			    .append("a Windows host.");
-			logger.warn(sb.toString());
-			throw new WebDriverNotSupportedException(sb.toString());
-		}
-		return super.getWebDriver(remote);
+		WebDriver webDriver = super.getWebDriver(remote);
+		webDriver.manage().window().maximize(); // No argument to start Firefox maximized
+		return webDriver;
 	}
-
+	
 }
