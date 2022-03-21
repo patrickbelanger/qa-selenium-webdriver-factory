@@ -73,7 +73,7 @@ public class Opera extends ChromiumBasedBrowser {
 
 	@Override
 	public WebDriver getWebDriver(boolean remote) throws MalformedURLException {
-		if (OperatingSystem.isExecutionHostLinux()) { // TODO: To investigate with another browser/driver release
+		if (OperatingSystem.isExecutionHostLinux() && !remote) { // TODO: To investigate with another browser/driver release
 			StringBuilder sb = new StringBuilder()
 			    .append("WebDriverFactory: Using OperaDriver locally on Linux is unstable. ")
 			    .append("For better stability, consider executing Opera Browser remotely through Selenium Grid on ")
