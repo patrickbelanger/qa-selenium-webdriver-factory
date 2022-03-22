@@ -21,6 +21,7 @@ import org.aeonbits.owner.Config;
 import org.aeonbits.owner.Config.Sources;
 
 import qa.patrick.belanger.selenium.webdriver.base.Driver;
+import qa.patrick.belanger.selenium.webdriver.base.GridThirdParty;
 
 @Sources({ "classpath:webdriver.properties" })
 public interface WebDriverProperties extends Config {
@@ -65,6 +66,10 @@ public interface WebDriverProperties extends Config {
 	@DefaultValue("4444")
 	String getGridPort();
 
+	@Key("grid.third.party.provider")
+	@DefaultValue("SELENIUM_GRID")
+	GridThirdParty getGridThidParty();
+	
 	@Key("webdriver.default")
 	@DefaultValue("CHROME")
 	Driver getWebDriverDefault();

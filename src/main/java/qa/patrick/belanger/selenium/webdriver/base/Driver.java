@@ -94,6 +94,8 @@ public enum Driver {
 	@Setter(AccessLevel.PRIVATE)
 	String executable;
 
+	private Driver() { }
+	
 	private Driver(String browserName, String className, String property, String executableWindowsArm64,
 	    String executableUnix) {
 		setBrowserName(browserName);

@@ -17,13 +17,19 @@
 
 package qa.patrick.belanger.selenium.webdriver.factory;
 
+import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import lombok.AccessLevel;
+import lombok.Getter;
 import qa.patrick.belanger.selenium.webdriver.base.Driver;
+import qa.patrick.belanger.selenium.webdriver.base.GridThirdParty;
 import qa.patrick.belanger.selenium.webdriver.factory.drivers.Browser;
+import qa.patrick.belanger.selenium.webdriver.factory.drivers.CloudBasedGrid;
+import qa.patrick.belanger.selenium.webdriver.properties.WebDriverProperties;
 
 /**
  * WebDriverFactory
@@ -32,10 +38,13 @@ import qa.patrick.belanger.selenium.webdriver.factory.drivers.Browser;
  */
 public class WebDriverFactory {
 
-	private final static Logger logger = LoggerFactory.getLogger(WebDriverFactory.class);
-
-	private WebDriverFactory() {
-	}
+	@Getter(AccessLevel.PRIVATE)
+	final static Logger logger = LoggerFactory.getLogger(WebDriverFactory.class);
+	
+	@Getter(AccessLevel.PRIVATE)
+	final static WebDriverProperties webDriverProperties = ConfigFactory.create(WebDriverProperties.class);
+	
+	private WebDriverFactory() { }
 
 	/**
 	 * Instantiate a WebDriver or RemoteWebDriver
@@ -46,14 +55,30 @@ public class WebDriverFactory {
 	 */
 	public static WebDriver getDriver(Driver driver, boolean remote) {
 		try {
-			return ((Browser) Class.forName(getDriverPackageName(driver)).getDeclaredConstructor().newInstance())
-			    .getWebDriver(remote);
+			return instantiateWebDriver(driver, remote);
 		} catch (Exception e) {
 			logger.error(e.getLocalizedMessage());
 			throw new WebDriverException(e.getLocalizedMessage());
 		}
 	}
-
+	
+	private static boolean isCloudBasedGrid() {
+		return !getWebDriverProperties().getGridThidParty().equals(GridThirdParty.SELENIUM_GRID);
+	}
+	
+	private static GridThirdParty getGridThirdParty() {
+		return getWebDriverProperties().getGridThidParty();
+	}
+	
+	private static WebDriver instantiateWebDriver(Driver driver, boolean remote) throws Exception {
+		if (isCloudBasedGrid()) {
+			return ((CloudBasedGrid) Class.forName(getDriverPackageName(driver)).getDeclaredConstructor()
+					.newInstance(driver, getGridThirdParty())).getWebDriver(remote);
+		}
+		return ((Browser) Class.forName(getDriverPackageName(driver)).getDeclaredConstructor().newInstance())
+		    .getWebDriver(remote);
+	}
+	
 	/**
 	 * Returns the fully qualified package name of the Driver
 	 * 

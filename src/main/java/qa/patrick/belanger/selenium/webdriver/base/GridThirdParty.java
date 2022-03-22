@@ -27,11 +27,25 @@ import lombok.Setter;
  * 
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
-public enum GridProvider {
+public enum GridThirdParty {
 	
 	SELENIUM_GRID,
-	BROWSER_STACK("https://%s:%s@hub-cloud.browserstack.com/wd/hub", true)
+	BROWSER_STACK("BrowserStack", ".drivers.cloud.BrowserStack", "https://%s:%s@hub-cloud.browserstack.com/wd/hub", true)
 	;
+	
+	/**
+	 * Get/set third-party name
+	 */
+	@Getter
+	@Setter(AccessLevel.PRIVATE)
+	String thirdPartyName;
+
+	/**
+	 * Get/set class name (including part of the package as prefix)
+	 */
+	@Getter
+	@Setter(AccessLevel.PRIVATE)
+	private String className;
 	
 	@Getter
 	@Setter(AccessLevel.PRIVATE)
@@ -41,9 +55,11 @@ public enum GridProvider {
 	@Setter(AccessLevel.PRIVATE)
 	boolean userPasswordRequiredUrl;
 	
-	private GridProvider() { }
+	private GridThirdParty() { }
 	
-	private GridProvider(String gridUrl, boolean userPasswordRequiredUrl) { 
+	private GridThirdParty(String thirdPartyName, String className, String gridUrl, boolean userPasswordRequiredUrl) { 
+		setThirdPartyName(thirdPartyName);
+		setClassName(className);
 		setGridUrl(gridUrl);
 		setUserPasswordRequiredUrl(userPasswordRequiredUrl);
 	}
