@@ -1,9 +1,11 @@
 package qa.patrick.belanger.selenium.webdriver.factory.drivers;
 
 import java.net.MalformedURLException;
+import java.net.URL;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.AbstractDriverOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -39,8 +41,7 @@ public abstract class CloudBasedGrid extends Browser {
 	 * @throws MalformedURLException
 	 */
 	private WebDriver getRemoteWebDriver() throws MalformedURLException {
-		return null;
-		//return new RemoteWebDriver(new URL(getHostUrl()), toCapabilities());
+		return new RemoteWebDriver(new URL(getHostUrl()), toCapabilities());
 	}
 
 	

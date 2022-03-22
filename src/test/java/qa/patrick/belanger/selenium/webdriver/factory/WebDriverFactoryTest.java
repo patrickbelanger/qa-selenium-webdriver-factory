@@ -143,6 +143,16 @@ public class WebDriverFactoryTest {
 		assertTrue(webDriver.getCurrentUrl().contains("google"));
 	}
 	
+	@Test
+	public void cloudBasedGrid_browserStack_shouldBeAbleToInstantiateChromeRemotely() {
+		webDriver = WebDriverFactory.getDriver(Driver.CHROME, true);
+		assertNotNull(webDriver);
+		assertTrue(webDriver instanceof RemoteWebDriver);
+		assertTrue(((RemoteWebDriver) webDriver).getCapabilities().getBrowserName().equalsIgnoreCase("opera"));
+		webDriver.navigate().to("https://www.google.com");
+		assertTrue(webDriver.getCurrentUrl().contains("google"));
+	}
+	
 	@AfterEach
 	public void tearDown() {
 		if (webDriver != null) {

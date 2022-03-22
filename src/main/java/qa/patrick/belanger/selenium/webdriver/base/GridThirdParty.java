@@ -30,7 +30,7 @@ import lombok.Setter;
 public enum GridThirdParty {
 	
 	SELENIUM_GRID,
-	BROWSER_STACK("BrowserStack", ".drivers.cloud.BrowserStack", "https://%s:%s@hub-cloud.browserstack.com/wd/hub", true)
+	BROWSERSTACK("BrowserStack", ".drivers.cloud.BrowserStack", "https://%s:%s@hub-cloud.browserstack.com/wd/hub", true)
 	;
 	
 	/**
