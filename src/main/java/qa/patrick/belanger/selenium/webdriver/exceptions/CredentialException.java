@@ -15,37 +15,23 @@
 // specific language governing permissions and limitations
 // under the License.
 
-package qa.patrick.belanger.selenium.webdriver.utils;
+package qa.patrick.belanger.selenium.webdriver.exceptions;
 
 /**
+ * CredentialException Indicates that credential provided is invalid
+ * 
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
-public class Environment {
+public class CredentialException extends RuntimeException {
 
-	/** 
-	 * Gets Java Runtime Environment argument (i.e., argument provided in command-line)
-	 * @param argument
-	 * @return
-	 */
-	public static String getJreArgument(String argument) {
-		return System.getProperty(argument);
+	private static final long serialVersionUID = -136443188939917778L;
+
+	public CredentialException(String message) {
+		super(message);
 	}
-	
-	/**
-	 * Gets the value of the specified environment variable. 
-	 * @param variable
-	 * @return
-	 */
-	public static String getEnvironmentValue(String variable) {
-		return System.getenv(variable);
+
+	public CredentialException(String message, Throwable cause) {
+		super(message, cause);
 	}
-	
-	public static String getEnvironmentOrArgument(String variable, String argument) {
-		try {
-			return getEnvironmentValue(variable);
-		} catch(Exception e) {
-			return getJreArgument(argument);
-		}
-	}
-	
+
 }

@@ -21,10 +21,12 @@ import java.net.MalformedURLException;
 
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.MutableCapabilities;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.AbstractDriverOptions;
+import org.openqa.selenium.remote.CapabilityType;
 
 import qa.patrick.belanger.selenium.webdriver.base.Driver;
 
@@ -60,6 +62,9 @@ public class Chrome extends ChromiumBasedBrowser {
 	@Override
 	public MutableCapabilities toCapabilities() {
 		super.toCapabilities();
+		getCapabilities().setCapability(CapabilityType.BROWSER_NAME, "chrome");
+		getCapabilities().setCapability(CapabilityType.BROWSER_VERSION, "latest"); //TODO: Make it parameterizable
+		getCapabilities().setCapability(CapabilityType.PLATFORM_NAME, Platform.WIN10); //TODO: Make it parameterizable
 		getCapabilities().setCapability(ChromeOptions.CAPABILITY, getOptions());
 		return getCapabilities();
 	}
