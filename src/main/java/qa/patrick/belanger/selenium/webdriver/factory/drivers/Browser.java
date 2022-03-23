@@ -21,10 +21,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.aeonbits.owner.ConfigFactory;
-import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.AbstractDriverOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,7 +42,7 @@ public abstract class Browser {
 
 	@Getter(AccessLevel.PROTECTED)
 	@Setter(AccessLevel.PROTECTED)
-	DesiredCapabilities capabilities;
+	MutableCapabilities capabilities;
 
 	@Getter(AccessLevel.PROTECTED)
 	@Setter(AccessLevel.PRIVATE)
@@ -119,8 +118,8 @@ public abstract class Browser {
 		    getDriver().getExecutable());
 	}
 
-	protected Capabilities toCapabilities() {
-		setCapabilities(new DesiredCapabilities());
+	protected MutableCapabilities toCapabilities() {
+		setCapabilities(new MutableCapabilities());
 		return getCapabilities();
 	}
 

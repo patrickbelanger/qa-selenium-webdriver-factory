@@ -20,6 +20,7 @@ package qa.patrick.belanger.selenium.webdriver.factory.drivers.desktop;
 import java.net.MalformedURLException;
 
 import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -57,7 +58,7 @@ public class Chrome extends ChromiumBasedBrowser {
 	 * Store a set of ChromeOptions in a {@link Capabilities} class
 	 */
 	@Override
-	public Capabilities toCapabilities() {
+	public MutableCapabilities toCapabilities() {
 		super.toCapabilities();
 		getCapabilities().setCapability(ChromeOptions.CAPABILITY, getOptions());
 		return getCapabilities();

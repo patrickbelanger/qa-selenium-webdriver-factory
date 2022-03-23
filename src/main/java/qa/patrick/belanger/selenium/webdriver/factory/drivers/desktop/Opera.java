@@ -20,6 +20,7 @@ package qa.patrick.belanger.selenium.webdriver.factory.drivers.desktop;
 import java.net.MalformedURLException;
 
 import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.opera.OperaOptions;
@@ -59,7 +60,7 @@ public class Opera extends ChromiumBasedBrowser {
 	 * Store a set of OperaOptions in a {@link Capabilities} class
 	 */
 	@Override
-	public Capabilities toCapabilities() {
+	public MutableCapabilities toCapabilities() {
 		return null;
 	}
 

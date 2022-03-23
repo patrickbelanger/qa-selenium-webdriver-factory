@@ -19,6 +19,20 @@ public abstract class CloudBasedGrid extends Browser {
 	@Getter
 	@Setter(AccessLevel.PRIVATE)
 	GridThirdParty gridThirdParty;
+
+	/**
+	 * Get/Set username (to access cloud-based infrastructure)
+	 */
+	@Getter(AccessLevel.PROTECTED)
+	@Setter(AccessLevel.PROTECTED)
+	String username;
+	
+	/**
+	 * Get/Set access token (or password)
+	 */
+	@Getter(AccessLevel.PROTECTED)
+	@Setter(AccessLevel.PROTECTED)
+	String accessToken;
 	
 	public CloudBasedGrid(Driver driver) {
 		super(driver);

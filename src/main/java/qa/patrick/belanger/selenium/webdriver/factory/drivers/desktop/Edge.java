@@ -20,6 +20,7 @@ package qa.patrick.belanger.selenium.webdriver.factory.drivers.desktop;
 import java.net.MalformedURLException;
 
 import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
@@ -60,7 +61,7 @@ public class Edge extends ChromiumBasedBrowser {
 	 * Store a set of EdgeOptions in a {@link Capabilities} class
 	 */
 	@Override
-	public Capabilities toCapabilities() {
+	public MutableCapabilities toCapabilities() {
 		return null;
 	}
 
