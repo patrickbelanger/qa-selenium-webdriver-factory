@@ -41,11 +41,10 @@ public class Environment {
 	}
 	
 	public static String getEnvironmentOrArgument(String variable, String argument) {
-		try {
+		if (getEnvironmentValue(variable) != null) {
 			return getEnvironmentValue(variable);
-		} catch(Exception e) {
-			return getJreArgument(argument);
-		}
+		} 
+		return getJreArgument(argument);
 	}
 	
 }
