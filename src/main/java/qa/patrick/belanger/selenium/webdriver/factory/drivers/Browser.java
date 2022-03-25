@@ -38,8 +38,8 @@ import qa.patrick.belanger.selenium.webdriver.utils.OperatingSystem;
 /**
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
-public abstract class Browser {
-
+public abstract class Browser extends Grid {
+	
 	@Getter(AccessLevel.PROTECTED)
 	@Setter(AccessLevel.PROTECTED)
 	MutableCapabilities capabilities;
@@ -47,12 +47,7 @@ public abstract class Browser {
 	@Getter(AccessLevel.PROTECTED)
 	@Setter(AccessLevel.PRIVATE)
 	Driver driver;
-
-	@Getter(AccessLevel.PROTECTED)
-	WebDriverProperties webDriverProperties = ConfigFactory.create(WebDriverProperties.class);
-
-	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
-
+	
 	public Browser(Driver driver) {
 		setDriver(driver);
 		System.setProperty(driver.getProperty(), getWebDriverPath());
@@ -61,11 +56,6 @@ public abstract class Browser {
 	public abstract AbstractDriverOptions<?> getOptions();
 
 	public abstract WebDriver getWebDriver();
-
-	protected String getHostUrl() {
-		return String.format("%s:%s%s", getWebDriverProperties().getGridUrl(), getWebDriverProperties().getGridPort(),
-		    WebDriverProperties.GRID_HUB_ENDPOINT);
-	}
 
 	/**
 	 * Creates a new RemoteWebDriver instance with specified options.

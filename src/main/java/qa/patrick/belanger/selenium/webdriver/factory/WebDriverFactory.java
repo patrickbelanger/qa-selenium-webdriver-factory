@@ -26,9 +26,7 @@ import org.slf4j.LoggerFactory;
 import lombok.AccessLevel;
 import lombok.Getter;
 import qa.patrick.belanger.selenium.webdriver.base.Driver;
-import qa.patrick.belanger.selenium.webdriver.base.GridThirdParty;
 import qa.patrick.belanger.selenium.webdriver.factory.drivers.Browser;
-import qa.patrick.belanger.selenium.webdriver.factory.drivers.CloudBasedGrid;
 import qa.patrick.belanger.selenium.webdriver.properties.WebDriverProperties;
 
 /**
@@ -62,32 +60,9 @@ public class WebDriverFactory {
 		}
 	}
 	
-	private static GridThirdParty getGridThirdParty() {
-		return getWebDriverProperties().getGridThidParty();
-	}
-	
-	private static boolean isCloudBasedGrid(boolean remote) {
-		return remote && !getWebDriverProperties().getGridThidParty().equals(GridThirdParty.SELENIUM_GRID);
-	}
-	
 	private static WebDriver instantiateWebDriver(Driver driver, boolean remote) throws Exception {
-		if (isCloudBasedGrid(remote)) {
-			return ((CloudBasedGrid) Class.forName(getGridThirdPartyPackageName(getGridThirdParty()))
-					.getDeclaredConstructor(Driver.class, GridThirdParty.class)
-					.newInstance(new Object[] { driver, getGridThirdParty() })).getWebDriver();
-		}
 		return ((Browser) Class.forName(getDriverPackageName(driver)).getDeclaredConstructor().newInstance())
 		    .getWebDriver(remote);
-	}
-	
-	/**
-	 * Returns the fully qualified package name of the Grid Third Party
-	 * 
-	 * @param driver {@link GridThirdParty}
-	 * @return
-	 */
-	private static String getGridThirdPartyPackageName(GridThirdParty gridThirdParty) {
-		return String.format("%s%s", WebDriverFactory.class.getPackageName(), gridThirdParty.getClassName());
 	}
 	
 	/**
