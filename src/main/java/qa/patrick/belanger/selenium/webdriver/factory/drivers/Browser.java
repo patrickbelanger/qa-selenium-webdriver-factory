@@ -20,13 +20,10 @@ package qa.patrick.belanger.selenium.webdriver.factory.drivers;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.AbstractDriverOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -41,12 +38,14 @@ import qa.patrick.belanger.selenium.webdriver.utils.OperatingSystem;
 public abstract class Browser extends Grid {
 	
 	@Getter(AccessLevel.PROTECTED)
-	@Setter(AccessLevel.PROTECTED)
+	@Setter(AccessLevel.PUBLIC)
 	MutableCapabilities capabilities;
 
 	@Getter(AccessLevel.PROTECTED)
 	@Setter(AccessLevel.PRIVATE)
 	Driver driver;
+	
+	public Browser() { }
 	
 	public Browser(Driver driver) {
 		setDriver(driver);
@@ -64,7 +63,7 @@ public abstract class Browser extends Grid {
 	 * @throws MalformedURLException
 	 */
 	private WebDriver getRemoteWebDriver() throws MalformedURLException {
-		return getRemoteWebDriver(false); // We should use (Browser)Options classes used nowadays over Capabilities.
+		return getRemoteWebDriver(false);
 	}
 
 	/**
@@ -76,13 +75,13 @@ public abstract class Browser extends Grid {
 	 *                        of a browser).
 	 * 
 	 *                        Third-party providers still use Capabilities object to
-	 *                        set a specific browser (browser_name, browser_version,
+	 *                        set a specific browser (browserName, browserVersion,
 	 *                        etc).
 	 * 
 	 * @return
 	 * @throws MalformedURLException
 	 */
-	private WebDriver getRemoteWebDriver(boolean useCapabilities) throws MalformedURLException {
+	protected WebDriver getRemoteWebDriver(boolean useCapabilities) throws MalformedURLException {
 		return new RemoteWebDriver(new URL(getHostUrl()), useCapabilities ? toCapabilities() : getOptions());
 	}
 

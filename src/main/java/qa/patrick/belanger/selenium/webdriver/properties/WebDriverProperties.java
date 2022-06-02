@@ -62,6 +62,10 @@ public interface WebDriverProperties extends Config {
 	@DefaultValue("http://localhost")
 	String getGridUrl();
 
+	@Key("grid.browerstack.url")
+	@DefaultValue("http://localhost")
+	String getBrowserStackGridUrl();
+	
 	@Key("grid.port")
 	@DefaultValue("4444")
 	String getGridPort();

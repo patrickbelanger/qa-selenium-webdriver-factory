@@ -18,6 +18,7 @@
 package qa.patrick.belanger.selenium.webdriver.factory;
 
 import org.aeonbits.owner.ConfigFactory;
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.slf4j.Logger;
@@ -26,6 +27,7 @@ import org.slf4j.LoggerFactory;
 import lombok.AccessLevel;
 import lombok.Getter;
 import qa.patrick.belanger.selenium.webdriver.base.Driver;
+import qa.patrick.belanger.selenium.webdriver.base.GridThirdParty;
 import qa.patrick.belanger.selenium.webdriver.factory.drivers.Browser;
 import qa.patrick.belanger.selenium.webdriver.properties.WebDriverProperties;
 
@@ -47,11 +49,11 @@ public class WebDriverFactory {
 	/**
 	 * Instantiate a WebDriver or RemoteWebDriver
 	 * 
-	 * @param driver {@link Driver} Launch the specified Browser/Platform
+	 * @param driver {@link Driver} Launch the specified browser (locally) or on a Selenium Grid. 
 	 * @param remote Return a RemoteWebDriver instance instead of a WebDriver object
 	 * @return {@WebDriver}
 	 */
-	public static WebDriver getDriver(Driver driver, boolean remote) {
+	public static WebDriver getDriver(Enum<?> driver, boolean remote) {
 		try {
 			return instantiateWebDriver(driver, remote);
 		} catch (Exception e) {
@@ -60,9 +62,35 @@ public class WebDriverFactory {
 		}
 	}
 	
-	private static WebDriver instantiateWebDriver(Driver driver, boolean remote) throws Exception {
-		return ((Browser) Class.forName(getDriverPackageName(driver)).getDeclaredConstructor().newInstance())
-		    .getWebDriver(remote);
+	/**
+	 * Instantiate a WebDriver or RemoteWebDriver
+	 * 
+	 * @param driver {@link Driver} Launch the specified browser (locally), on a Selenium Grid or {@link GridThirdParty}
+	 * 															third-party provider (like BrowserStack, Perfecto, SauceLab, and so on)
+	 * @param capabilities {@link Capabilities} 
+	 * @param remote Return a RemoteWebDriver instance instead of a WebDriver object
+	 * @return {@WebDriver}
+	 */
+	public static WebDriver getDriver(Enum<?> driver, MutableCapabilities capabilities) {
+		try {
+			return instantiateWebDriver(driver, capabilities, true);
+		} catch (Exception e) {
+			logger.error(e.getLocalizedMessage());
+			throw new WebDriverException(e.getLocalizedMessage());
+		}
+	}
+	
+	private static WebDriver instantiateWebDriver(Enum<?> driver, boolean remote) throws Exception {
+		return instantiateWebDriver(driver, null, remote);
+	}
+	
+	private static WebDriver instantiateWebDriver(Enum<?> driver, MutableCapabilities capabilities, boolean remote) 
+			throws Exception {
+		Browser browser = ((Browser) Class.forName(getDriverPackageName(driver)).getDeclaredConstructor().newInstance());
+		if (capabilities != null) {
+			browser.setCapabilities(capabilities);
+		}
+		return browser.getWebDriver(remote);
 	}
 	
 	/**
@@ -71,8 +99,15 @@ public class WebDriverFactory {
 	 * @param driver {@link Driver}
 	 * @return
 	 */
-	private static String getDriverPackageName(Driver driver) {
-		return String.format("%s%s", WebDriverFactory.class.getPackageName(), driver.getClassName());
+	private static String getDriverPackageName(Enum<?> driver) {
+		return String.format("%s%s", WebDriverFactory.class.getPackageName(), getDriverClassName(driver));
 	}
 	
+	private static String getDriverClassName(Enum<?> driver) {
+		try {
+			return ((Driver) driver).getClassName();
+		} catch(ClassCastException e) {
+			return ((GridThirdParty) driver).getClassName();
+		}
+	}
 }

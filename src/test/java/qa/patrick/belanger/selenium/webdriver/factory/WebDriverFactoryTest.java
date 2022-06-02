@@ -24,14 +24,18 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.opera.OperaDriver;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import qa.patrick.belanger.selenium.webdriver.base.Driver;
+import qa.patrick.belanger.selenium.webdriver.base.GridThirdParty;
 import qa.patrick.belanger.selenium.webdriver.utils.OperatingSystem;
 
 /**
@@ -145,10 +149,14 @@ public class WebDriverFactoryTest {
 	
 	@Test
 	public void cloudBasedGrid_browserStack_shouldBeAbleToInstantiateChromeRemotely() {
-		webDriver = WebDriverFactory.getDriver(Driver.CHROME, true);
+		MutableCapabilities capabilities = new MutableCapabilities();
+		capabilities.setCapability(CapabilityType.BROWSER_NAME, "chrome");
+		capabilities.setCapability(CapabilityType.BROWSER_VERSION, "latest");
+		capabilities.setCapability("os", "Windows");
+		capabilities.setCapability("osVersion", "10");		
+		webDriver = WebDriverFactory.getDriver(GridThirdParty.BROWSERSTACK, capabilities);
 		assertNotNull(webDriver);
-		assertTrue(webDriver instanceof RemoteWebDriver);
-		assertTrue(((RemoteWebDriver) webDriver).getCapabilities().getBrowserName().equalsIgnoreCase("opera"));
+		//assertTrue(webDriver instanceof RemoteWebDriver);
 		webDriver.navigate().to("https://www.google.com");
 		assertTrue(webDriver.getCurrentUrl().contains("google"));
 	}

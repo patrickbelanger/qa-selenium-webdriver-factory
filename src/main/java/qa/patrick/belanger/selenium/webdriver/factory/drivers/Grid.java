@@ -29,6 +29,9 @@ import qa.patrick.belanger.selenium.webdriver.properties.WebDriverProperties;
 
 public abstract class Grid {
 
+	protected static final String ARGUMENT_USERNAME = "username";
+	protected static final String ARGUMENT_ACCESS_KEY = "accessKey";
+	
 	@Getter(AccessLevel.PROTECTED)
 	@Setter(AccessLevel.PRIVATE)
 	String username;
@@ -50,5 +53,5 @@ public abstract class Grid {
 		return String.format("%s:%s%s", getWebDriverProperties().getGridUrl(), getWebDriverProperties().getGridPort(),
 		    WebDriverProperties.GRID_HUB_ENDPOINT);
 	}
-	
+
 }
