@@ -28,6 +28,7 @@ import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.opera.OperaDriver;
@@ -36,6 +37,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import qa.patrick.belanger.selenium.webdriver.base.Driver;
 import qa.patrick.belanger.selenium.webdriver.base.GridThirdParty;
+import qa.patrick.belanger.selenium.webdriver.factory.drivers.desktop.Chrome;
 import qa.patrick.belanger.selenium.webdriver.utils.OperatingSystem;
 
 /**
@@ -153,7 +155,8 @@ public class WebDriverFactoryTest {
 		capabilities.setCapability(CapabilityType.BROWSER_NAME, "chrome");
 		capabilities.setCapability(CapabilityType.BROWSER_VERSION, "latest");
 		capabilities.setCapability("os", "Windows");
-		capabilities.setCapability("osVersion", "10");		
+		capabilities.setCapability("osVersion", "10");
+		capabilities.setCapability(ChromeOptions.CAPABILITY, new Chrome().getOptions());
 		webDriver = WebDriverFactory.getDriver(GridThirdParty.BROWSERSTACK, capabilities);
 		assertNotNull(webDriver);
 		//assertTrue(webDriver instanceof RemoteWebDriver);
