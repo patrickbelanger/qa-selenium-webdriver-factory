@@ -25,6 +25,9 @@ import qa.patrick.belanger.selenium.webdriver.utils.OperatingSystem;
 /**
  * List of supported WebDrivers
  * 
+ * BRAVE
+ * CHROME
+ * 
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
 public enum Driver {
@@ -43,7 +46,7 @@ public enum Driver {
 	 */
 	EDGE("Edge", ".drivers.desktop.Edge", "webdriver.edge.driver", "msedgedriver.exe", "msedgedriver"),
 	/**
-	 * Opera Browser
+	 * Firefox Browser
 	 */
 	FIREFOX("firefox", ".drivers.desktop.Firefox", "webdriver.gecko.driver", "geckodriver.exe", "geckodriver"),
 	/**
