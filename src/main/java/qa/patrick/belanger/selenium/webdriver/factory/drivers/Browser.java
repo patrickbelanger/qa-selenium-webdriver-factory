@@ -19,8 +19,9 @@ package qa.patrick.belanger.selenium.webdriver.factory.drivers;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
-import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.AbstractDriverOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -29,6 +30,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import qa.patrick.belanger.selenium.webdriver.base.Driver;
+import qa.patrick.belanger.selenium.webdriver.exceptions.WebDriverNotSupportedException;
 import qa.patrick.belanger.selenium.webdriver.properties.WebDriverProperties;
 import qa.patrick.belanger.selenium.webdriver.utils.OperatingSystem;
 
@@ -37,13 +39,17 @@ import qa.patrick.belanger.selenium.webdriver.utils.OperatingSystem;
  */
 public abstract class Browser extends Grid {
 	
-	@Getter(AccessLevel.PROTECTED)
+	@Getter(AccessLevel.PUBLIC)
 	@Setter(AccessLevel.PUBLIC)
-	MutableCapabilities capabilities;
-
+	Map<String, Object> w3cCapabilities;
+	
 	@Getter(AccessLevel.PROTECTED)
 	@Setter(AccessLevel.PRIVATE)
 	Driver driver;
+	
+	@Getter(AccessLevel.PUBLIC)
+	@Setter(AccessLevel.PUBLIC)
+	public AbstractDriverOptions<?> options;
 	
 	public Browser() { }
 	
@@ -51,9 +57,7 @@ public abstract class Browser extends Grid {
 		setDriver(driver);
 		System.setProperty(driver.getProperty(), getWebDriverPath());
 	}
-
-	public abstract AbstractDriverOptions<?> getOptions();
-
+	
 	public abstract WebDriver getWebDriver();
 
 	/**
@@ -62,27 +66,12 @@ public abstract class Browser extends Grid {
 	 * @return
 	 * @throws MalformedURLException
 	 */
-	private WebDriver getRemoteWebDriver() throws MalformedURLException {
-		return getRemoteWebDriver(false);
-	}
-
-	/**
-	 * Creates a new RemoteWebDriver instance with specified options (or
-	 * capabilities).
-	 * 
-	 * @param useCapabilities Use values set in Capabilities (object that describes
-	 *                        a series of key/value pairs that encapsulate aspects
-	 *                        of a browser).
-	 * 
-	 *                        Third-party providers still use Capabilities object to
-	 *                        set a specific browser (browserName, browserVersion,
-	 *                        etc).
-	 * 
-	 * @return
-	 * @throws MalformedURLException
-	 */
-	protected WebDriver getRemoteWebDriver(boolean useCapabilities) throws MalformedURLException {
-		return new RemoteWebDriver(new URL(getHostUrl()), useCapabilities ? toCapabilities() : getOptions());
+	protected WebDriver getRemoteWebDriver() {
+		try {
+			return new RemoteWebDriver(new URL(getHostUrl()), getOptions());
+		} catch(Exception e) {
+			throw new WebDriverNotSupportedException(e.getLocalizedMessage());
+		}
 	}
 
 	/**
@@ -107,9 +96,9 @@ public abstract class Browser extends Grid {
 		    getDriver().getExecutable());
 	}
 
-	protected MutableCapabilities toCapabilities() {
-		setCapabilities(new MutableCapabilities());
-		return getCapabilities();
+	protected Map<String, Object> toW3cCapabilities() {
+		setW3cCapabilities(new HashMap<>());
+		return getW3cCapabilities();
 	}
 
 }

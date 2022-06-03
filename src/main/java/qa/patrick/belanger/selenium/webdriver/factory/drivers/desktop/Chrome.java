@@ -18,9 +18,9 @@
 package qa.patrick.belanger.selenium.webdriver.factory.drivers.desktop;
 
 import java.net.MalformedURLException;
+import java.util.Map;
 
 import org.openqa.selenium.Capabilities;
-import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -60,13 +60,13 @@ public class Chrome extends ChromiumBasedBrowser {
 	 * Store a set of ChromeOptions in a {@link Capabilities} class
 	 */
 	@Override
-	public MutableCapabilities toCapabilities() {
-		super.toCapabilities();
-		getCapabilities().setCapability(CapabilityType.BROWSER_NAME, "chrome");
-		getCapabilities().setCapability(CapabilityType.BROWSER_VERSION, "latest"); //TODO: Make it parameterizable
-		getCapabilities().setCapability(CapabilityType.PLATFORM_NAME, Platform.WIN10); //TODO: Make it parameterizable
-		getCapabilities().setCapability(ChromeOptions.CAPABILITY, getOptions());
-		return getCapabilities();
+	public Map<String, Object> toW3cCapabilities() {
+		super.toW3cCapabilities();
+		getW3cCapabilities().put(CapabilityType.BROWSER_NAME, "chrome");
+		getW3cCapabilities().put(CapabilityType.BROWSER_VERSION, "latest"); //TODO: Make it parameterizable
+		getW3cCapabilities().put(CapabilityType.PLATFORM_NAME, Platform.WIN10); //TODO: Make it parameterizable
+		getW3cCapabilities().put(ChromeOptions.CAPABILITY, getOptions());
+		return getW3cCapabilities();
 	}
 
 	/**

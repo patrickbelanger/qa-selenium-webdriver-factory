@@ -20,7 +20,8 @@ package qa.patrick.belanger.selenium.webdriver.factory;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assumptions;
@@ -28,19 +29,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import qa.patrick.belanger.selenium.webdriver.base.Driver;
 import qa.patrick.belanger.selenium.webdriver.base.GridThirdParty;
-import qa.patrick.belanger.selenium.webdriver.factory.drivers.desktop.Chrome;
 import qa.patrick.belanger.selenium.webdriver.utils.OperatingSystem;
 
 /**
@@ -154,20 +151,15 @@ public class WebDriverFactoryTest {
 	
 	@Test
 	public void cloudBasedGrid_browserStack_shouldBeAbleToInstantiateChromeRemotely() {
-		MutableCapabilities capabilities = new MutableCapabilities();
-		capabilities.setCapability(CapabilityType.BROWSER_NAME, "chrome");
-		capabilities.setCapability(CapabilityType.BROWSER_VERSION, "latest");
-		capabilities.setCapability("os", "Windows");
-		capabilities.setCapability("osVersion", "10");
-		capabilities.setCapability(ChromeOptions.CAPABILITY, new Chrome().getOptions());
-		webDriver = WebDriverFactory.getDriver(GridThirdParty.BROWSERSTACK, capabilities);
-		WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
+		Map<String, Object> w3cCapabilities = new HashMap<>();
+		w3cCapabilities.put(CapabilityType.BROWSER_NAME, "chrome");
+		w3cCapabilities.put(CapabilityType.BROWSER_VERSION, "latest");
+		webDriver = WebDriverFactory.getDriver(Driver.CHROME, GridThirdParty.BROWSERSTACK, w3cCapabilities);
+		//WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
 		assertNotNull(webDriver);
-		//assertTrue(webDriver instanceof RemoteWebDriver);
 		webDriver.navigate().to("https://www.google.com");
-		webDriver.findElement(By.name("q")).sendKeys("selenium webdriver" + Keys.ENTER);
-		
 		assertTrue(webDriver.getCurrentUrl().contains("google"));
+		webDriver.findElement(By.name("q")).sendKeys("selenium webdriver is the best" + Keys.ENTER);
 	}
 	
 	@AfterEach

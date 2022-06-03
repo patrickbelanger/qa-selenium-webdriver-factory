@@ -17,10 +17,8 @@
 
 package qa.patrick.belanger.selenium.webdriver.factory.drivers.cloud;
 
-import java.net.MalformedURLException;
+import java.util.Map;
 
-import org.openqa.selenium.MutableCapabilities;
-import org.openqa.selenium.UnsupportedCommandException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.AbstractDriverOptions;
 
@@ -35,8 +33,8 @@ import qa.patrick.belanger.selenium.webdriver.utils.Environment;
  */
 public class SauceLabs extends Browser {
 
-	private static final String SAUCELAB_ACCESS_KEY = "SAUCELAB_ACCESS_KEY";
-	private static final String SAUCELAB_USERNAME = "SAUCELAB_USERNAME";
+	private static final String SAUCELAB_ACCESS_KEY = "SAUCE_ACCESS_KEY";
+	private static final String SAUCELAB_USERNAME = "SAUCE_USERNAME";
 	
 	public SauceLabs() {
 		super();
@@ -44,17 +42,18 @@ public class SauceLabs extends Browser {
 
 	@Override
 	public AbstractDriverOptions<?> getOptions() {
-		return null;
+		super.getOptions().setCapability("sauce:options", getW3cCapabilities());
+		return getOptions();
 	}
 
 	@Override
-	public MutableCapabilities toCapabilities() {
-		super.toCapabilities();
-		getCapabilities().setCapability("username", Environment.getEnvironmentOrArgument(SAUCELAB_USERNAME, 
+	public Map<String, Object> toW3cCapabilities() {
+		super.toW3cCapabilities();
+		getW3cCapabilities().put("username", Environment.getEnvironmentOrArgument(SAUCELAB_USERNAME, 
 				ARGUMENT_USERNAME));
-		getCapabilities().setCapability("accessKey", Environment.getEnvironmentOrArgument(SAUCELAB_ACCESS_KEY, 
+		getW3cCapabilities().put("accessKey", Environment.getEnvironmentOrArgument(SAUCELAB_ACCESS_KEY, 
 				ARGUMENT_ACCESS_KEY));
-		return getCapabilities();
+		return getW3cCapabilities();
 	}
 
 	protected String getHostUrl() {
@@ -66,12 +65,7 @@ public class SauceLabs extends Browser {
 	 */
 	@Override
 	public WebDriver getWebDriver() {
-		throw new UnsupportedCommandException();
-	}
-
-	@Override
-	public WebDriver getWebDriver(boolean remote) throws MalformedURLException {
-		return super.getRemoteWebDriver(remote);
+		return super.getRemoteWebDriver();
 	}
 
 }

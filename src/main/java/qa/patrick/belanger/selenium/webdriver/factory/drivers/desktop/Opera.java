@@ -18,12 +18,12 @@
 package qa.patrick.belanger.selenium.webdriver.factory.drivers.desktop;
 
 import java.net.MalformedURLException;
+import java.util.Map;
 
 import org.openqa.selenium.Capabilities;
-import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.opera.OperaDriver;
-import org.openqa.selenium.opera.OperaOptions;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.AbstractDriverOptions;
 
 import qa.patrick.belanger.selenium.webdriver.base.Driver;
@@ -36,7 +36,7 @@ import qa.patrick.belanger.selenium.webdriver.utils.OperatingSystem;
  * 
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
-public class Opera extends ChromiumBasedBrowser {
+public class Opera extends Chrome {
 
 	public Opera() {
 		super(Driver.OPERA);
@@ -48,19 +48,20 @@ public class Opera extends ChromiumBasedBrowser {
 
 	@Override
 	public AbstractDriverOptions<?> getOptions() {
-		OperaOptions operaOptions = new OperaOptions();
-		operaOptions.addArguments(ARGUMENT_START_MAXIMIZED);
-		if (getWebDriverProperties().isBrowserPrivateMode()) {
-			operaOptions.addArguments(ARGUMENT_INCOGNITO_MODE);
+		ChromeOptions chromeOptions = (ChromeOptions) super.getOptions(); // Same as Chrome, basically
+		/* To adapt
+		if (getWebDriverProperties().useBraveBrowserBinaryPath()) {
+			chromeOptions.setBinary(getWebDriverProperties().getBraveBrowserBinaryPath());
 		}
-		return operaOptions;
+		*/
+		return chromeOptions;
 	}
 
 	/**
 	 * Store a set of OperaOptions in a {@link Capabilities} class
 	 */
 	@Override
-	public MutableCapabilities toCapabilities() {
+	public Map<String, Object> toW3cCapabilities() {
 		return null;
 	}
 
@@ -69,7 +70,7 @@ public class Opera extends ChromiumBasedBrowser {
 	 */
 	@Override
 	public WebDriver getWebDriver() {
-		return new OperaDriver((OperaOptions) getOptions());
+		return new ChromeDriver((ChromeOptions) getOptions());
 	}
 
 	@Override

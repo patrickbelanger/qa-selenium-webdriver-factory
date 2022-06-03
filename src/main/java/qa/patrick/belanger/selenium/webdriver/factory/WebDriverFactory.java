@@ -17,8 +17,9 @@
 
 package qa.patrick.belanger.selenium.webdriver.factory;
 
+import java.util.Map;
+
 import org.aeonbits.owner.ConfigFactory;
-import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.slf4j.Logger;
@@ -53,7 +54,7 @@ public class WebDriverFactory {
 	 * @param remote Return a RemoteWebDriver instance instead of a WebDriver object
 	 * @return {@WebDriver}
 	 */
-	public static WebDriver getDriver(Enum<?> driver, boolean remote) {
+	public static WebDriver getDriver(Driver driver, boolean remote) {
 		try {
 			return instantiateWebDriver(driver, remote);
 		} catch (Exception e) {
@@ -66,14 +67,15 @@ public class WebDriverFactory {
 	 * Instantiate a WebDriver or RemoteWebDriver
 	 * 
 	 * @param driver {@link Driver} Launch the specified browser (locally), on a Selenium Grid or {@link GridThirdParty}
-	 * 															third-party provider (like BrowserStack, Perfecto, SauceLab, and so on)
-	 * @param capabilities {@link Capabilities} 
+	 * 															third-party provider (like BrowserStack, Perfecto, Sauce Labs, and so on)
+	 * @param w3cCapabilities Browser/Cloud capability (with the W3C Syntax)
+	 * 												Read: https://www.selenium.dev/blog/2022/legacy-protocol-support/ 
 	 * @param remote Return a RemoteWebDriver instance instead of a WebDriver object
 	 * @return {@WebDriver}
 	 */
-	public static WebDriver getDriver(Enum<?> driver, MutableCapabilities capabilities) {
+	public static WebDriver getDriver(Driver driver, GridThirdParty gridThirdParty, Map<String, Object> w3cCapabilities) {
 		try {
-			return instantiateWebDriver(driver, capabilities, true);
+			return instantiateWebDriver(driver, gridThirdParty, w3cCapabilities, true);
 		} catch (Exception e) {
 			logger.error(e.getLocalizedMessage());
 			throw new WebDriverException(e.getLocalizedMessage());
@@ -81,14 +83,23 @@ public class WebDriverFactory {
 	}
 	
 	private static WebDriver instantiateWebDriver(Enum<?> driver, boolean remote) throws Exception {
-		return instantiateWebDriver(driver, null, remote);
+		return instantiateWebDriver(null, driver, null, remote);
 	}
 	
-	private static WebDriver instantiateWebDriver(Enum<?> driver, MutableCapabilities capabilities, boolean remote) 
+	private static WebDriver instantiateWebDriver(Driver driverOnly, Enum<?> driverOrThirdParty, 
+			Map<String, Object> w3cCapabilities, boolean remote) 
 			throws Exception {
-		Browser browser = ((Browser) Class.forName(getDriverPackageName(driver)).getDeclaredConstructor().newInstance());
-		if (capabilities != null) {
-			browser.setCapabilities(capabilities);
+		Browser browser = 
+				((Browser) Class.forName(getDriverPackageName(driverOrThirdParty)).getDeclaredConstructor().newInstance());
+		if (w3cCapabilities != null) {
+			browser.setW3cCapabilities(w3cCapabilities);
+		}
+		if (driverOnly != null) {
+			browser.setOptions(
+				((Browser) Class.forName(getDriverPackageName(driverOnly)).getDeclaredConstructor().newInstance()).getOptions()
+			);
+			browser.getW3cCapabilities().put(driverOnly.getBrowserName().toLowerCase(), browser.getOptions());
+			
 		}
 		return browser.getWebDriver(remote);
 	}

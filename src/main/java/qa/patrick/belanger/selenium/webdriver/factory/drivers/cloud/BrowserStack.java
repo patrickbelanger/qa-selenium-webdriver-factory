@@ -17,12 +17,9 @@
 
 package qa.patrick.belanger.selenium.webdriver.factory.drivers.cloud;
 
-import java.net.MalformedURLException;
+import java.util.Map;
 
-import org.openqa.selenium.MutableCapabilities;
-import org.openqa.selenium.UnsupportedCommandException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.AbstractDriverOptions;
 
 import qa.patrick.belanger.selenium.webdriver.factory.drivers.Browser;
 import qa.patrick.belanger.selenium.webdriver.utils.Environment;
@@ -40,16 +37,11 @@ public class BrowserStack extends Browser {
 	
 	public BrowserStack() {
 		super();
-	}
+  }
 
 	@Override
-	public AbstractDriverOptions<?> getOptions() {
-		return null;
-	}
-
-	@Override
-	public MutableCapabilities toCapabilities() {
-		return getCapabilities();
+	public Map<String, Object> toW3cCapabilities() {
+		return getW3cCapabilities();
 	}
 
 	protected String getHostUrl() {
@@ -64,12 +56,12 @@ public class BrowserStack extends Browser {
 	 */
 	@Override
 	public WebDriver getWebDriver() {
-		throw new UnsupportedCommandException();
+		super.getOptions().setCapability("os", "windows");
+		super.getOptions().setCapability("osVersion", "10"); // Doesn't work as expected
+		super.getOptions().setCapability("bstack:options", getW3cCapabilities());
+		return super.getRemoteWebDriver();
 	}
 
-	@Override
-	public WebDriver getWebDriver(boolean remote) throws MalformedURLException {
-		return super.getRemoteWebDriver(remote);
-	}
+	
 
 }
