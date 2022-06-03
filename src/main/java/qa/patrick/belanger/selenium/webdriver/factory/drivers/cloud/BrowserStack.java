@@ -14,7 +14,6 @@ public class BrowserStack extends Browser {
 
 	private static final String BROWSERSTACK_ACCESS_KEY = "BROWSERSTACK_ACCESS_KEY";
 	private static final String BROWSERSTACK_USERNAME = "BROWSERSTACK_USERNAME";
-	private static final String BROWSERSTACK_HUB_URL = "https://%s:%s@hub-cloud.browserstack.com/wd/hub";
 	
 	public BrowserStack() {
 		super();
@@ -31,7 +30,7 @@ public class BrowserStack extends Browser {
 	}
 
 	protected String getHostUrl() {
-		return String.format(BROWSERSTACK_HUB_URL, 
+		return String.format(getWebDriverProperties().getBrowserStackGridUrl(), 
 		    Environment.getEnvironmentOrArgument(BROWSERSTACK_USERNAME, ARGUMENT_USERNAME),
 		    Environment.getEnvironmentOrArgument(BROWSERSTACK_ACCESS_KEY, ARGUMENT_ACCESS_KEY)
 	  );

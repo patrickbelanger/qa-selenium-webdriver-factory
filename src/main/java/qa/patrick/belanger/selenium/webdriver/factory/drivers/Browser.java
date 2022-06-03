@@ -102,7 +102,7 @@ public abstract class Browser extends Grid {
 			return Browser.class.getClassLoader().getResource(getDriver().getExecutable()).getPath();
 		} // Use defined path in .properties
 		return String.format("%s%s",
-		    OperatingSystem.isExecutionHostWindows() ? webDriverProperties.getWebDriverDefaultPath()
+		    OperatingSystem.isExecutionHostWindows() ? getWebDriverProperties().getWebDriverDefaultPath()
 		        : WebDriverProperties.UNIX_WEBDRIVER_PATH,
 		    getDriver().getExecutable());
 	}

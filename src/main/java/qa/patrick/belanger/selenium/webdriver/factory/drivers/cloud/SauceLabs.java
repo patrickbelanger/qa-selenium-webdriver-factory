@@ -35,7 +35,7 @@ public class SauceLabs extends Browser {
 	}
 
 	protected String getHostUrl() {
-		return String.format("");
+		return String.format(getWebDriverProperties().getSauceLabsGridUrl());
 	}
 	
 	/**

@@ -63,8 +63,13 @@ public interface WebDriverProperties extends Config {
 	String getGridUrl();
 
 	@Key("grid.browerstack.url")
-	@DefaultValue("http://localhost")
+	@DefaultValue("https://%s:%s@hub-cloud.browserstack.com/wd/hub")
 	String getBrowserStackGridUrl();
+	
+	@Key("grid.saucelabs.url")
+	@DefaultValue("https://ondemand.us-west-1.saucelabs.com/wd/hub")
+	String getSauceLabsGridUrl();
+	
 	
 	@Key("grid.port")
 	@DefaultValue("4444")

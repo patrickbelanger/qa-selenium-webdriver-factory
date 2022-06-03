@@ -20,20 +20,23 @@ package qa.patrick.belanger.selenium.webdriver.factory;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.Duration;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import qa.patrick.belanger.selenium.webdriver.base.Driver;
 import qa.patrick.belanger.selenium.webdriver.base.GridThirdParty;
@@ -134,7 +137,7 @@ public class WebDriverFactoryTest {
 		Assumptions.assumeTrue(OperatingSystem.isExecutionHostWindows()); // Only works on Windows host
 		webDriver = WebDriverFactory.getDriver(Driver.OPERA, false);
 		assertNotNull(webDriver);
-		assertTrue(webDriver instanceof OperaDriver);
+		assertTrue(webDriver instanceof ChromeDriver);
 		webDriver.navigate().to("https://www.google.com");
 		assertTrue(webDriver.getCurrentUrl().contains("google"));
 	}
@@ -158,9 +161,12 @@ public class WebDriverFactoryTest {
 		capabilities.setCapability("osVersion", "10");
 		capabilities.setCapability(ChromeOptions.CAPABILITY, new Chrome().getOptions());
 		webDriver = WebDriverFactory.getDriver(GridThirdParty.BROWSERSTACK, capabilities);
+		WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
 		assertNotNull(webDriver);
 		//assertTrue(webDriver instanceof RemoteWebDriver);
 		webDriver.navigate().to("https://www.google.com");
+		webDriver.findElement(By.name("q")).sendKeys("selenium webdriver" + Keys.ENTER);
+		
 		assertTrue(webDriver.getCurrentUrl().contains("google"));
 	}
 	
