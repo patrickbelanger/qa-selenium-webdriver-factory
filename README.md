@@ -9,9 +9,16 @@ A library to ease the development of Selenium's powered automation framework by 
 * Mozilla Firefox (tested on version 98.0.1 (Windows/Linux (* remote only)))
 * Opera Browser (tested on version 84.0.4316.42 (WebKit - 98.0.4758.109) (Windows/Linux (*see knowledge base section)))
 
+### Selenium 4.2.x W3C compliant (ready for Selenium 4.3
+* The goal is creating a WebDriverFactory library that follows closely the latest Selenium WebDriver/W3C standards.
+
 ### Supported Platform
 * Linux (tested on Ubuntu 21.10)
 * Windows (tested on Windows 10)
+
+### Supported Third-party provider (Grid - Desktop)
+* BrowserStack
+* Sauce Labs (in progress)
 
 # Prerequisites
 
