@@ -1,5 +1,7 @@
 # qa-selenium-webdriver-factory
-A library to ease the development of Selenium's powered automation framework by instantiating a web driver and reducing boilerplate code.
+A library to ease the development of Selenium's powered automation framework by instantiating a web driver 
+and reducing boilerplate code. The goal is: set WebDriverFactory in your dependencies, and implement it in your
+automation framework.
 
 ## Features
 ### Supported Browsers
@@ -18,6 +20,7 @@ A library to ease the development of Selenium's powered automation framework by 
 
 ### Supported Third-party provider (Grid - Desktop)
 * BrowserStack
+* Perforce Perfecto (planned)
 * Sauce Labs (in progress)
 
 # Prerequisites
