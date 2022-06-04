@@ -25,6 +25,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
 import qa.patrick.belanger.selenium.webdriver.base.Driver;
+import qa.patrick.belanger.selenium.webdriver.factory.drivers.options.FirefoxDefaultOptions;
 
 /**
  * Firefox Browser class 
@@ -44,11 +45,7 @@ public class Firefox extends GeckoBasedBrowser {
 
 	@Override
 	public MutableCapabilities getOptions() {
-		FirefoxOptions firefoxOptions = new FirefoxOptions();
-		if (getWebDriverProperties().isBrowserPrivateMode()) {
-			firefoxOptions.addArguments(ARGUMENT_PRIVATE_MODE);
-		}
-		return firefoxOptions;
+		return new FirefoxDefaultOptions().getOptions();
 	}
 	
 	/**

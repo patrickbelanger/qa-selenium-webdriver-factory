@@ -29,6 +29,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.CapabilityType;
 
 import qa.patrick.belanger.selenium.webdriver.base.Driver;
+import qa.patrick.belanger.selenium.webdriver.factory.drivers.options.ChromeDefaultOptions;
 
 /**
  * Chrome Browser class 
@@ -48,12 +49,7 @@ public class Chrome extends ChromiumBasedBrowser {
 
 	@Override
 	public MutableCapabilities getOptions() {
-		ChromeOptions chromeOptions = new ChromeOptions();
-		chromeOptions.addArguments(ARGUMENT_START_MAXIMIZED);
-		if (getWebDriverProperties().isBrowserPrivateMode()) {
-			chromeOptions.addArguments(ARGUMENT_INCOGNITO_MODE);
-		}
-		return chromeOptions;
+		return new ChromeDefaultOptions().getOptions();
 	}
 
 	/**

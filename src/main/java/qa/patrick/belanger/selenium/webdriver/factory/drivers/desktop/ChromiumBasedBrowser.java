@@ -27,16 +27,16 @@ public abstract class ChromiumBasedBrowser extends Browser {
 
 	/**
 	 * Maximize Chromium-based browser window at launch
-	 */
-	protected final String ARGUMENT_START_MAXIMIZED = "--start-maximized";
+	 */ 
+	public static final String ARGUMENT_START_MAXIMIZED = "--start-maximized";
 	/**
 	 * Enabling private browsing on Brave/Chrome
 	 */
-	protected final String ARGUMENT_INCOGNITO_MODE = "--incognito";
+	public static final String ARGUMENT_INCOGNITO_MODE = "--incognito";
 	/**
 	 * Enabling private browsing on Edge
 	 */
-	protected final String ARGUMENT_INPRIVATE_MODE = "--inprivate";
+	public static final String ARGUMENT_INPRIVATE_MODE = "--inprivate";
 
 	public ChromiumBasedBrowser(Driver driver) {
 		super(driver);

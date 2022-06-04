@@ -28,7 +28,7 @@ public abstract class GeckoBasedBrowser extends Browser {
 	/**
 	 * Enabling private browsing on Firefox
 	 */
-	protected final String ARGUMENT_PRIVATE_MODE = "--private";
+	public static final String ARGUMENT_PRIVATE_MODE = "--private";
 	
 	public GeckoBasedBrowser(Driver driver) {
 		super(driver);

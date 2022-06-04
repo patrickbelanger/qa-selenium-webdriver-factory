@@ -29,6 +29,7 @@ import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.remote.CapabilityType;
 
 import qa.patrick.belanger.selenium.webdriver.base.Driver;
+import qa.patrick.belanger.selenium.webdriver.factory.drivers.options.EdgeDefaultOptions;
 
 /**
  * Edge Browser class 
@@ -48,15 +49,7 @@ public class Edge extends ChromiumBasedBrowser {
 
 	@Override
 	public MutableCapabilities getOptions() {
-		EdgeOptions edgeOptions = new EdgeOptions();
-		edgeOptions.addArguments(ARGUMENT_START_MAXIMIZED);
-		if (getWebDriverProperties().isBrowserPrivateMode()) {
-			edgeOptions.addArguments(ARGUMENT_INPRIVATE_MODE);
-		}
-		if (getWebDriverProperties().useEdgeBrowserBinaryPath()) {
-			edgeOptions.setBinary(getWebDriverProperties().getEdgeBrowserBinaryPath());
-		}
-		return edgeOptions;
+		return new EdgeDefaultOptions().getOptions();
 	}
 
 	/**
