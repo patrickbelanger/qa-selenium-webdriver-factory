@@ -21,10 +21,10 @@ import java.net.MalformedURLException;
 import java.util.Map;
 
 import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.AbstractDriverOptions;
 
 import qa.patrick.belanger.selenium.webdriver.base.Driver;
 import qa.patrick.belanger.selenium.webdriver.exceptions.WebDriverNotSupportedException;
@@ -47,7 +47,7 @@ public class Opera extends Chrome {
 	}
 
 	@Override
-	public AbstractDriverOptions<?> getOptions() {
+	public MutableCapabilities getOptions() {
 		ChromeOptions chromeOptions = (ChromeOptions) super.getOptions(); // Same as Chrome, basically
 		/* To adapt
 		if (getWebDriverProperties().useBraveBrowserBinaryPath()) {

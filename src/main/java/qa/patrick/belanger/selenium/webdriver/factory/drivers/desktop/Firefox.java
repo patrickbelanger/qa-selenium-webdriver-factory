@@ -19,10 +19,10 @@ package qa.patrick.belanger.selenium.webdriver.factory.drivers.desktop;
 
 import java.net.MalformedURLException;
 
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.remote.AbstractDriverOptions;
 
 import qa.patrick.belanger.selenium.webdriver.base.Driver;
 
@@ -43,7 +43,7 @@ public class Firefox extends GeckoBasedBrowser {
 	}
 
 	@Override
-	public AbstractDriverOptions<?> getOptions() {
+	public MutableCapabilities getOptions() {
 		FirefoxOptions firefoxOptions = new FirefoxOptions();
 		if (getWebDriverProperties().isBrowserPrivateMode()) {
 			firefoxOptions.addArguments(ARGUMENT_PRIVATE_MODE);

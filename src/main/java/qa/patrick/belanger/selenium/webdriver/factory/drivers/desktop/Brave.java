@@ -17,10 +17,10 @@
 
 package qa.patrick.belanger.selenium.webdriver.factory.drivers.desktop;
 
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.AbstractDriverOptions;
 
 import qa.patrick.belanger.selenium.webdriver.base.Driver;
 import qa.patrick.belanger.selenium.webdriver.exceptions.WebDriverNotSupportedException;
@@ -42,7 +42,7 @@ public class Brave extends Chrome {
 	 * Get ChromeOptions (with the binary location of Brave Browser)
 	 */
 	@Override
-	public AbstractDriverOptions<?> getOptions() {
+	public MutableCapabilities getOptions() {
 		ChromeOptions chromeOptions = (ChromeOptions) super.getOptions(); // Same as Chrome, basically
 		if (getWebDriverProperties().useBraveBrowserBinaryPath()) {
 			chromeOptions.setBinary(getWebDriverProperties().getBraveBrowserBinaryPath());

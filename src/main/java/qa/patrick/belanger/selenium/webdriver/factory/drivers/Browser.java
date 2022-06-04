@@ -22,8 +22,8 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.AbstractDriverOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import lombok.AccessLevel;
@@ -49,7 +49,7 @@ public abstract class Browser extends Grid {
 	
 	@Getter(AccessLevel.PUBLIC)
 	@Setter(AccessLevel.PUBLIC)
-	public AbstractDriverOptions<?> options;
+	public MutableCapabilities options;
 	
 	public Browser() { }
 	

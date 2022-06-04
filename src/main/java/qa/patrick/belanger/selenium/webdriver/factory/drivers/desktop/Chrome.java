@@ -21,11 +21,11 @@ import java.net.MalformedURLException;
 import java.util.Map;
 
 import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.AbstractDriverOptions;
 import org.openqa.selenium.remote.CapabilityType;
 
 import qa.patrick.belanger.selenium.webdriver.base.Driver;
@@ -47,7 +47,7 @@ public class Chrome extends ChromiumBasedBrowser {
 	}
 
 	@Override
-	public AbstractDriverOptions<?> getOptions() {
+	public MutableCapabilities getOptions() {
 		ChromeOptions chromeOptions = new ChromeOptions();
 		chromeOptions.addArguments(ARGUMENT_START_MAXIMIZED);
 		if (getWebDriverProperties().isBrowserPrivateMode()) {
