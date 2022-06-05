@@ -53,6 +53,7 @@ public class WebDriverFactory {
 
   /**
    * Get default browser options based on the specified driver
+   * 
    * @param driver {@link Driver}
    * @return
    */
@@ -70,7 +71,7 @@ public class WebDriverFactory {
 	 * Instantiate a WebDriver or RemoteWebDriver
 	 * 
 	 * @param driver {@link Driver} Launch the specified browser (locally) or on a Selenium Grid. 
-	 * @param remote Return a RemoteWebDriver instance instead of a WebDriver object
+	 * @param remote Return a RemoteWebDriver instance instead of a local WebDriver object
 	 * @return {@WebDriver}
 	 */
 	public static WebDriver getDriver(Driver driver, boolean remote) {
@@ -85,10 +86,14 @@ public class WebDriverFactory {
 	/**
 	 * Instantiate a WebDriver or RemoteWebDriver
 	 * 
-	 * @param driver {@link Driver} Launch the specified browser (locally), on a Selenium Grid or {@link GridThirdParty}
-	 * 															third-party provider (like BrowserStack)
-	 * @param w3cCapabilities Browser/Cloud capability (using the W3C standards)
-	 * 												Read: https://www.selenium.dev/blog/2022/legacy-protocol-support/ 
+	 * @param driver {@link Driver} 
+	 * 				Launch the specified browser (locally), on a Selenium Grid or {@link GridThirdParty}
+	 * 				third-party provider (like BrowserStack)
+	 * @param gridPartyParty {@link GridThirdParty} 
+	 * 				Specify a grid third-party provider (such as BrowserStack or Sauce Labs)
+	 * @param w3cCapabilities 
+	 * 				Browser/Cloud capability (using the W3C standards)
+	 * 				Read: https://www.selenium.dev/blog/2022/legacy-protocol-support/ 
 	 * @param remote Return a RemoteWebDriver instance instead of a WebDriver object
 	 * @return {@WebDriver}
 	 */
@@ -104,12 +109,18 @@ public class WebDriverFactory {
 	/**
 	 * Instantiate a WebDriver or RemoteWebDriver
 	 * 
-	 * @param driver {@link Driver} Launch the specified browser (locally), on a Selenium Grid or {@link GridThirdParty}
-	 * 															third-party provider (Sauce Labs)
-	 * @param w3cCapabilities Browser/Cloud capability (using the W3C standards)
-	 * 												Read: https://www.selenium.dev/blog/2022/legacy-protocol-support/
-	 * @param  MutableCapabilities browserOptions Browser Option (like {@link ChromeOptions} and so on. You can use
-	 * 														 {@link WebDriverFactory.getDefaultBrowserOptions()}
+	 * @param driver {@link Driver} 
+	 * 				Launch the specified browser (locally), on a Selenium Grid or {@link GridThirdParty}
+	 * 				third-party provider (Sauce Labs)
+	 * @param gridPartyParty {@link GridThirdParty} 
+	 * 				Specify a grid third-party provider (such as BrowserStack or Sauce Labs)
+	 * @param w3cCapabilities 
+	 * 				Browser/Cloud capability (using the W3C standards)
+	 * 				Read: https://www.selenium.dev/blog/2022/legacy-protocol-support/
+	 * @param  MutableCapabilities browserOptions 
+	 * 				Browser Options (like {@link ChromeOptions} and so on). You can use
+	 * 				{@link WebDriverFactory#getDefaultBrowserOptions()} method to get the proper instance
+	 * 				by passing the wanted {@link Driver}.
 	 * @param remote Return a RemoteWebDriver instance instead of a WebDriver object
 	 * @return {@WebDriver}
 	 */
@@ -144,12 +155,6 @@ public class WebDriverFactory {
 		return browser.getWebDriver(remote);
 	}
 	
-	/**
-	 * Returns the fully qualified package name of the Driver
-	 * 
-	 * @param driver {@link Driver}
-	 * @return
-	 */
 	private static String getDriverPackageName(Enum<?> driver) {
 		return String.format("%s%s", WebDriverFactory.class.getPackageName(), getDriverClassName(driver));
 	}
