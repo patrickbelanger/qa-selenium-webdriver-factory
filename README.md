@@ -1,5 +1,7 @@
 # qa-selenium-webdriver-factory
-A library to ease the development of Selenium's powered automation framework by instantiating a web driver and reducing boilerplate code.
+A library to ease the development of Selenium's powered automation framework by instantiating a web driver 
+and reducing boilerplate code. The goal is: set WebDriverFactory in your dependencies, and implement it in your
+automation framework.
 
 ## Features
 ### Supported Browsers
@@ -9,9 +11,17 @@ A library to ease the development of Selenium's powered automation framework by 
 * Mozilla Firefox (tested on version 98.0.1 (Windows/Linux (* remote only)))
 * Opera Browser (tested on version 84.0.4316.42 (WebKit - 98.0.4758.109) (Windows/Linux (*see knowledge base section)))
 
+### Selenium 4.2.x W3C compliant (ready for Selenium 4.3
+* The goal is creating a WebDriverFactory library that follows closely the latest Selenium WebDriver/W3C standards.
+
 ### Supported Platform
 * Linux (tested on Ubuntu 21.10)
 * Windows (tested on Windows 10)
+
+### Supported Third-party provider (Grid - Desktop)
+* BrowserStack
+* Perforce Perfecto (planned)
+* Sauce Labs (in progress)
 
 # Prerequisites
 
@@ -26,11 +36,9 @@ and [Visual Studio Code](https://projectlombok.org/setup/vscode).
 
 # Knowledge Base
 
-* If you get Java error(s) on getters/setters, you haven't installed the Lombok plugin on your IDE. This library is required to use qa-selenium-webdriver-factory. After installing the plugin, make sure to perform a Maven update.
-* Brave Browser on Linux (local): Not supported. I recommend executing Brave Browser on a Windows host or remotely (through Selenium Grid hosted on Windows 
-(* tested and works fine)).
-* Opera Browser on Linux (local): Not supported. I recommend executing Opera Browser on a Windows host or remotely (through Selenium Grid hosted on Windows 
-(* tested and works fine)).
+* If you get Java error(s) on getters/setters when cloning the repository, this means you haven't installed the Lombok plugin on your IDE. This library is required to compile. After installing the plugin, make sure to perform a Maven update to clean up projects.
+* Brave Browser on Linux (local): Not supported. I recommend executing Brave Browser on a Windows host or remotely (through Selenium Grid hosted on Windows (* tested and works fine)).
+* Opera Browser: Since Selenium deprecated the OperaDriver/OperaOptions, WebDriverFactory is unable to instanciate Opera Driver for now.
 
 # Contribute
 

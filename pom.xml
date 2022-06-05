@@ -14,7 +14,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>qa.patrick.belanger</groupId>
+	<groupId>qa.free.tools</groupId>
 	<artifactId>selenium-webdriver-factory</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
@@ -39,7 +39,7 @@
 		<logback.core.version>1.2.11</logback.core.version>
 		<lombok.version>1.18.22</lombok.version>
 		<owner.version>1.0.12</owner.version>
-		<selenium.version>4.1.2</selenium.version>
+		<selenium.version>4.2.1</selenium.version>
 		<slf4j.version>1.7.25</slf4j.version>
 	</properties>
 
@@ -86,6 +86,18 @@
 			<artifactId>selenium-java</artifactId>
 			<version>${selenium.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>${selenium.version}</version>
+		</dependency>
+		<!-- 
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-devtools-v102</artifactId>
+			<version>${selenium.version}</version>
+		</dependency>
+		-->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
