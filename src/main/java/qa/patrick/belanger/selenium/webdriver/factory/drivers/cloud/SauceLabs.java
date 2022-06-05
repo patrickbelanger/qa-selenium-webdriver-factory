@@ -20,7 +20,6 @@ package qa.patrick.belanger.selenium.webdriver.factory.drivers.cloud;
 import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.AbstractDriverOptions;
 
 import qa.patrick.belanger.selenium.webdriver.factory.drivers.Browser;
 import qa.patrick.belanger.selenium.webdriver.utils.Environment;
@@ -41,14 +40,8 @@ public class SauceLabs extends Browser {
 	}
 
 	@Override
-	public AbstractDriverOptions<?> getOptions() {
-		super.getOptions().setCapability("sauce:options", getW3cCapabilities());
-		return getOptions();
-	}
-
-	@Override
-	public Map<String, Object> toW3cCapabilities() {
-		super.toW3cCapabilities();
+	public Map<String, Object> getW3cCapabilities() {
+		super.getW3cCapabilities();
 		getW3cCapabilities().put("username", Environment.getEnvironmentOrArgument(SAUCELAB_USERNAME, 
 				ARGUMENT_USERNAME));
 		getW3cCapabilities().put("accessKey", Environment.getEnvironmentOrArgument(SAUCELAB_ACCESS_KEY, 

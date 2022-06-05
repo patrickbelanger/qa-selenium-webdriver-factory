@@ -19,7 +19,6 @@ package qa.patrick.belanger.selenium.webdriver.factory.drivers;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.openqa.selenium.MutableCapabilities;
@@ -44,7 +43,7 @@ public abstract class Browser extends Grid {
 	Map<String, Object> w3cCapabilities;
 	
 	@Getter(AccessLevel.PROTECTED)
-	@Setter(AccessLevel.PRIVATE)
+	@Setter(AccessLevel.PUBLIC)
 	Driver driver;
 	
 	@Getter(AccessLevel.PUBLIC)
@@ -68,12 +67,21 @@ public abstract class Browser extends Grid {
 	 */
 	protected WebDriver getRemoteWebDriver() {
 		try {
-			return new RemoteWebDriver(new URL(getHostUrl()), getOptions());
+			RemoteWebDriver remoteDriver = new RemoteWebDriver(new URL(getHostUrl()), getOptions());
+			if (isExecutionOnMac(remoteDriver) || getDriver().equals(Driver.FIREFOX)) {
+				remoteDriver.manage().window().maximize(); // 
+			}
+			return remoteDriver;
 		} catch(Exception e) {
 			throw new WebDriverNotSupportedException(e.getLocalizedMessage());
 		}
 	}
 
+	private boolean isExecutionOnMac(WebDriver webDriver) {
+		return ((RemoteWebDriver) webDriver).getCapabilities()
+				.getPlatformName().toString().equals("MAC");
+	}
+	
 	/**
 	 * Creates a new WebDriver instance with specified options.
 	 * 
@@ -94,11 +102,6 @@ public abstract class Browser extends Grid {
 		    OperatingSystem.isExecutionHostWindows() ? getWebDriverProperties().getWebDriverDefaultPath()
 		        : WebDriverProperties.UNIX_WEBDRIVER_PATH,
 		    getDriver().getExecutable());
-	}
-
-	protected Map<String, Object> toW3cCapabilities() {
-		setW3cCapabilities(new HashMap<>());
-		return getW3cCapabilities();
 	}
 
 }

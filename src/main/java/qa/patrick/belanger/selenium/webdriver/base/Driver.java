@@ -25,8 +25,11 @@ import qa.patrick.belanger.selenium.webdriver.utils.OperatingSystem;
 /**
  * List of supported WebDrivers
  * 
- * BRAVE
+ * BRAVE (through ChromeDriver)
  * CHROME
+ * EDGE
+ * FIREFOX
+ * OPERA (through ChromeDriver since OperaDriver has been deprecated)
  * 
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
@@ -34,30 +37,24 @@ public enum Driver {
 
 	/**
 	 * Brave Browser Remark: Binary location needs to be specified in
-	 * webdriver.properties file.
+	 * webdriver.properties file. (This browser uses ChromeDriver)
 	 */
-	BRAVE("Brave", ".drivers.desktop.Brave", "webdriver.chrome.driver", "chromedriver.exe", "chromedriver"),
+	BRAVE("Brave", ".drivers.desktop.Brave", ".drivers.options.Chrome", "webdriver.chrome.driver", 
+			"chromedriver.exe", "chromedriver"),
+	CHROME("Chrome", ".drivers.desktop.Chrome", ".drivers.options.Chrome", "webdriver.chrome.driver", 
+			"chromedriver.exe", "chromedriver"),
+	EDGE("Edge", ".drivers.desktop.Edge", ".drivers.options.Edge", "webdriver.edge.driver", 
+			"msedgedriver.exe", "msedgedriver"),
+	FIREFOX("firefox", ".drivers.desktop.Firefox", ".drivers.options.Firefox", "webdriver.gecko.driver", 
+			"geckodriver.exe", "geckodriver"),
 	/**
-	 * Chrome Browser
+	 * Opera Browser Remark: Binary location needs to be specified in
+	 * webdriver.properties file. (This browser uses ChromeDriver)
 	 */
-	CHROME("Chrome", ".drivers.desktop.Chrome", "webdriver.chrome.driver", "chromedriver.exe", "chromedriver"),
-	/**
-	 * Edge Browser
-	 */
-	EDGE("Edge", ".drivers.desktop.Edge", "webdriver.edge.driver", "msedgedriver.exe", "msedgedriver"),
-	/**
-	 * Firefox Browser
-	 */
-	FIREFOX("firefox", ".drivers.desktop.Firefox", "webdriver.gecko.driver", "geckodriver.exe", "geckodriver"),
-	/**
-	 * Opera Browser
-	 */
-	OPERA("Opera", ".drivers.desktop.Opera", "webdriver.opera.driver", "operadriver.exe", "operadriver"),
+	OPERA("Opera", ".drivers.desktop.Opera", ".drivers.options.Chrome", "webdriver.opera.driver", 
+			"operadriver.exe", "operadriver"),
 	;
 
-	/**
-	 * Get/set browser name
-	 */
 	@Getter
 	@Setter(AccessLevel.PRIVATE)
 	String browserName;
@@ -69,6 +66,13 @@ public enum Driver {
 	@Setter(AccessLevel.PRIVATE)
 	private String className;
 
+	/**
+	 * Get/set browser options class name (including part of the package as prefix)
+	 */
+	@Getter
+	@Setter(AccessLevel.PRIVATE)
+	private String optionsClassName;
+	
 	/**
 	 * Get/set system property for this webdriver
 	 */
@@ -99,10 +103,11 @@ public enum Driver {
 
 	private Driver() { }
 	
-	private Driver(String browserName, String className, String property, String executableWindowsArm64,
-	    String executableUnix) {
+	private Driver(String browserName, String className, String optionsClassName, 
+			String property, String executableWindowsArm64, String executableUnix) {
 		setBrowserName(browserName);
 		setClassName(className);
+		setOptionsClassName(optionsClassName);
 		setProperty(property);
 		setExecutableWindowsArm64(executableWindowsArm64);
 		setExecutableUnix(executableUnix);

@@ -17,10 +17,11 @@
 
 package qa.patrick.belanger.selenium.webdriver.factory.drivers.cloud;
 
-import java.util.Map;
+import java.util.HashMap;
 
 import org.openqa.selenium.WebDriver;
 
+import qa.patrick.belanger.selenium.webdriver.factory.WebDriverFactory;
 import qa.patrick.belanger.selenium.webdriver.factory.drivers.Browser;
 import qa.patrick.belanger.selenium.webdriver.utils.Environment;
 
@@ -38,12 +39,7 @@ public class BrowserStack extends Browser {
 	public BrowserStack() {
 		super();
   }
-
-	@Override
-	public Map<String, Object> toW3cCapabilities() {
-		return getW3cCapabilities();
-	}
-
+	
 	protected String getHostUrl() {
 		return String.format(getWebDriverProperties().getBrowserStackGridUrl(), 
 		    Environment.getEnvironmentOrArgument(BROWSERSTACK_USERNAME, ARGUMENT_USERNAME),
@@ -55,13 +51,18 @@ public class BrowserStack extends Browser {
 	 * Creates a new WebDriver (connected on BrowserStack hub) with the specified options.
 	 */
 	@Override
-	public WebDriver getWebDriver() {
-		super.getOptions().setCapability("os", "windows");
-		super.getOptions().setCapability("osVersion", "10"); // Doesn't work as expected
-		super.getOptions().setCapability("bstack:options", getW3cCapabilities());
+	public WebDriver getRemoteWebDriver() {
+		setOptions(WebDriverFactory.getDefaultBrowserOptions(getDriver())); // We need to get the desired options first
+		if (getW3cCapabilities().isEmpty()) {
+			setW3cCapabilities(new HashMap<>());
+		}
+		getOptions().setCapability("bstack:options", getW3cCapabilities());
 		return super.getRemoteWebDriver();
 	}
 
-	
+	@Override
+	public WebDriver getWebDriver() {
+		return null;
+	}
 
 }

@@ -150,12 +150,32 @@ public class WebDriverFactoryTest {
 	}
 	
 	@Test
-	public void cloudBasedGrid_browserStack_shouldBeAbleToInstantiateChromeRemotely() {
+	public void cloudBasedGrid_browserStack_shouldBeAbleToInstantiateChromeOnMacOSRemotely() {
+		cloudBasedGrid_browserStack_shouldBeAbleToInstantiateChromeRemotely("OS X", "Sierra");
+	}
+
+	@Test
+	public void cloudBasedGrid_browserStack_shouldBeAbleToInstantiateChromeOnWindows8Remotely() {
+		cloudBasedGrid_browserStack_shouldBeAbleToInstantiateChromeRemotely("Windows", "8");
+	}
+
+	@Test
+	public void cloudBasedGrid_browserStack_shouldBeAbleToInstantiateChromeOnWindowsTenRemotely() {
+		cloudBasedGrid_browserStack_shouldBeAbleToInstantiateChromeRemotely("Windows", "10");
+	}
+	
+	@Test
+	public void cloudBasedGrid_browserStack_shouldBeAbleToInstantiateChromeOnWindowsElevenRemotely() {
+		cloudBasedGrid_browserStack_shouldBeAbleToInstantiateChromeRemotely("Windows", "11");
+	}
+	
+	private void cloudBasedGrid_browserStack_shouldBeAbleToInstantiateChromeRemotely(String os, String osVersion) {
 		Map<String, Object> w3cCapabilities = new HashMap<>();
 		w3cCapabilities.put(CapabilityType.BROWSER_NAME, "chrome");
 		w3cCapabilities.put(CapabilityType.BROWSER_VERSION, "latest");
+		w3cCapabilities.put("os", os);
+		w3cCapabilities.put("osVersion", osVersion);
 		webDriver = WebDriverFactory.getDriver(Driver.CHROME, GridThirdParty.BROWSERSTACK, w3cCapabilities);
-		//WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
 		assertNotNull(webDriver);
 		webDriver.navigate().to("https://www.google.com");
 		assertTrue(webDriver.getCurrentUrl().contains("google"));

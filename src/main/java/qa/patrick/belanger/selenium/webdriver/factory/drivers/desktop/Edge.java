@@ -56,8 +56,8 @@ public class Edge extends ChromiumBasedBrowser {
 	 * Store a set of EdgeOptions in a {@link Capabilities} class
 	 */
 	@Override
-	public Map<String, Object> toW3cCapabilities() {
-		super.toW3cCapabilities();
+	public Map<String, Object> getW3cCapabilities() {
+		super.getW3cCapabilities();
 		getW3cCapabilities().put(CapabilityType.BROWSER_NAME, "edge");
 		getW3cCapabilities().put(CapabilityType.BROWSER_VERSION, "latest"); //TODO: Make it parameterizable
 		getW3cCapabilities().put(CapabilityType.PLATFORM_NAME, Platform.WIN10); //TODO: Make it parameterizable

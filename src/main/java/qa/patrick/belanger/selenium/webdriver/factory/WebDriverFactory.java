@@ -20,6 +20,7 @@ package qa.patrick.belanger.selenium.webdriver.factory;
 import java.util.Map;
 
 import org.aeonbits.owner.ConfigFactory;
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.slf4j.Logger;
@@ -30,6 +31,7 @@ import lombok.Getter;
 import qa.patrick.belanger.selenium.webdriver.base.Driver;
 import qa.patrick.belanger.selenium.webdriver.base.GridThirdParty;
 import qa.patrick.belanger.selenium.webdriver.factory.drivers.Browser;
+import qa.patrick.belanger.selenium.webdriver.factory.drivers.options.DefaultOptions;
 import qa.patrick.belanger.selenium.webdriver.properties.WebDriverProperties;
 
 /**
@@ -47,6 +49,21 @@ public class WebDriverFactory {
 	
 	private WebDriverFactory() { }
 
+  /**
+   * Get default browser options based on the specified driver
+   * @param driver {@link Driver}
+   * @return
+   */
+	public static MutableCapabilities getDefaultBrowserOptions(Driver driver) {
+		try {
+			return ((DefaultOptions) 
+					Class.forName(getOptionsPackageName(driver)).getDeclaredConstructor().newInstance()).getOptions();
+		} catch(Exception e) {
+			logger.error(e.getLocalizedMessage());
+			throw new WebDriverException(e.getLocalizedMessage());
+		}
+	}
+	
 	/**
 	 * Instantiate a WebDriver or RemoteWebDriver
 	 * 
@@ -68,7 +85,7 @@ public class WebDriverFactory {
 	 * 
 	 * @param driver {@link Driver} Launch the specified browser (locally), on a Selenium Grid or {@link GridThirdParty}
 	 * 															third-party provider (like BrowserStack, Perfecto, Sauce Labs, and so on)
-	 * @param w3cCapabilities Browser/Cloud capability (with the W3C Syntax)
+	 * @param w3cCapabilities Browser/Cloud capability (using the W3C standards)
 	 * 												Read: https://www.selenium.dev/blog/2022/legacy-protocol-support/ 
 	 * @param remote Return a RemoteWebDriver instance instead of a WebDriver object
 	 * @return {@WebDriver}
@@ -86,7 +103,7 @@ public class WebDriverFactory {
 		return instantiateWebDriver(null, driver, null, remote);
 	}
 	
-	private static WebDriver instantiateWebDriver(Driver driverOnly, Enum<?> driverOrThirdParty, 
+	private static WebDriver instantiateWebDriver(Driver driver, Enum<?> driverOrThirdParty, 
 			Map<String, Object> w3cCapabilities, boolean remote) 
 			throws Exception {
 		Browser browser = 
@@ -94,12 +111,8 @@ public class WebDriverFactory {
 		if (w3cCapabilities != null) {
 			browser.setW3cCapabilities(w3cCapabilities);
 		}
-		if (driverOnly != null) {
-			browser.setOptions(
-				((Browser) Class.forName(getDriverPackageName(driverOnly)).getDeclaredConstructor().newInstance()).getOptions()
-			);
-			browser.getW3cCapabilities().put(driverOnly.getBrowserName().toLowerCase(), browser.getOptions());
-			
+		if (driver != null) {
+			browser.setDriver(driver);
 		}
 		return browser.getWebDriver(remote);
 	}
@@ -112,6 +125,10 @@ public class WebDriverFactory {
 	 */
 	private static String getDriverPackageName(Enum<?> driver) {
 		return String.format("%s%s", WebDriverFactory.class.getPackageName(), getDriverClassName(driver));
+	}
+	
+	private static String getOptionsPackageName(Driver driver) {
+		return String.format("%s%sDefaultOptions", WebDriverFactory.class.getPackageName(), driver.getOptionsClassName());
 	}
 	
 	private static String getDriverClassName(Enum<?> driver) {

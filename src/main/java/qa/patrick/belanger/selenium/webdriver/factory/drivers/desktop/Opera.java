@@ -61,7 +61,7 @@ public class Opera extends Chrome {
 	 * Store a set of OperaOptions in a {@link Capabilities} class
 	 */
 	@Override
-	public Map<String, Object> toW3cCapabilities() {
+	public Map<String, Object> getW3cCapabilities() {
 		return null;
 	}
 
