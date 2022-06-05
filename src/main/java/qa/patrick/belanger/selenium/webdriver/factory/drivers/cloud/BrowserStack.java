@@ -52,7 +52,9 @@ public class BrowserStack extends Browser {
 	 */
 	@Override
 	public WebDriver getRemoteWebDriver() {
-		setOptions(WebDriverFactory.getDefaultBrowserOptions(getDriver())); // We need to get the desired options first
+		if (getOptions().asMap().isEmpty()) {
+			setOptions(WebDriverFactory.getDefaultBrowserOptions(getDriver())); // We need to get the desired options first
+		}
 		if (getW3cCapabilities().isEmpty()) {
 			setW3cCapabilities(new HashMap<>());
 		}

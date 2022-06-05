@@ -48,8 +48,10 @@ public class SauceLabs extends Browser {
 	 * Creates a new WebDriver (connected on Sauce Labs hub) with the specified options.
 	 */
 	@Override
-	public WebDriver getWebDriver() {
-		setOptions(WebDriverFactory.getDefaultBrowserOptions(getDriver())); // We need to get the desired options first
+	public WebDriver getRemoteWebDriver() {
+		if (getOptions().asMap().isEmpty()) {
+			setOptions(WebDriverFactory.getDefaultBrowserOptions(getDriver())); // We need to get the desired options first
+		}
 		if (getW3cCapabilities().isEmpty()) {
 			setW3cCapabilities(new HashMap<>());
 		}
@@ -57,8 +59,14 @@ public class SauceLabs extends Browser {
 				ARGUMENT_USERNAME));
 		getW3cCapabilities().put("accessKey", Environment.getEnvironmentOrArgument(SAUCELAB_ACCESS_KEY, 
 				ARGUMENT_ACCESS_KEY));
+		getOptions().setCapability("platformName", "Windows 10");
 		getOptions().setCapability("sauce:options", getW3cCapabilities());
 		return super.getRemoteWebDriver();
 	}
 
+	@Override
+	public WebDriver getWebDriver() {
+		return null;
+	}
+	
 }

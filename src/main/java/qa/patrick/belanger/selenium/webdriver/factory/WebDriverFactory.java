@@ -84,7 +84,7 @@ public class WebDriverFactory {
 	 * Instantiate a WebDriver or RemoteWebDriver
 	 * 
 	 * @param driver {@link Driver} Launch the specified browser (locally), on a Selenium Grid or {@link GridThirdParty}
-	 * 															third-party provider (like BrowserStack, Perfecto, Sauce Labs, and so on)
+	 * 															third-party provider (like BrowserStack)
 	 * @param w3cCapabilities Browser/Cloud capability (using the W3C standards)
 	 * 												Read: https://www.selenium.dev/blog/2022/legacy-protocol-support/ 
 	 * @param remote Return a RemoteWebDriver instance instead of a WebDriver object
@@ -92,7 +92,29 @@ public class WebDriverFactory {
 	 */
 	public static WebDriver getDriver(Driver driver, GridThirdParty gridThirdParty, Map<String, Object> w3cCapabilities) {
 		try {
-			return instantiateWebDriver(driver, gridThirdParty, w3cCapabilities, true);
+			return instantiateWebDriver(driver, gridThirdParty, w3cCapabilities, null, true);
+		} catch (Exception e) {
+			logger.error(e.getLocalizedMessage());
+			throw new WebDriverException(e.getLocalizedMessage());
+		}
+	}
+	
+	/**
+	 * Instantiate a WebDriver or RemoteWebDriver
+	 * 
+	 * @param driver {@link Driver} Launch the specified browser (locally), on a Selenium Grid or {@link GridThirdParty}
+	 * 															third-party provider (Sauce Labs)
+	 * @param w3cCapabilities Browser/Cloud capability (using the W3C standards)
+	 * 												Read: https://www.selenium.dev/blog/2022/legacy-protocol-support/
+	 * @param  MutableCapabilities browserOptions Browser Option (like {@link ChromeOptions} and so on. You can use
+	 * 														 {@link WebDriverFactory.getDefaultBrowserOptions()}
+	 * @param remote Return a RemoteWebDriver instance instead of a WebDriver object
+	 * @return {@WebDriver}
+	 */
+	public static WebDriver getDriver(Driver driver, GridThirdParty gridThirdParty, 
+				Map<String, Object> w3cCapabilities, MutableCapabilities browserOptions) {
+		try {
+			return instantiateWebDriver(driver, gridThirdParty, w3cCapabilities, browserOptions, true);
 		} catch (Exception e) {
 			logger.error(e.getLocalizedMessage());
 			throw new WebDriverException(e.getLocalizedMessage());
@@ -100,16 +122,19 @@ public class WebDriverFactory {
 	}
 	
 	private static WebDriver instantiateWebDriver(Enum<?> driver, boolean remote) throws Exception {
-		return instantiateWebDriver(null, driver, null, remote);
+		return instantiateWebDriver(null, driver, null, null, remote);
 	}
 	
 	private static WebDriver instantiateWebDriver(Driver driver, Enum<?> driverOrThirdParty, 
-			Map<String, Object> w3cCapabilities, boolean remote) 
+			Map<String, Object> w3cCapabilities, MutableCapabilities browserOptions, boolean remote) 
 			throws Exception {
 		Browser browser = 
 				((Browser) Class.forName(getDriverPackageName(driverOrThirdParty)).getDeclaredConstructor().newInstance());
 		if (w3cCapabilities != null) {
 			browser.setW3cCapabilities(w3cCapabilities);
+		}
+		if (browserOptions != null) {
+			browser.setOptions(browserOptions);
 		}
 		if (driver != null) {
 			browser.setDriver(driver);

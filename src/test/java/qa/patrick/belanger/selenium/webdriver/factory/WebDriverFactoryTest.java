@@ -30,8 +30,10 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.CapabilityType;
@@ -152,33 +154,55 @@ public class WebDriverFactoryTest {
 		assertTrue(webDriver.getCurrentUrl().contains("google"));
 	}
 	
+	@Disabled // Passed (05-06-2022) - You need a BrowserStack account to enable this test
 	@Test
 	public void cloudBasedGrid_browserStack_shouldBeAbleToInstantiateChromeOnMacOSRemotely() {
-		cloudBasedGrid_browserStack_shouldBeAbleToInstantiateChromeRemotely("OS X", "Sierra");
+		cloudBasedGrid_shouldBeAbleToInstantiateChromeRemotely(GridThirdParty.BROWSERSTACK, "OS X", "Sierra");
 	}
 
+	@Disabled // Passed (05-06-2022) - You need a BrowserStack account to enable this test
 	@Test
 	public void cloudBasedGrid_browserStack_shouldBeAbleToInstantiateChromeOnWindows8Remotely() {
-		cloudBasedGrid_browserStack_shouldBeAbleToInstantiateChromeRemotely("Windows", "8");
+		cloudBasedGrid_shouldBeAbleToInstantiateChromeRemotely(GridThirdParty.BROWSERSTACK, "Windows", "8");
 	}
 
+	@Disabled // Passed (05-06-2022) - You need a BrowserStack account to enable this test
 	@Test
 	public void cloudBasedGrid_browserStack_shouldBeAbleToInstantiateChromeOnWindowsTenRemotely() {
-		cloudBasedGrid_browserStack_shouldBeAbleToInstantiateChromeRemotely("Windows", "10");
+		cloudBasedGrid_shouldBeAbleToInstantiateChromeRemotely(GridThirdParty.BROWSERSTACK, "Windows", "10");
+	}
+
+	@Disabled // Passed (05-06-2022) - You need a BrowserStack account to enable this test
+	@Test
+	public void cloudBasedGrid_browserStack_shouldBeAbleToInstantiateChromeOnWindowsElevenRemotely() {
+		cloudBasedGrid_shouldBeAbleToInstantiateChromeRemotely(GridThirdParty.BROWSERSTACK, "Windows", "11");
 	}
 	
 	@Test
-	public void cloudBasedGrid_browserStack_shouldBeAbleToInstantiateChromeOnWindowsElevenRemotely() {
-		cloudBasedGrid_browserStack_shouldBeAbleToInstantiateChromeRemotely("Windows", "11");
+	public void cloudBasedGrid_sauceLabs_shouldBeAbleToInstantiateChromeOnWindowsTenRemotely() {
+		cloudBasedGrid_shouldBeAbleToInstantiateChromeRemotely(GridThirdParty.SAUCELABS, "Windows", "10");
 	}
 	
-	private void cloudBasedGrid_browserStack_shouldBeAbleToInstantiateChromeRemotely(String os, String osVersion) {
+	@Test
+	public void cloudBasedGrid_sauceLabs_shouldBeAbleToInstantiateChromeOnWindowsElevenRemotely() {
+		cloudBasedGrid_shouldBeAbleToInstantiateChromeRemotely(GridThirdParty.SAUCELABS, "Windows", "11");
+	}
+	
+	private void cloudBasedGrid_shouldBeAbleToInstantiateChromeRemotely(GridThirdParty gridThirdParty, 
+			String os, String osVersion) {
 		Map<String, Object> w3cCapabilities = new HashMap<>();
 		w3cCapabilities.put(CapabilityType.BROWSER_NAME, "chrome");
 		w3cCapabilities.put(CapabilityType.BROWSER_VERSION, "latest");
-		w3cCapabilities.put("os", os);
-		w3cCapabilities.put("osVersion", osVersion);
-		webDriver = WebDriverFactory.getDriver(Driver.CHROME, GridThirdParty.BROWSERSTACK, w3cCapabilities);
+		if (gridThirdParty.equals(GridThirdParty.BROWSERSTACK)) {
+			w3cCapabilities.put("os", os);
+			w3cCapabilities.put("osVersion", osVersion);
+			webDriver = WebDriverFactory.getDriver(Driver.CHROME, gridThirdParty, w3cCapabilities);
+		} else if (gridThirdParty.equals(GridThirdParty.SAUCELABS)) {
+			MutableCapabilities capabilities = WebDriverFactory.getDefaultBrowserOptions(Driver.CHROME);
+			((ChromeOptions) capabilities).setPlatformName(os);
+			capabilities.setCapability("platformVersion", osVersion);			
+			webDriver = WebDriverFactory.getDriver(Driver.CHROME, gridThirdParty, w3cCapabilities, capabilities);
+		}
 		assertNotNull(webDriver);
 		webDriver.navigate().to("https://www.google.com");
 		assertTrue(webDriver.getCurrentUrl().contains("google"));
