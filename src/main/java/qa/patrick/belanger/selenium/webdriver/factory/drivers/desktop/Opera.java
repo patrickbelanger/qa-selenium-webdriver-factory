@@ -18,9 +18,7 @@
 package qa.patrick.belanger.selenium.webdriver.factory.drivers.desktop;
 
 import java.net.MalformedURLException;
-import java.util.Map;
 
-import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -28,6 +26,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 import qa.patrick.belanger.selenium.webdriver.base.Driver;
 import qa.patrick.belanger.selenium.webdriver.exceptions.WebDriverNotSupportedException;
+import qa.patrick.belanger.selenium.webdriver.factory.drivers.options.OperaDefaultOptions;
 import qa.patrick.belanger.selenium.webdriver.utils.OperatingSystem;
 
 /**
@@ -39,7 +38,7 @@ import qa.patrick.belanger.selenium.webdriver.utils.OperatingSystem;
 public class Opera extends Chrome {
 
 	public Opera() {
-		super(Driver.OPERA);
+		super(Driver.CHROME);
 	}
 
 	public Opera(Driver driver) {
@@ -48,19 +47,7 @@ public class Opera extends Chrome {
 
 	@Override
 	public MutableCapabilities getOptions() {
-		ChromeOptions chromeOptions = (ChromeOptions) super.getOptions(); // Same as Chrome, basically
-		if (getWebDriverProperties().useBraveBrowserBinaryPath()) {
-			chromeOptions.setBinary(getWebDriverProperties().getBraveBrowserBinaryPath());
-		}
-		return chromeOptions;
-	}
-
-	/**
-	 * Store a set of OperaOptions in a {@link Capabilities} class
-	 */
-	@Override
-	public Map<String, Object> getW3cCapabilities() {
-		return null;
+		return new OperaDefaultOptions().getOptions();
 	}
 
 	/**
@@ -81,6 +68,7 @@ public class Opera extends Chrome {
 			logger.warn(sb.toString());
 			throw new WebDriverNotSupportedException(sb.toString());
 		}
+		setOptions(getOptions());
 		return super.getWebDriver(remote);
 	}
 
