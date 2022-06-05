@@ -43,7 +43,6 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import qa.free.tools.selenium.webdriver.base.Driver;
 import qa.free.tools.selenium.webdriver.base.GridThirdParty;
-import qa.free.tools.selenium.webdriver.factory.WebDriverFactory;
 import qa.free.tools.selenium.webdriver.utils.OperatingSystem;
 
 /**
@@ -163,7 +162,7 @@ public class WebDriverFactoryTest {
 		cloudBasedGrid_shouldBeAbleToInstantiateChromeRemotely(GridThirdParty.BROWSERSTACK, "OS X", "Sierra");
 	}
 
-	// Passed (05-06-2022) - You need a BrowserStack account to enable this test
+	@Disabled // Passed (05-06-2022) - You need a BrowserStack account to enable this test
 	@Test
 	public void cloudBasedGrid_browserStack_shouldBeAbleToInstantiateChromeOnWindows8Remotely() {
 		cloudBasedGrid_shouldBeAbleToInstantiateChromeRemotely(GridThirdParty.BROWSERSTACK, "Windows", "8");
