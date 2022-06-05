@@ -49,11 +49,9 @@ public class Opera extends Chrome {
 	@Override
 	public MutableCapabilities getOptions() {
 		ChromeOptions chromeOptions = (ChromeOptions) super.getOptions(); // Same as Chrome, basically
-		/* To adapt
 		if (getWebDriverProperties().useBraveBrowserBinaryPath()) {
 			chromeOptions.setBinary(getWebDriverProperties().getBraveBrowserBinaryPath());
 		}
-		*/
 		return chromeOptions;
 	}
 

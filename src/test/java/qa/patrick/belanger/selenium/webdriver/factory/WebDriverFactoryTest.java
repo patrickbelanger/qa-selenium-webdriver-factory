@@ -20,24 +20,17 @@ package qa.patrick.belanger.selenium.webdriver.factory;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import qa.patrick.belanger.selenium.webdriver.base.Driver;
-import qa.patrick.belanger.selenium.webdriver.base.GridThirdParty;
 import qa.patrick.belanger.selenium.webdriver.utils.OperatingSystem;
 
 /**
@@ -170,6 +163,7 @@ public class WebDriverFactoryTest {
 	}
 	
 	private void cloudBasedGrid_browserStack_shouldBeAbleToInstantiateChromeRemotely(String os, String osVersion) {
+		/*
 		Map<String, Object> w3cCapabilities = new HashMap<>();
 		w3cCapabilities.put(CapabilityType.BROWSER_NAME, "chrome");
 		w3cCapabilities.put(CapabilityType.BROWSER_VERSION, "latest");
@@ -180,6 +174,7 @@ public class WebDriverFactoryTest {
 		webDriver.navigate().to("https://www.google.com");
 		assertTrue(webDriver.getCurrentUrl().contains("google"));
 		webDriver.findElement(By.name("q")).sendKeys("selenium webdriver is the best" + Keys.ENTER);
+		*/
 	}
 	
 	@AfterEach

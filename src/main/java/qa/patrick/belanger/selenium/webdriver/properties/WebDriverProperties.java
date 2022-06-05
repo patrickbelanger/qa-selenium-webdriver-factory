@@ -29,8 +29,6 @@ public interface WebDriverProperties extends Config {
 	static final String GRID_HUB_ENDPOINT = "/wd/hub";
 	static final String UNIX_WEBDRIVER_PATH = "/usr/local/bin/";
 
-	/* Brave Browser related properties */
-
 	@Key("brave.browser.binary.path")
 	@DefaultValue("C:/Program Files/BraveSoftware/Brave-Browser/Application/brave.exe")
 	String getBraveBrowserBinaryPath();
@@ -38,8 +36,6 @@ public interface WebDriverProperties extends Config {
 	@Key("brave.browser.use.binary.path")
 	@DefaultValue("true") // Browser binary path for Brave Browser must be mentioned
 	boolean useBraveBrowserBinaryPath();
-
-	/* Edge Browser related properties */
 
 	@Key("edge.browser.binary.path")
 	@DefaultValue("C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe")
@@ -50,13 +46,17 @@ public interface WebDriverProperties extends Config {
 	                       // running from a Linux-based execution host
 	boolean useEdgeBrowserBinaryPath();
 
-	/* General browser options */
+	@Key("opera.browser.binary.path") // Default can't be set since the path could be in the C:\Users\{username} folder
+	String getOperaBrowserBinaryPath();
 
+	@Key("opera.browser.use.binary.path")
+	@DefaultValue("true") // Browser binary path for Opera Browser must be mentioned
+	boolean useOperaBrowserBinaryPath();
+	
+	
 	@Key("browser.private.mode")
 	@DefaultValue("true")
 	boolean isBrowserPrivateMode();
-
-	/* Grid related properties */
 
 	@Key("grid.url")
 	@DefaultValue("http://localhost")
@@ -70,7 +70,6 @@ public interface WebDriverProperties extends Config {
 	@DefaultValue("https://ondemand.us-west-1.saucelabs.com/wd/hub")
 	String getSauceLabsGridUrl();
 	
-	
 	@Key("grid.port")
 	@DefaultValue("4444")
 	String getGridPort();
@@ -82,8 +81,6 @@ public interface WebDriverProperties extends Config {
 	@Key("webdriver.default")
 	@DefaultValue("CHROME")
 	Driver getWebDriverDefault();
-
-	/* Webdriver related properties */
 
 	@Key("webdriver.default.path")
 	@DefaultValue("classpath:")

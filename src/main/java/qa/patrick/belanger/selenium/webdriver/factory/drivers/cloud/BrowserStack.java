@@ -27,7 +27,7 @@ import qa.patrick.belanger.selenium.webdriver.utils.Environment;
 
 /**
  * BrowserStack class 
- * Returns a RemoteWebDriver connected to BrowserStack
+ * Returns a RemoteWebDriver connected to BrowserStack (+ required credentials)
  * 
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */

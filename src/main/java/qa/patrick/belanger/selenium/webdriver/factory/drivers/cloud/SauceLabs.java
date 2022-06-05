@@ -17,16 +17,17 @@
 
 package qa.patrick.belanger.selenium.webdriver.factory.drivers.cloud;
 
-import java.util.Map;
+import java.util.HashMap;
 
 import org.openqa.selenium.WebDriver;
 
+import qa.patrick.belanger.selenium.webdriver.factory.WebDriverFactory;
 import qa.patrick.belanger.selenium.webdriver.factory.drivers.Browser;
 import qa.patrick.belanger.selenium.webdriver.utils.Environment;
 
 /**
  * Sauce Labs class 
- * Returns a RemoteWebDriver connected to Sauce Labs
+ * Returns a RemoteWebDriver connected to Sauce Labs (+ required credentials)
  * 
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
@@ -39,16 +40,6 @@ public class SauceLabs extends Browser {
 		super();
 	}
 
-	@Override
-	public Map<String, Object> getW3cCapabilities() {
-		super.getW3cCapabilities();
-		getW3cCapabilities().put("username", Environment.getEnvironmentOrArgument(SAUCELAB_USERNAME, 
-				ARGUMENT_USERNAME));
-		getW3cCapabilities().put("accessKey", Environment.getEnvironmentOrArgument(SAUCELAB_ACCESS_KEY, 
-				ARGUMENT_ACCESS_KEY));
-		return getW3cCapabilities();
-	}
-
 	protected String getHostUrl() {
 		return String.format(getWebDriverProperties().getSauceLabsGridUrl());
 	}
@@ -58,6 +49,15 @@ public class SauceLabs extends Browser {
 	 */
 	@Override
 	public WebDriver getWebDriver() {
+		setOptions(WebDriverFactory.getDefaultBrowserOptions(getDriver())); // We need to get the desired options first
+		if (getW3cCapabilities().isEmpty()) {
+			setW3cCapabilities(new HashMap<>());
+		}
+		getW3cCapabilities().put("username", Environment.getEnvironmentOrArgument(SAUCELAB_USERNAME, 
+				ARGUMENT_USERNAME));
+		getW3cCapabilities().put("accessKey", Environment.getEnvironmentOrArgument(SAUCELAB_ACCESS_KEY, 
+				ARGUMENT_ACCESS_KEY));
+		getOptions().setCapability("sauce:options", getW3cCapabilities());
 		return super.getRemoteWebDriver();
 	}
 
