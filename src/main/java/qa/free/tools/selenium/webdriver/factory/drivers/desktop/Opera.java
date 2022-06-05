@@ -38,7 +38,8 @@ import qa.free.tools.selenium.webdriver.utils.OperatingSystem;
 public class Opera extends Chrome {
 
 	public Opera() {
-		super(Driver.CHROME);
+		throw new WebDriverNotSupportedException(
+				"The OperaDriver will be available in a future release of WebDriverFactory");
 	}
 
 	public Opera(Driver driver) {

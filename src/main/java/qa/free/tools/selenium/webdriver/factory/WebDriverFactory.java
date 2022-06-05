@@ -23,6 +23,7 @@ import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,6 +31,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import qa.free.tools.selenium.webdriver.base.Driver;
 import qa.free.tools.selenium.webdriver.base.GridThirdParty;
+import qa.free.tools.selenium.webdriver.exceptions.UnableInstantiateWebDriverException;
 import qa.free.tools.selenium.webdriver.factory.drivers.Browser;
 import qa.free.tools.selenium.webdriver.factory.drivers.options.DefaultOptions;
 import qa.free.tools.selenium.webdriver.properties.WebDriverProperties;
@@ -75,8 +77,8 @@ public class WebDriverFactory {
 		try {
 			return instantiateWebDriver(driver, remote);
 		} catch (Exception e) {
-			logger.error(e.getLocalizedMessage());
-			throw new WebDriverException(e.getLocalizedMessage());
+			logger.error(e.getCause().getMessage());
+			throw new UnableInstantiateWebDriverException(e.getCause().getMessage());
 		}
 	}
 	
@@ -94,8 +96,8 @@ public class WebDriverFactory {
 		try {
 			return instantiateWebDriver(driver, gridThirdParty, w3cCapabilities, null, true);
 		} catch (Exception e) {
-			logger.error(e.getLocalizedMessage());
-			throw new WebDriverException(e.getLocalizedMessage());
+			logger.error(e.getCause().getMessage());
+			throw new UnableInstantiateWebDriverException(e.getCause().getMessage());
 		}
 	}
 	
@@ -116,8 +118,8 @@ public class WebDriverFactory {
 		try {
 			return instantiateWebDriver(driver, gridThirdParty, w3cCapabilities, browserOptions, true);
 		} catch (Exception e) {
-			logger.error(e.getLocalizedMessage());
-			throw new WebDriverException(e.getLocalizedMessage());
+			logger.error(e.getCause().getMessage());
+			throw new UnableInstantiateWebDriverException(e.getCause().getMessage());
 		}
 	}
 	

@@ -134,7 +134,7 @@ public class WebDriverFactoryTest {
 		assertTrue(webDriver.getCurrentUrl().contains("google"));
 	}
 
-	@Disabled // I need to investigate further
+	//@Disabled // I need to investigate further
 	@Test
 	public void operaBrowser_shouldBeAbleToInstantiateOperaDriverLocally() {
 		Assumptions.assumeTrue(OperatingSystem.isExecutionHostWindows()); // Only works on Windows host
