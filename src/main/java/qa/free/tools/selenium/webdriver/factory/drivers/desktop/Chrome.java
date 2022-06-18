@@ -21,7 +21,6 @@ import java.util.Map;
 
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.MutableCapabilities;
-import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -58,8 +57,6 @@ public class Chrome extends ChromiumBasedBrowser {
 	public Map<String, Object> getW3cCapabilities() {
 		super.getW3cCapabilities();
 		getW3cCapabilities().put(CapabilityType.BROWSER_NAME, "chrome");
-		getW3cCapabilities().put(CapabilityType.BROWSER_VERSION, "latest"); //TODO: Make it parameterizable
-		getW3cCapabilities().put(CapabilityType.PLATFORM_NAME, Platform.WIN10); //TODO: Make it parameterizable
 		getW3cCapabilities().put(ChromeOptions.CAPABILITY, getOptions());
 		return getW3cCapabilities();
 	}

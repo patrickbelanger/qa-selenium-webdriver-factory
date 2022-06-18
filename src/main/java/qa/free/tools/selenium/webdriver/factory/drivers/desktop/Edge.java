@@ -21,7 +21,6 @@ import java.util.Map;
 
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.MutableCapabilities;
-import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
@@ -58,8 +57,6 @@ public class Edge extends ChromiumBasedBrowser {
 	public Map<String, Object> getW3cCapabilities() {
 		super.getW3cCapabilities();
 		getW3cCapabilities().put(CapabilityType.BROWSER_NAME, "edge");
-		getW3cCapabilities().put(CapabilityType.BROWSER_VERSION, "latest"); //TODO: Make it parameterizable
-		getW3cCapabilities().put(CapabilityType.PLATFORM_NAME, Platform.WIN10); //TODO: Make it parameterizable
 		getW3cCapabilities().put(EdgeOptions.CAPABILITY, getOptions());
 		return getW3cCapabilities();
 	}

@@ -30,7 +30,6 @@ import lombok.Getter;
 import lombok.Setter;
 import qa.free.tools.selenium.webdriver.base.Driver;
 import qa.free.tools.selenium.webdriver.exceptions.WebDriverNotSupportedException;
-import qa.free.tools.selenium.webdriver.properties.WebDriverProperties;
 import qa.free.tools.selenium.webdriver.utils.OperatingSystem;
 
 /**
@@ -99,7 +98,7 @@ public abstract class Browser extends Grid {
 		} // Use defined path in .properties
 		return String.format("%s%s",
 		    OperatingSystem.isExecutionHostWindows() ? getWebDriverProperties().getWebDriverDefaultPath()
-		        : WebDriverProperties.UNIX_WEBDRIVER_PATH,
+		        : getWebDriverProperties().getWebDriverDefaultUnixPath(),
 		    getDriver().getExecutable());
 	}
 

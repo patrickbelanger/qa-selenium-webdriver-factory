@@ -59,7 +59,7 @@ public class Opera extends Chrome {
 
 	@Override
 	public WebDriver getWebDriver(boolean remote) {
-		if (OperatingSystem.isExecutionHostLinux() && !remote) { // TODO: To investigate with another browser/driver release
+		if (OperatingSystem.isExecutionHostLinux() && !remote) {
 			StringBuilder sb = new StringBuilder()
 			    .append("WebDriverFactory: Using OperaDriver locally on Linux is unstable. ")
 			    .append("For better stability, consider executing Opera Browser remotely through Selenium Grid on ")
