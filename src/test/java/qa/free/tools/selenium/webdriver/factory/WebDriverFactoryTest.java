@@ -48,7 +48,7 @@ import qa.free.tools.selenium.webdriver.utils.OperatingSystem;
 /**
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
-public class WebDriverFactoryTest {
+class WebDriverFactoryTest {
 
 	private WebDriver webDriver;
 

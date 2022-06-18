@@ -34,7 +34,7 @@ import qa.free.tools.selenium.webdriver.utils.OperatingSystem;
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
 public enum Driver {
-
+	
 	/**
 	 * Brave Browser Remark: Binary location needs to be specified in
 	 * webdriver.properties file. (This browser uses ChromeDriver)
@@ -54,7 +54,7 @@ public enum Driver {
 	OPERA("Opera", ".drivers.desktop.Opera", ".drivers.options.Chrome", "webdriver.opera.driver", 
 			"operadriver.exe", "operadriver"),
 	;
-
+	
 	@Getter
 	@Setter(AccessLevel.PRIVATE)
 	String browserName;

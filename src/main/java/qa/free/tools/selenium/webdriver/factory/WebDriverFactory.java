@@ -62,7 +62,6 @@ public class WebDriverFactory {
 			return ((DefaultOptions) 
 					Class.forName(getOptionsPackageName(driver)).getDeclaredConstructor().newInstance()).getOptions();
 		} catch(Exception e) {
-			logger.error(e.getLocalizedMessage());
 			throw new WebDriverException(e.getLocalizedMessage());
 		}
 	}
@@ -78,7 +77,6 @@ public class WebDriverFactory {
 		try {
 			return instantiateWebDriver(driver, remote);
 		} catch (Exception e) {
-			logger.error(e.getCause().getMessage());
 			throw new UnableInstantiateWebDriverException(e.getCause().getMessage());
 		}
 	}
@@ -101,7 +99,6 @@ public class WebDriverFactory {
 		try {
 			return instantiateWebDriver(driver, gridThirdParty, w3cCapabilities, null, true);
 		} catch (Exception e) {
-			logger.error(e.getCause().getMessage());
 			throw new UnableInstantiateWebDriverException(e.getCause().getMessage());
 		}
 	}
@@ -129,12 +126,11 @@ public class WebDriverFactory {
 		try {
 			return instantiateWebDriver(driver, gridThirdParty, w3cCapabilities, browserOptions, true);
 		} catch (Exception e) {
-			logger.error(e.getCause().getMessage());
 			throw new UnableInstantiateWebDriverException(e.getCause().getMessage());
 		}
 	}
 	
-	private static WebDriver instantiateWebDriver(Enum<?> driver, boolean remote) throws Exception {
+	private static WebDriver instantiateWebDriver(Enum<?> driver, boolean remote) {
 		return instantiateWebDriver(null, driver, null, null, remote);
 	}
 	
