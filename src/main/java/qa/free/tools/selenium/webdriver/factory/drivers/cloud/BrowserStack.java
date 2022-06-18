@@ -40,6 +40,7 @@ public class BrowserStack extends Browser {
 		super();
   }
 	
+	@Override
 	protected String getHostUrl() {
 		return String.format(getWebDriverProperties().getBrowserStackGridUrl(), 
 		    Environment.getEnvironmentOrArgument(BROWSERSTACK_USERNAME, ARGUMENT_USERNAME),

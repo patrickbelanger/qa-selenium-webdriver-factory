@@ -30,7 +30,7 @@ public abstract class GeckoBasedBrowser extends Browser {
 	 */
 	public static final String ARGUMENT_PRIVATE_MODE = "--private";
 	
-	public GeckoBasedBrowser(Driver driver) {
+	protected GeckoBasedBrowser(Driver driver) {
 		super(driver);
 	}
 

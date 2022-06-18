@@ -40,6 +40,7 @@ public class SauceLabs extends Browser {
 		super();
 	}
 
+	@Override
 	protected String getHostUrl() {
 		return String.format(getWebDriverProperties().getSauceLabsGridUrl());
 	}

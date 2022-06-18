@@ -58,7 +58,7 @@ public class WebDriverFactoryTest {
 	}
 
 	@Test
-	public void braveBrowser_shouldBeAbleToInstantiateChromeDriverLocally() {
+	void braveBrowser_shouldBeAbleToInstantiateChromeDriverLocally() {
 		Assumptions.assumeTrue(OperatingSystem.isExecutionHostWindows()); // Only works on Windows host
 		webDriver = WebDriverFactory.getDriver(Driver.BRAVE, false);
 		assertNotNull(webDriver);
@@ -68,7 +68,7 @@ public class WebDriverFactoryTest {
 	}
 
 	@Test()
-	public void braveBrowser_shouldBeAbleToInstantiateChromeDriverRemotely() {
+	void braveBrowser_shouldBeAbleToInstantiateChromeDriverRemotely() {
 		webDriver = WebDriverFactory.getDriver(Driver.BRAVE, true);
 		assertNotNull(webDriver);
 		assertTrue(webDriver instanceof RemoteWebDriver);
@@ -78,7 +78,7 @@ public class WebDriverFactoryTest {
 	}
 
 	@Test
-	public void chromeBrowser_shouldBeAbleToInstantiateChromeDriverLocally() {
+	void chromeBrowser_shouldBeAbleToInstantiateChromeDriverLocally() {
 		webDriver = WebDriverFactory.getDriver(Driver.CHROME, false);
 		assertNotNull(webDriver);
 		assertTrue(webDriver instanceof ChromeDriver);
@@ -87,7 +87,7 @@ public class WebDriverFactoryTest {
 	}
 
 	@Test
-	public void chromeBrowser_shouldBeAbleToInstantiateChromeDriverRemotely() {
+	void chromeBrowser_shouldBeAbleToInstantiateChromeDriverRemotely() {
 		webDriver = WebDriverFactory.getDriver(Driver.CHROME, true);
 		assertNotNull(webDriver);
 		assertTrue(webDriver instanceof RemoteWebDriver);
@@ -97,7 +97,7 @@ public class WebDriverFactoryTest {
 	}
 
 	@Test
-	public void edgeBrowser_shouldBeAbleToInstantiateEdgeDriverLocally() {
+	void edgeBrowser_shouldBeAbleToInstantiateEdgeDriverLocally() {
 		webDriver = WebDriverFactory.getDriver(Driver.EDGE, false);
 		assertNotNull(webDriver);
 		assertTrue(webDriver instanceof EdgeDriver);
@@ -106,7 +106,7 @@ public class WebDriverFactoryTest {
 	}
 
 	@Test
-	public void edgeBrowser_shouldBeAbleToInstantiateEdgeDriverRemotely() {
+	void edgeBrowser_shouldBeAbleToInstantiateEdgeDriverRemotely() {
 		webDriver = WebDriverFactory.getDriver(Driver.EDGE, true);
 		assertNotNull(webDriver);
 		assertTrue(webDriver instanceof RemoteWebDriver);
@@ -116,7 +116,7 @@ public class WebDriverFactoryTest {
 	}
 	
 	@Test
-	public void firefoxBrowser_shouldBeAbleToInstantiateFirefoxDriverLocally() {
+	void firefoxBrowser_shouldBeAbleToInstantiateFirefoxDriverLocally() {
 		webDriver = WebDriverFactory.getDriver(Driver.FIREFOX, false);
 		assertNotNull(webDriver);
 		assertTrue(webDriver instanceof FirefoxDriver);
@@ -125,7 +125,7 @@ public class WebDriverFactoryTest {
 	}
 
 	@Test
-	public void firefoxBrowser_shouldBeAbleToInstantiateFirefoxDriverRemotely() {
+	void firefoxBrowser_shouldBeAbleToInstantiateFirefoxDriverRemotely() {
 		webDriver = WebDriverFactory.getDriver(Driver.FIREFOX, true);
 		assertNotNull(webDriver);
 		assertTrue(webDriver instanceof RemoteWebDriver);
@@ -134,9 +134,9 @@ public class WebDriverFactoryTest {
 		assertTrue(webDriver.getCurrentUrl().contains("google"));
 	}
 
-	@Disabled // I need to investigate further
+	@Disabled("Deprecated - This test needs to be updated since Opera uses ChromeDriver now")
 	@Test
-	public void operaBrowser_shouldBeAbleToInstantiateOperaDriverLocally() {
+	void operaBrowser_shouldBeAbleToInstantiateOperaDriverLocally() {
 		Assumptions.assumeTrue(OperatingSystem.isExecutionHostWindows()); // Only works on Windows host
 		webDriver = WebDriverFactory.getDriver(Driver.OPERA, false);
 		assertNotNull(webDriver);
@@ -145,9 +145,9 @@ public class WebDriverFactoryTest {
 		assertTrue(webDriver.getCurrentUrl().contains("google"));
 	}
 	
-	@Disabled // I need to investigate further
+	@Disabled("Deprecated - This test needs to be updated since Opera uses ChromeDriver now")
 	@Test
-	public void operaBrowser_shouldBeAbleToInstantiateOperaDriverRemotely() {
+	void operaBrowser_shouldBeAbleToInstantiateOperaDriverRemotely() {
 		webDriver = WebDriverFactory.getDriver(Driver.OPERA, true);
 		assertNotNull(webDriver);
 		assertTrue(webDriver instanceof RemoteWebDriver);
@@ -156,39 +156,39 @@ public class WebDriverFactoryTest {
 		assertTrue(webDriver.getCurrentUrl().contains("google"));
 	}
 	
-	@Disabled // Passed (05-06-2022) - You need a BrowserStack account to enable this test
+	@Disabled("Passed (05-06-2022) - You need a BrowserStack account to enable this test")
 	@Test
-	public void cloudBasedGrid_browserStack_shouldBeAbleToInstantiateChromeOnMacOSRemotely() {
+	void cloudBasedGrid_browserStack_shouldBeAbleToInstantiateChromeOnMacOSRemotely() {
 		cloudBasedGrid_shouldBeAbleToInstantiateChromeRemotely(GridThirdParty.BROWSERSTACK, "OS X", "Sierra");
 	}
 
-	@Disabled // Passed (05-06-2022) - You need a BrowserStack account to enable this test
+	@Disabled("Passed (05-06-2022) - You need a BrowserStack account to enable this test")
 	@Test
-	public void cloudBasedGrid_browserStack_shouldBeAbleToInstantiateChromeOnWindows8Remotely() {
+	void cloudBasedGrid_browserStack_shouldBeAbleToInstantiateChromeOnWindows8Remotely() {
 		cloudBasedGrid_shouldBeAbleToInstantiateChromeRemotely(GridThirdParty.BROWSERSTACK, "Windows", "8");
 	}
 
-	@Disabled // Passed (05-06-2022) - You need a BrowserStack account to enable this test
+	@Disabled("Passed (05-06-2022) - You need a BrowserStack account to enable this test")
 	@Test
-	public void cloudBasedGrid_browserStack_shouldBeAbleToInstantiateChromeOnWindowsTenRemotely() {
+	void cloudBasedGrid_browserStack_shouldBeAbleToInstantiateChromeOnWindowsTenRemotely() {
 		cloudBasedGrid_shouldBeAbleToInstantiateChromeRemotely(GridThirdParty.BROWSERSTACK, "Windows", "10");
 	}
 
-	@Disabled // Passed (05-06-2022) - You need a BrowserStack account to enable this test
+	@Disabled("Passed (05-06-2022) - You need a BrowserStack account to enable this test")
 	@Test
-	public void cloudBasedGrid_browserStack_shouldBeAbleToInstantiateChromeOnWindowsElevenRemotely() {
+	void cloudBasedGrid_browserStack_shouldBeAbleToInstantiateChromeOnWindowsElevenRemotely() {
 		cloudBasedGrid_shouldBeAbleToInstantiateChromeRemotely(GridThirdParty.BROWSERSTACK, "Windows", "11");
 	}
 	
-	@Disabled // Connection works, but I need to investigate
+	@Disabled("Connection works, but I need to investigate")
 	@Test
-	public void cloudBasedGrid_sauceLabs_shouldBeAbleToInstantiateChromeOnWindowsTenRemotely() {
+	void cloudBasedGrid_sauceLabs_shouldBeAbleToInstantiateChromeOnWindowsTenRemotely() {
 		cloudBasedGrid_shouldBeAbleToInstantiateChromeRemotely(GridThirdParty.SAUCELABS, "Windows", "10");
 	}
 	
-	@Disabled // Connection works, but I need to investigate
+	@Disabled("Connection works, but I need to investigate")
 	@Test
-	public void cloudBasedGrid_sauceLabs_shouldBeAbleToInstantiateChromeOnWindowsElevenRemotely() {
+	void cloudBasedGrid_sauceLabs_shouldBeAbleToInstantiateChromeOnWindowsElevenRemotely() {
 		cloudBasedGrid_shouldBeAbleToInstantiateChromeRemotely(GridThirdParty.SAUCELABS, "Windows", "11");
 	}
 	

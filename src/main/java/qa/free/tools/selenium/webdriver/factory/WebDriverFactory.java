@@ -44,10 +44,10 @@ import qa.free.tools.selenium.webdriver.properties.WebDriverProperties;
 public class WebDriverFactory {
 
 	@Getter(AccessLevel.PRIVATE)
-	final static Logger logger = LoggerFactory.getLogger(WebDriverFactory.class);
+	static final Logger logger = LoggerFactory.getLogger(WebDriverFactory.class);
 	
 	@Getter(AccessLevel.PRIVATE)
-	final static WebDriverProperties webDriverProperties = ConfigFactory.create(WebDriverProperties.class);
+	static final WebDriverProperties webDriverProperties = ConfigFactory.create(WebDriverProperties.class);
 	
 	private WebDriverFactory() { }
 
@@ -139,20 +139,23 @@ public class WebDriverFactory {
 	}
 	
 	private static WebDriver instantiateWebDriver(Driver driver, Enum<?> driverOrThirdParty, 
-			Map<String, Object> w3cCapabilities, MutableCapabilities browserOptions, boolean remote) 
-			throws Exception {
-		Browser browser = 
-				((Browser) Class.forName(getDriverPackageName(driverOrThirdParty)).getDeclaredConstructor().newInstance());
-		if (w3cCapabilities != null) {
-			browser.setW3cCapabilities(w3cCapabilities);
+			Map<String, Object> w3cCapabilities, MutableCapabilities browserOptions, boolean remote) {
+		try {
+  		Browser browser = 
+  				((Browser) Class.forName(getDriverPackageName(driverOrThirdParty)).getDeclaredConstructor().newInstance());
+  		if (w3cCapabilities != null) {
+  			browser.setW3cCapabilities(w3cCapabilities);
+  		}
+  		if (browserOptions != null) {
+  			browser.setOptions(browserOptions);
+  		}
+  		if (driver != null) {
+  			browser.setDriver(driver);
+  		}
+  		return browser.getWebDriver(remote);
+		} catch(Exception e) {
+			throw new UnableInstantiateWebDriverException(e);
 		}
-		if (browserOptions != null) {
-			browser.setOptions(browserOptions);
-		}
-		if (driver != null) {
-			browser.setDriver(driver);
-		}
-		return browser.getWebDriver(remote);
 	}
 	
 	private static String getDriverPackageName(Enum<?> driver) {

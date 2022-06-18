@@ -50,9 +50,9 @@ public abstract class Browser extends Grid {
 	@Setter(AccessLevel.PUBLIC)
 	public MutableCapabilities options;
 	
-	public Browser() { }
+	protected Browser() { }
 	
-	public Browser(Driver driver) {
+	protected Browser(Driver driver) {
 		setDriver(driver);
 		System.setProperty(driver.getProperty(), getWebDriverPath());
 	}
@@ -87,9 +87,8 @@ public abstract class Browser extends Grid {
 	 * 
 	 * @param remote Returns a RemoteDriver instance with the specified options
 	 * @return {@link WebDriver}
-	 * @throws MalformedURLException
 	 */
-	public WebDriver getWebDriver(boolean remote) throws MalformedURLException {
+	public WebDriver getWebDriver(boolean remote) {
 		return remote ? getRemoteWebDriver() : getWebDriver();
 	}
 

@@ -60,7 +60,7 @@ public class Brave extends Chrome {
 			    .append("WebDriverFactory: Using ChromeDriver against Brave Browser locally on Linux is unstable. ")
 			    .append("For better stability, consider executing Brave Browser remotely through Selenium Grid on ")
 			    .append("a Windows host.");
-			logger.warn(sb.toString());
+			logger.warn("{}", sb);
 			throw new WebDriverNotSupportedException(sb.toString());
 		}
 		return new ChromeDriver((ChromeOptions) getOptions());

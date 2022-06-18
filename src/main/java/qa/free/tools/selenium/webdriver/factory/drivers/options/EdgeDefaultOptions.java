@@ -21,7 +21,6 @@ import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.edge.EdgeOptions;
 
 import qa.free.tools.selenium.webdriver.factory.drivers.desktop.ChromiumBasedBrowser;
-import qa.free.tools.selenium.webdriver.factory.drivers.desktop.Edge;
 
 public class EdgeDefaultOptions extends DefaultOptions {
 
@@ -30,7 +29,7 @@ public class EdgeDefaultOptions extends DefaultOptions {
 		EdgeOptions edgeOptions = new EdgeOptions();
 		edgeOptions.addArguments(ChromiumBasedBrowser.ARGUMENT_START_MAXIMIZED);
 		if (getWebDriverProperties().isBrowserPrivateMode()) {
-			edgeOptions.addArguments(Edge.ARGUMENT_INPRIVATE_MODE);
+			edgeOptions.addArguments(ChromiumBasedBrowser.ARGUMENT_INPRIVATE_MODE);
 		}
 		if (getWebDriverProperties().useEdgeBrowserBinaryPath()) {
 			edgeOptions.setBinary(getWebDriverProperties().getEdgeBrowserBinaryPath());

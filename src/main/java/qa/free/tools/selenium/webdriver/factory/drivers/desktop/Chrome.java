@@ -17,7 +17,6 @@
 
 package qa.free.tools.selenium.webdriver.factory.drivers.desktop;
 
-import java.net.MalformedURLException;
 import java.util.Map;
 
 import org.openqa.selenium.Capabilities;
@@ -71,11 +70,6 @@ public class Chrome extends ChromiumBasedBrowser {
 	@Override
 	public WebDriver getWebDriver() {
 		return new ChromeDriver((ChromeOptions) getOptions());
-	}
-
-	@Override
-	public WebDriver getWebDriver(boolean remote) throws MalformedURLException {
-		return super.getWebDriver(remote);
 	}
 
 }

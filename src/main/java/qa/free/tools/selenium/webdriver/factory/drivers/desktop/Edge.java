@@ -17,7 +17,6 @@
 
 package qa.free.tools.selenium.webdriver.factory.drivers.desktop;
 
-import java.net.MalformedURLException;
 import java.util.Map;
 
 import org.openqa.selenium.Capabilities;
@@ -71,11 +70,6 @@ public class Edge extends ChromiumBasedBrowser {
 	@Override
 	public WebDriver getWebDriver() {
 		return new EdgeDriver((EdgeOptions) getOptions());
-	}
-
-	@Override
-	public WebDriver getWebDriver(boolean remote) throws MalformedURLException {
-		return super.getWebDriver(remote);
 	}
 
 }
