@@ -39,25 +39,23 @@ public enum Driver {
 	 * Brave Browser Remark: Binary location needs to be specified in
 	 * webdriver.properties file. (This browser uses ChromeDriver)
 	 */
-	BRAVE("Brave", ".drivers.desktop.Brave", ".drivers.options.Chrome", "webdriver.chrome.driver", 
-			"chromedriver.exe", "chromedriver"),
+	BRAVE("Brave", ".drivers.desktop.Brave"),
 	CHROME("Chrome", ".drivers.desktop.Chrome", ".drivers.options.Chrome", "webdriver.chrome.driver", 
 			"chromedriver.exe", "chromedriver"),
 	EDGE("Edge", ".drivers.desktop.Edge", ".drivers.options.Edge", "webdriver.edge.driver", 
 			"msedgedriver.exe", "msedgedriver"),
-	FIREFOX("firefox", ".drivers.desktop.Firefox", ".drivers.options.Firefox", "webdriver.gecko.driver", 
+	FIREFOX("Firefox", ".drivers.desktop.Firefox", ".drivers.options.Firefox", "webdriver.gecko.driver", 
 			"geckodriver.exe", "geckodriver"),
 	/**
 	 * Opera Browser Remark: Binary location needs to be specified in
 	 * webdriver.properties file. (This browser uses ChromeDriver)
 	 */
-	OPERA("Opera", ".drivers.desktop.Opera", ".drivers.options.Chrome", "webdriver.opera.driver", 
-			"operadriver.exe", "operadriver"),
+	OPERA("Opera", ".drivers.desktop.Opera"),
 	;
 
 	@Getter
 	@Setter(AccessLevel.PRIVATE)
-	String browserName;
+	private String browserName;
 
 	/**
 	 * Get/set class name (including part of the package as prefix)
@@ -85,23 +83,38 @@ public enum Driver {
 	 */
 	@Getter(AccessLevel.PRIVATE)
 	@Setter(AccessLevel.PRIVATE)
-	String executableWindowsArm64;
+	private String executableWindowsArm64;
 
 	/**
 	 * Get/set driver executable for Unix-based platform (including MacOS)
 	 */
 	@Getter(AccessLevel.PRIVATE)
 	@Setter(AccessLevel.PRIVATE)
-	String executableUnix;
+	private String executableUnix;
 
 	/**
 	 * Get/set driver executable for Windows (Arm64, x64, x86)
 	 */
 	@Getter
 	@Setter(AccessLevel.PRIVATE)
-	String executable;
+	private String executable;
 
 	private Driver() { }
+
+	/**
+	 * For Chromium-based driver using ChromeDriver.
+	 * @param browserName
+	 * @param className
+	 */
+	private Driver(String browserName, String className) {
+		setBrowserName(browserName);
+		setClassName(className);
+		setOptionsClassName(".drivers.options.Chrome");
+		setProperty("webdriver.chrome.driver");
+		setExecutableWindowsArm64("chromedriver.exe");
+		setExecutableUnix("chromedriver");
+		setExecutable(OperatingSystem.isExecutionHostWindows() ? executableWindowsArm64 : executableUnix);
+	}
 	
 	private Driver(String browserName, String className, String optionsClassName, 
 			String property, String executableWindowsArm64, String executableUnix) {
