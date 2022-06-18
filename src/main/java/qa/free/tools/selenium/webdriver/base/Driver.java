@@ -34,13 +34,15 @@ import qa.free.tools.selenium.webdriver.utils.OperatingSystem;
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
 public enum Driver {
-	
+
 	/**
 	 * Brave Browser Remark: Binary location needs to be specified in
 	 * webdriver.properties file. (This browser uses ChromeDriver)
 	 */
-	BRAVE("Brave", ".drivers.desktop.Brave", "chromedriver.exe", "chromedriver"),
-	CHROME("Chrome", ".drivers.desktop.Chrome", "chromedriver.exe", "chromedriver"),
+	BRAVE("Brave", ".drivers.desktop.Brave", ".drivers.options.Chrome", "webdriver.chrome.driver", 
+			"chromedriver.exe", "chromedriver"),
+	CHROME("Chrome", ".drivers.desktop.Chrome", ".drivers.options.Chrome", "webdriver.chrome.driver", 
+			"chromedriver.exe", "chromedriver"),
 	EDGE("Edge", ".drivers.desktop.Edge", ".drivers.options.Edge", "webdriver.edge.driver", 
 			"msedgedriver.exe", "msedgedriver"),
 	FIREFOX("firefox", ".drivers.desktop.Firefox", ".drivers.options.Firefox", "webdriver.gecko.driver", 
@@ -49,9 +51,10 @@ public enum Driver {
 	 * Opera Browser Remark: Binary location needs to be specified in
 	 * webdriver.properties file. (This browser uses ChromeDriver)
 	 */
-	OPERA("Opera", ".drivers.desktop.Opera", "operadriver.exe", "operadriver"),
+	OPERA("Opera", ".drivers.desktop.Opera", ".drivers.options.Chrome", "webdriver.opera.driver", 
+			"operadriver.exe", "operadriver"),
 	;
-	
+
 	@Getter
 	@Setter(AccessLevel.PRIVATE)
 	String browserName;
@@ -97,21 +100,8 @@ public enum Driver {
 	@Getter
 	@Setter(AccessLevel.PRIVATE)
 	String executable;
-	
-	private static final String CHROME_CLASS_NAME = ".drivers.options.Chrome";
-	private static final String CHROME_OPTIONS_CLASS_NAME = "webdriver.chrome.driver";
-	
+
 	private Driver() { }
-	
-	private Driver(String browserName, String property, String executableWindowsArm64, String executableUnix) {
-		setBrowserName(browserName);
-		setClassName(CHROME_CLASS_NAME);
-		setOptionsClassName(CHROME_OPTIONS_CLASS_NAME);
-		setProperty(property);
-		setExecutableWindowsArm64(executableWindowsArm64);
-		setExecutableUnix(executableUnix);
-		setExecutable(OperatingSystem.isExecutionHostWindows() ? executableWindowsArm64 : executableUnix);
-	}
 	
 	private Driver(String browserName, String className, String optionsClassName, 
 			String property, String executableWindowsArm64, String executableUnix) {
@@ -123,6 +113,5 @@ public enum Driver {
 		setExecutableUnix(executableUnix);
 		setExecutable(OperatingSystem.isExecutionHostWindows() ? executableWindowsArm64 : executableUnix);
 	}
-	
 
 }

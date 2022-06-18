@@ -85,7 +85,7 @@ public interface WebDriverProperties extends Config {
 	@DefaultValue("classpath:")
 	String getWebDriverDefaultPath();
 
-	@Key("webdriver.default.path")
+	@Key("webdriver.default.unix.path")
 	@DefaultValue("/usr/local/bin/")
 	String getWebDriverDefaultUnixPath();
 	
