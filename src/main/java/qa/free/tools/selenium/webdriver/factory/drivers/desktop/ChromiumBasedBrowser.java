@@ -38,7 +38,7 @@ public abstract class ChromiumBasedBrowser extends Browser {
 	 */
 	public static final String ARGUMENT_INPRIVATE_MODE = "--inprivate";
 
-	public ChromiumBasedBrowser(Driver driver) {
+	protected ChromiumBasedBrowser(Driver driver) {
 		super(driver);
 	}
 

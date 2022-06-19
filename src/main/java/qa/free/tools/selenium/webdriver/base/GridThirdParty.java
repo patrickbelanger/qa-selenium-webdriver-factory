@@ -39,7 +39,7 @@ public enum GridThirdParty {
 	 */
 	@Getter
 	@Setter(AccessLevel.PRIVATE)
-	String thirdPartyName;
+	private String thirdPartyName;
 
 	/**
 	 * Get/set class name (including part of the package as prefix)
@@ -47,14 +47,6 @@ public enum GridThirdParty {
 	@Getter
 	@Setter(AccessLevel.PRIVATE)
 	private String className;
-	
-	@Getter
-	@Setter(AccessLevel.PRIVATE)
-	String gridUrl;
-	
-	@Getter
-	@Setter(AccessLevel.PRIVATE)
-	boolean userPasswordRequiredUrl;
 	
 	private GridThirdParty() { }
 	

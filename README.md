@@ -11,7 +11,7 @@ automation framework.
 * Mozilla Firefox (tested on version 98.0.1 (Windows/Linux (* remote only)))
 * Opera Browser (tested on version 84.0.4316.42 (WebKit - 98.0.4758.109) (Windows/Linux (*see knowledge base section)))
 
-### Selenium 4.2.x W3C compliant (ready for Selenium 4.3
+### Selenium 4.2.x W3C compliant (ready for Selenium 4.3)
 * The goal is creating a WebDriverFactory library that follows closely the latest Selenium WebDriver/W3C standards.
 
 ### Supported Platform
@@ -30,6 +30,15 @@ automation framework.
 and [Visual Studio Code](https://projectlombok.org/setup/vscode).
 * Selenium Webdriver (uses version 4.1.2)
 
+# How to use WebDriverFactory?
+
+* A documentation will be available in the Wiki section. Meanwhile, you can take a look at the WebDriverFactoryTest.java
+class to get an idea how to implement the WebDriverFactory in your automation framework.
+
+* The WebDriverFactory should be called from a BaseTest class (that needs to be created from your end) which will 
+instantiate the desired WebDriver you want. You can bind Junit or TestNg, get parameters to set up the WebDriverFactory
+to return the wanted driver instance.
+ 
 # Developer(s)
 
 * [Patrick Bélanger](https://github.com/patrickbelanger)

@@ -30,7 +30,6 @@ import lombok.Getter;
 import lombok.Setter;
 import qa.free.tools.selenium.webdriver.base.Driver;
 import qa.free.tools.selenium.webdriver.exceptions.WebDriverNotSupportedException;
-import qa.free.tools.selenium.webdriver.properties.WebDriverProperties;
 import qa.free.tools.selenium.webdriver.utils.OperatingSystem;
 
 /**
@@ -50,9 +49,9 @@ public abstract class Browser extends Grid {
 	@Setter(AccessLevel.PUBLIC)
 	public MutableCapabilities options;
 	
-	public Browser() { }
+	protected Browser() { }
 	
-	public Browser(Driver driver) {
+	protected Browser(Driver driver) {
 		setDriver(driver);
 		System.setProperty(driver.getProperty(), getWebDriverPath());
 	}
@@ -87,9 +86,8 @@ public abstract class Browser extends Grid {
 	 * 
 	 * @param remote Returns a RemoteDriver instance with the specified options
 	 * @return {@link WebDriver}
-	 * @throws MalformedURLException
 	 */
-	public WebDriver getWebDriver(boolean remote) throws MalformedURLException {
+	public WebDriver getWebDriver(boolean remote) {
 		return remote ? getRemoteWebDriver() : getWebDriver();
 	}
 
@@ -100,7 +98,7 @@ public abstract class Browser extends Grid {
 		} // Use defined path in .properties
 		return String.format("%s%s",
 		    OperatingSystem.isExecutionHostWindows() ? getWebDriverProperties().getWebDriverDefaultPath()
-		        : WebDriverProperties.UNIX_WEBDRIVER_PATH,
+		        : getWebDriverProperties().getWebDriverDefaultUnixPath(),
 		    getDriver().getExecutable());
 	}
 

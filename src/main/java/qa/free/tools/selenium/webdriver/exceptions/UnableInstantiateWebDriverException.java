@@ -11,5 +11,9 @@ public class UnableInstantiateWebDriverException extends RuntimeException {
 	public UnableInstantiateWebDriverException(String message, Throwable cause) {
 		super(message, cause);
 	}
+	
+	public UnableInstantiateWebDriverException(Throwable cause) {
+		super(cause);
+	}
 
 }

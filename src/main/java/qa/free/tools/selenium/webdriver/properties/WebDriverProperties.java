@@ -27,7 +27,6 @@ import qa.free.tools.selenium.webdriver.base.GridThirdParty;
 public interface WebDriverProperties extends Config {
 
 	static final String GRID_HUB_ENDPOINT = "/wd/hub";
-	static final String UNIX_WEBDRIVER_PATH = "/usr/local/bin/";
 
 	@Key("brave.browser.binary.path")
 	@DefaultValue("C:/Program Files/BraveSoftware/Brave-Browser/Application/brave.exe")
@@ -86,4 +85,9 @@ public interface WebDriverProperties extends Config {
 	@DefaultValue("classpath:")
 	String getWebDriverDefaultPath();
 
+	@Key("webdriver.default.unix.path")
+	@DefaultValue("/usr/local/bin/")
+	String getWebDriverDefaultUnixPath();
+	
 }
+

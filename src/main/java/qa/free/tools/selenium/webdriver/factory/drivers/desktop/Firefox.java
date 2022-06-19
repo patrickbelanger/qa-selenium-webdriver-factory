@@ -17,8 +17,6 @@
 
 package qa.free.tools.selenium.webdriver.factory.drivers.desktop;
 
-import java.net.MalformedURLException;
-
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -59,7 +57,7 @@ public class Firefox extends GeckoBasedBrowser {
 	}
 
 	@Override
-	public WebDriver getWebDriver(boolean remote) throws MalformedURLException {
+	public WebDriver getWebDriver(boolean remote) {
 		WebDriver webDriver = super.getWebDriver(remote);
 		webDriver.manage().window().maximize(); // No argument to start Firefox maximized
 		return webDriver;

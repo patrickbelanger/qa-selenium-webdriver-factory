@@ -22,6 +22,8 @@ package qa.free.tools.selenium.webdriver.utils;
  */
 public class Environment {
 
+	private Environment() { }
+	
 	/** 
 	 * Gets Java Runtime Environment argument (i.e., argument provided in command-line)
 	 * @param argument

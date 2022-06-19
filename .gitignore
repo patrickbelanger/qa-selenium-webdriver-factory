@@ -30,3 +30,6 @@ hs_err_pid*
 .project
 bin/
 
+/sonar.bat
+# Testing IntelliJ
+/.idea/

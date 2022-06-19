@@ -17,8 +17,6 @@
 
 package qa.free.tools.selenium.webdriver.factory.drivers.desktop;
 
-import java.net.MalformedURLException;
-
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -60,13 +58,13 @@ public class Opera extends Chrome {
 	}
 
 	@Override
-	public WebDriver getWebDriver(boolean remote) throws MalformedURLException {
-		if (OperatingSystem.isExecutionHostLinux() && !remote) { // TODO: To investigate with another browser/driver release
+	public WebDriver getWebDriver(boolean remote) {
+		if (OperatingSystem.isExecutionHostLinux() && !remote) {
 			StringBuilder sb = new StringBuilder()
 			    .append("WebDriverFactory: Using OperaDriver locally on Linux is unstable. ")
 			    .append("For better stability, consider executing Opera Browser remotely through Selenium Grid on ")
 			    .append("a Windows host.");
-			logger.warn(sb.toString());
+			logger.warn("{}", sb);
 			throw new WebDriverNotSupportedException(sb.toString());
 		}
 		setOptions(getOptions());

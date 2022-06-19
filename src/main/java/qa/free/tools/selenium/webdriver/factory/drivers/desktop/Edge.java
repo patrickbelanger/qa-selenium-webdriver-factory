@@ -17,12 +17,11 @@
 
 package qa.free.tools.selenium.webdriver.factory.drivers.desktop;
 
-import java.net.MalformedURLException;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.MutableCapabilities;
-import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
@@ -57,12 +56,13 @@ public class Edge extends ChromiumBasedBrowser {
 	 */
 	@Override
 	public Map<String, Object> getW3cCapabilities() {
-		super.getW3cCapabilities();
-		getW3cCapabilities().put(CapabilityType.BROWSER_NAME, "edge");
-		getW3cCapabilities().put(CapabilityType.BROWSER_VERSION, "latest"); //TODO: Make it parameterizable
-		getW3cCapabilities().put(CapabilityType.PLATFORM_NAME, Platform.WIN10); //TODO: Make it parameterizable
-		getW3cCapabilities().put(EdgeOptions.CAPABILITY, getOptions());
-		return getW3cCapabilities();
+		Map<String, Object> w3cCapabilities = super.getW3cCapabilities();
+		if (w3cCapabilities == null ) {
+			w3cCapabilities = new HashMap<>();
+		}
+		w3cCapabilities.put(CapabilityType.BROWSER_NAME, "edge");
+		w3cCapabilities.put(EdgeOptions.CAPABILITY, getOptions());
+		return w3cCapabilities;
 	}
 
 	/**
@@ -71,11 +71,6 @@ public class Edge extends ChromiumBasedBrowser {
 	@Override
 	public WebDriver getWebDriver() {
 		return new EdgeDriver((EdgeOptions) getOptions());
-	}
-
-	@Override
-	public WebDriver getWebDriver(boolean remote) throws MalformedURLException {
-		return super.getWebDriver(remote);
 	}
 
 }
