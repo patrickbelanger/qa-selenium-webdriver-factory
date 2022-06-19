@@ -17,6 +17,7 @@
 
 package qa.free.tools.selenium.webdriver.factory.drivers.desktop;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.openqa.selenium.Capabilities;
@@ -55,10 +56,13 @@ public class Edge extends ChromiumBasedBrowser {
 	 */
 	@Override
 	public Map<String, Object> getW3cCapabilities() {
-		super.getW3cCapabilities();
-		getW3cCapabilities().put(CapabilityType.BROWSER_NAME, "edge");
-		getW3cCapabilities().put(EdgeOptions.CAPABILITY, getOptions());
-		return getW3cCapabilities();
+		Map<String, Object> w3cCapabilities = super.getW3cCapabilities();
+		if (w3cCapabilities == null ) {
+			w3cCapabilities = new HashMap<>();
+		}
+		w3cCapabilities.put(CapabilityType.BROWSER_NAME, "edge");
+		w3cCapabilities.put(EdgeOptions.CAPABILITY, getOptions());
+		return w3cCapabilities;
 	}
 
 	/**

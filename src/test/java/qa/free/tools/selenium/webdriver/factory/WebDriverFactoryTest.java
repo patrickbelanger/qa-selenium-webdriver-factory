@@ -50,7 +50,7 @@ import qa.free.tools.selenium.webdriver.utils.OperatingSystem;
  */
 class WebDriverFactoryTest {
 
-	private WebDriver webDriver;
+	private WebDriver underTest;
 
 	@BeforeEach
 	public void setUp() {
@@ -60,100 +60,100 @@ class WebDriverFactoryTest {
 	@Test
 	void braveBrowser_shouldBeAbleToInstantiateChromeDriverLocally() {
 		Assumptions.assumeTrue(OperatingSystem.isExecutionHostWindows()); // Only works on Windows host
-		webDriver = WebDriverFactory.getDriver(Driver.BRAVE, false);
-		assertNotNull(webDriver);
-		assertTrue(webDriver instanceof ChromeDriver);
-		webDriver.navigate().to("https://www.google.com");
-		assertTrue(webDriver.getCurrentUrl().contains("google"));
+		underTest = WebDriverFactory.getDriver(Driver.BRAVE, false);
+		assertNotNull(underTest);
+		assertTrue(underTest instanceof ChromeDriver);
+		underTest.navigate().to("https://www.google.com");
+		assertTrue(underTest.getCurrentUrl().contains("google"));
 	}
 
 	@Test()
 	void braveBrowser_shouldBeAbleToInstantiateChromeDriverRemotely() {
-		webDriver = WebDriverFactory.getDriver(Driver.BRAVE, true);
-		assertNotNull(webDriver);
-		assertTrue(webDriver instanceof RemoteWebDriver);
-		assertTrue(((RemoteWebDriver) webDriver).getCapabilities().getBrowserName().equalsIgnoreCase("chrome"));
-		webDriver.navigate().to("https://www.google.com");
-		assertTrue(webDriver.getCurrentUrl().contains("google"));
+		underTest = WebDriverFactory.getDriver(Driver.BRAVE, true);
+		assertNotNull(underTest);
+		assertTrue(underTest instanceof RemoteWebDriver);
+		assertTrue(((RemoteWebDriver) underTest).getCapabilities().getBrowserName().equalsIgnoreCase("chrome"));
+		underTest.navigate().to("https://www.google.com");
+		assertTrue(underTest.getCurrentUrl().contains("google"));
 	}
 
 	@Test
 	void chromeBrowser_shouldBeAbleToInstantiateChromeDriverLocally() {
-		webDriver = WebDriverFactory.getDriver(Driver.CHROME, false);
-		assertNotNull(webDriver);
-		assertTrue(webDriver instanceof ChromeDriver);
-		webDriver.navigate().to("https://www.google.com");
-		assertTrue(webDriver.getCurrentUrl().contains("google"));
+		underTest = WebDriverFactory.getDriver(Driver.CHROME, false);
+		assertNotNull(underTest);
+		assertTrue(underTest instanceof ChromeDriver);
+		underTest.navigate().to("https://www.google.com");
+		assertTrue(underTest.getCurrentUrl().contains("google"));
 	}
 
 	@Test
 	void chromeBrowser_shouldBeAbleToInstantiateChromeDriverRemotely() {
-		webDriver = WebDriverFactory.getDriver(Driver.CHROME, true);
-		assertNotNull(webDriver);
-		assertTrue(webDriver instanceof RemoteWebDriver);
-		assertTrue(((RemoteWebDriver) webDriver).getCapabilities().getBrowserName().equalsIgnoreCase("chrome"));
-		webDriver.navigate().to("https://www.google.com");
-		assertTrue(webDriver.getCurrentUrl().contains("google"));
+		underTest = WebDriverFactory.getDriver(Driver.CHROME, true);
+		assertNotNull(underTest);
+		assertTrue(underTest instanceof RemoteWebDriver);
+		assertTrue(((RemoteWebDriver) underTest).getCapabilities().getBrowserName().equalsIgnoreCase("chrome"));
+		underTest.navigate().to("https://www.google.com");
+		assertTrue(underTest.getCurrentUrl().contains("google"));
 	}
 
 	@Test
 	void edgeBrowser_shouldBeAbleToInstantiateEdgeDriverLocally() {
-		webDriver = WebDriverFactory.getDriver(Driver.EDGE, false);
-		assertNotNull(webDriver);
-		assertTrue(webDriver instanceof EdgeDriver);
-		webDriver.navigate().to("https://www.google.com");
-		assertTrue(webDriver.getCurrentUrl().contains("google"));
+		underTest = WebDriverFactory.getDriver(Driver.EDGE, false);
+		assertNotNull(underTest);
+		assertTrue(underTest instanceof EdgeDriver);
+		underTest.navigate().to("https://www.google.com");
+		assertTrue(underTest.getCurrentUrl().contains("google"));
 	}
 
 	@Test
 	void edgeBrowser_shouldBeAbleToInstantiateEdgeDriverRemotely() {
-		webDriver = WebDriverFactory.getDriver(Driver.EDGE, true);
-		assertNotNull(webDriver);
-		assertTrue(webDriver instanceof RemoteWebDriver);
-		assertTrue(((RemoteWebDriver) webDriver).getCapabilities().getBrowserName().equalsIgnoreCase("msedge"));
-		webDriver.navigate().to("https://www.google.com");
-		assertTrue(webDriver.getCurrentUrl().contains("google"));
+		underTest = WebDriverFactory.getDriver(Driver.EDGE, true);
+		assertNotNull(underTest);
+		assertTrue(underTest instanceof RemoteWebDriver);
+		assertTrue(((RemoteWebDriver) underTest).getCapabilities().getBrowserName().equalsIgnoreCase("msedge"));
+		underTest.navigate().to("https://www.google.com");
+		assertTrue(underTest.getCurrentUrl().contains("google"));
 	}
 	
 	@Test
 	void firefoxBrowser_shouldBeAbleToInstantiateFirefoxDriverLocally() {
-		webDriver = WebDriverFactory.getDriver(Driver.FIREFOX, false);
-		assertNotNull(webDriver);
-		assertTrue(webDriver instanceof FirefoxDriver);
-		webDriver.navigate().to("https://www.google.com");
-		assertTrue(webDriver.getCurrentUrl().contains("google"));
+		underTest = WebDriverFactory.getDriver(Driver.FIREFOX, false);
+		assertNotNull(underTest);
+		assertTrue(underTest instanceof FirefoxDriver);
+		underTest.navigate().to("https://www.google.com");
+		assertTrue(underTest.getCurrentUrl().contains("google"));
 	}
 
 	@Test
 	void firefoxBrowser_shouldBeAbleToInstantiateFirefoxDriverRemotely() {
-		webDriver = WebDriverFactory.getDriver(Driver.FIREFOX, true);
-		assertNotNull(webDriver);
-		assertTrue(webDriver instanceof RemoteWebDriver);
-		assertTrue(((RemoteWebDriver) webDriver).getCapabilities().getBrowserName().equalsIgnoreCase("firefox"));
-		webDriver.navigate().to("https://www.google.com");
-		assertTrue(webDriver.getCurrentUrl().contains("google"));
+		underTest = WebDriverFactory.getDriver(Driver.FIREFOX, true);
+		assertNotNull(underTest);
+		assertTrue(underTest instanceof RemoteWebDriver);
+		assertTrue(((RemoteWebDriver) underTest).getCapabilities().getBrowserName().equalsIgnoreCase("firefox"));
+		underTest.navigate().to("https://www.google.com");
+		assertTrue(underTest.getCurrentUrl().contains("google"));
 	}
 
 	@Disabled("Deprecated - This test needs to be updated since Opera uses ChromeDriver now")
 	@Test
 	void operaBrowser_shouldBeAbleToInstantiateOperaDriverLocally() {
 		Assumptions.assumeTrue(OperatingSystem.isExecutionHostWindows()); // Only works on Windows host
-		webDriver = WebDriverFactory.getDriver(Driver.OPERA, false);
-		assertNotNull(webDriver);
-		assertTrue(webDriver instanceof ChromeDriver);
-		webDriver.navigate().to("https://www.google.com");
-		assertTrue(webDriver.getCurrentUrl().contains("google"));
+		underTest = WebDriverFactory.getDriver(Driver.OPERA, false);
+		assertNotNull(underTest);
+		assertTrue(underTest instanceof ChromeDriver);
+		underTest.navigate().to("https://www.google.com");
+		assertTrue(underTest.getCurrentUrl().contains("google"));
 	}
 	
 	@Disabled("Deprecated - This test needs to be updated since Opera uses ChromeDriver now")
 	@Test
 	void operaBrowser_shouldBeAbleToInstantiateOperaDriverRemotely() {
-		webDriver = WebDriverFactory.getDriver(Driver.OPERA, true);
-		assertNotNull(webDriver);
-		assertTrue(webDriver instanceof RemoteWebDriver);
-		assertTrue(((RemoteWebDriver) webDriver).getCapabilities().getBrowserName().equalsIgnoreCase("opera"));
-		webDriver.navigate().to("https://www.google.com");
-		assertTrue(webDriver.getCurrentUrl().contains("google"));
+		underTest = WebDriverFactory.getDriver(Driver.OPERA, true);
+		assertNotNull(underTest);
+		assertTrue(underTest instanceof RemoteWebDriver);
+		assertTrue(((RemoteWebDriver) underTest).getCapabilities().getBrowserName().equalsIgnoreCase("opera"));
+		underTest.navigate().to("https://www.google.com");
+		assertTrue(underTest.getCurrentUrl().contains("google"));
 	}
 	
 	@Disabled("Passed (05-06-2022) - You need a BrowserStack account to enable this test")
@@ -200,7 +200,7 @@ class WebDriverFactoryTest {
 		if (gridThirdParty.equals(GridThirdParty.BROWSERSTACK)) {
 			w3cCapabilities.put("os", os);
 			w3cCapabilities.put("osVersion", osVersion);
-			webDriver = WebDriverFactory.getDriver(Driver.CHROME, gridThirdParty, w3cCapabilities);
+			underTest = WebDriverFactory.getDriver(Driver.CHROME, gridThirdParty, w3cCapabilities);
 		} else if (gridThirdParty.equals(GridThirdParty.SAUCELABS)) {
 			String currentDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 			String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
@@ -209,18 +209,18 @@ class WebDriverFactoryTest {
 			MutableCapabilities capabilities = WebDriverFactory.getDefaultBrowserOptions(Driver.CHROME);
 			((ChromeOptions) capabilities).setPlatformName(os);
 			capabilities.setCapability("platformVersion", osVersion);			
-			webDriver = WebDriverFactory.getDriver(Driver.CHROME, gridThirdParty, w3cCapabilities, capabilities);
+			underTest = WebDriverFactory.getDriver(Driver.CHROME, gridThirdParty, w3cCapabilities, capabilities);
 		}
-		assertNotNull(webDriver);
-		webDriver.navigate().to("https://www.google.com");
-		assertTrue(webDriver.getCurrentUrl().contains("google"));
-		webDriver.findElement(By.name("q")).sendKeys("selenium webdriver is the best" + Keys.ENTER);
+		assertNotNull(underTest);
+		underTest.navigate().to("https://www.google.com");
+		assertTrue(underTest.getCurrentUrl().contains("google"));
+		underTest.findElement(By.name("q")).sendKeys("selenium webdriver is the best" + Keys.ENTER);
 	}
 	
 	@AfterEach
 	public void tearDown() {
-		if (webDriver != null) {
-			webDriver.quit();
+		if (underTest != null) {
+			underTest.quit();
 		}
 	}
 
