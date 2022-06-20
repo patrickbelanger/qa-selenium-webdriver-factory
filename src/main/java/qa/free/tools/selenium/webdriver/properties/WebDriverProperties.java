@@ -36,6 +36,10 @@ public interface WebDriverProperties extends Config {
 	@DefaultValue("true") // Browser binary path for Brave Browser must be mentioned
 	boolean useBraveBrowserBinaryPath();
 
+	@Key("chrome.browser.download.base.url")
+	@DefaultValue("https://chromedriver.storage.googleapis.com/")
+	String getChromeDownloadBaseUrl();
+	
 	@Key("edge.browser.binary.path")
 	@DefaultValue("C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe")
 	String getEdgeBrowserBinaryPath();

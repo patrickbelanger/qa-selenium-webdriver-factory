@@ -77,6 +77,13 @@ public class WebDriverFactory {
 		try {
 			return instantiateWebDriver(driver, remote);
 		} catch (Exception e) {
+			try {
+  			if (!remote) {
+  				return instantiateWebDriver(driver, false);
+  			}
+			} catch (Exception e1) {
+				//
+			}
 			throw new UnableInstantiateWebDriverException(e.getCause().getMessage());
 		}
 	}

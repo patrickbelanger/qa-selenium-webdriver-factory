@@ -42,7 +42,8 @@
 		<owner.version>1.0.12</owner.version>
 		<selenium.version>4.2.1</selenium.version>
 		<slf4j.version>1.7.25</slf4j.version>
-		 <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<spring.boot.version>2.7.0</spring.boot.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 	<build>
@@ -123,6 +124,11 @@
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
 			<version>${selenium.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webflux</artifactId>
+			<version>${spring.boot.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
