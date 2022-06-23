@@ -14,6 +14,9 @@ automation framework.
 ### Selenium 4.2.x W3C compliant (ready for Selenium 4.3)
 * The goal is creating a WebDriverFactory library that follows closely the latest Selenium WebDriver/W3C standards.
 
+### The code base is scanned using SonarQube/Lint
+* The goal is creating a library you can trust and rely on. I'm currently working to increase the test coverage.
+
 ### Supported Platform
 * Linux (tested on Ubuntu 21.10)
 * Windows (tested on Windows 10)
