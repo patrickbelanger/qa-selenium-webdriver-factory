@@ -20,6 +20,7 @@ automation framework.
 ### Supported Platform
 * Linux (tested on Ubuntu 21.10)
 * Windows (tested on Windows 10)
+* MacOS
 
 ### Supported Third-party provider (Grid - Desktop)
 * BrowserStack
